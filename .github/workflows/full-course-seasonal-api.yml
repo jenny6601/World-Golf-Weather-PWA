@@ -1,0 +1,25 @@
+name: Full golf course seasonal API verification
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [development]
+    paths:
+      - 'scripts/test-all-course-seasonal-api.mjs'
+      - 'data/courses/asia-courses.json'
+      - '.github/workflows/full-course-seasonal-api.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  all-course-api:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Verify EC46 and SEAS5 for every golf course
+        run: node scripts/test-all-course-seasonal-api.mjs
