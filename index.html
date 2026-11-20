@@ -895,16 +895,32 @@ async function loadLiveObservation(course){
   const compass16=["北","北北東","東北","東北東","東","東南東","東南","南南東","南","南南西","西南","西南西","西","西北西","西北","北北西"];
   const windDirectionLabel=o.windDirection===null||o.windDirection===undefined||!Number.isFinite(Number(o.windDirection))
    ?"未提供":fmt(((Number(o.windDirection)%360)+360)%360,0)+"°（"+compass16[Math.round((((Number(o.windDirection)%360)+360)%360)/22.5)%16]+"）";
+  const rawObservation=String(o.raw||"").toUpperCase();
+  const observedWeatherCodes=[...new Set((rawObservation.match(/(?:^|\\s)[+-]?(?:TSRA|SHRA|RA|DZ|SN|SG|PL|GR|GS|TS|FG|BR|HZ)(?=\\s|$)/g)||[]).map(x=>x.trim()))];
+  const weatherLabels={"RA":"降雨","-RA":"小雨","+RA":"大雨","SHRA":"陣雨","-SHRA":"陣雨","+SHRA":"強陣雨","TS":"雷暴","TSRA":"雷雨","-TSRA":"雷雨","+TSRA":"強雷雨","FG":"霧","BR":"薄霧","HZ":"霾","DZ":"毛毛雨","SN":"降雪","SG":"雪粒","PL":"冰粒","GR":"冰雹","GS":"小冰雹"};
+  const observedWeather=observedWeatherCodes.length? [...new Set(observedWeatherCodes.map(x=>weatherLabels[x]||x))].join("、"):"未觀測到明顯天氣現象";
+  let matchedForecast=null,matchedLocalHour="";
+  if(o.observedAt&&Array.isArray(active?.rows)){
+   const od=new Date(o.observedAt);
+   if(!Number.isNaN(od.getTime())){
+    const tz=course.timezone||currentCourseTimezone||"Asia/Taipei";
+    const pp=Object.fromEntries(new Intl.DateTimeFormat("en-CA",{timeZone:tz,year:"numeric",month:"2-digit",day:"2-digit",hour:"2-digit",hourCycle:"h23"}).formatToParts(od).map(x=>[x.type,x.value]));
+    matchedLocalHour=pp.hour+":00";
+    if(pp.year+"-"+pp.month+"-"+pp.day===active.date)matchedForecast=active.rows.find(x=>x.time===matchedLocalHour&&x.available)||null;
+   }
+  }
+  const rainLabel=matchedForecast
+   ?(matchedForecast.mm===null||matchedForecast.mm===undefined?"雨量未提供":fmt(matchedForecast.mm)+" mm")+"｜降雨機率 "+(matchedForecast.rain===null||matchedForecast.rain===undefined?"—":fmt(matchedForecast.rain,0)+"%")
+   :"尚無同時段預報資料";
   const metricRows=[
-   ["測站",o.stationId||o.stationName||"—"],
+   ["天氣狀況",observedWeather],
+   ["同時段預報雨量",rainLabel],
    ["氣溫",o.temperatureC===null?"—":fmt(o.temperatureC)+" °C"],
    ["估算體感",o.apparentTemperatureC===null?"—":fmt(o.apparentTemperatureC)+" °C"],
    ["相對濕度",o.humidityPercent===null?"未提供":fmt(o.humidityPercent,0)+" %"],
    ["風向",windDirectionLabel],
    ["風速",o.windKmh===null?"未提供":fmt(o.windKmh)+" km/h"],
-   ["陣風",o.gustKmh===null?"未提供":fmt(o.gustKmh)+" km/h"],
-   ["能見度",o.visibilityKm===null?"未提供":fmt(o.visibilityKm)+" km"],
-   ["氣壓",o.pressureHpa===null?"未提供":fmt(o.pressureHpa)+" hPa"]
+   ["陣風",o.gustKmh===null?"未提供":fmt(o.gustKmh)+" km/h"]
   ];
   if(metrics){
    metrics.innerHTML=metricRows.map((r,i)=>'<div class="metric"><small></small><strong></strong></div>').join("");
@@ -912,7 +928,7 @@ async function loadLiveObservation(course){
   }
   const alertBox=$("liveObservationAlert");
   if(alertBox){
-   const raw=String(o.raw||"").toUpperCase();
+   const raw=rawObservation;
    const flags=[];
    let alertLevel="info";
    const weatherMatch=raw.match(/(?:^|\s)[+-]?(?:TSRA|SHRA|RA|DZ|SN|SG|PL|GR|GS|TS|FG|BR|HZ)(?=\s|$)/g)||[];
@@ -1001,8 +1017,8 @@ async function autoLoadDatabaseCourse(c,button){
    $("status").textContent=`${c.name}｜${lat.toFixed(5)}, ${lon.toFixed(5)}｜正在取得六組氣象模型…`;
    currentCourseTimezone=c.timezone||"Asia/Tokyo";
    rememberCourseSearch(c.course_id);
-   loadLiveObservation(c);
    await loadForecast({name:c.name,address:c.address,lat,lon,source:"World Golf Weather 亞洲球場資料庫",timezone:currentCourseTimezone},selectedDate);
+   loadLiveObservation(c);
    $("courseAutoStatus").textContent="";$("courseAutoStatus").classList.remove("error");
  }catch(e){
    $("courseAutoStatus").textContent=`${c.name}：${e.message}`;$("courseAutoStatus").classList.add("error");
