@@ -881,7 +881,9 @@ async function loadLiveObservation(course){
   if(times)times.textContent="資料來源：Aviation Weather Center（全球 METAR）";
   if(metrics)metrics.innerHTML='<div class="metric"><small>即時觀測</small><strong>無可用資料</strong></div>';
  };
- if(heading)heading.textContent="即時天氣觀測｜"+(course.name||"—");
+ const liveTimezone=course.timezone||currentCourseTimezone||"Asia/Taipei";
+ const liveDateLabel=()=>new Intl.DateTimeFormat("en-CA",{timeZone:liveTimezone,year:"numeric",month:"2-digit",day:"2-digit"}).format(new Date()).replaceAll("-","/");
+ if(heading)heading.textContent="即時天氣觀測｜"+(course.name||"—")+"｜"+liveDateLabel();
  if(state){state.textContent="正在搜尋附近測站…";state.className="pill";}
  if(summary)summary.textContent="正在查詢球場附近全球航空氣象觀測站（METAR）。";
  if(alertBox){alertBox.hidden=true;alertBox.textContent="";}
@@ -989,6 +991,7 @@ async function loadLiveObservation(course){
   const timezone=course.timezone||"Asia/Taipei";
   const observed=o.observedAt?new Date(o.observedAt):null;
   const observedLabel=observed&&!Number.isNaN(observed.getTime())?new Intl.DateTimeFormat("zh-TW",{timeZone:timezone,dateStyle:"medium",timeStyle:"short"}).format(observed):"時間未知";
+  if(heading&&observed&&!Number.isNaN(observed.getTime()))heading.textContent="即時天氣觀測｜"+(course.name||"—")+"｜"+new Intl.DateTimeFormat("en-CA",{timeZone:timezone,year:"numeric",month:"2-digit",day:"2-digit"}).format(observed).replaceAll("-","/");
   const age=Math.round(o.ageMinutes||0);
   if(dateTime)dateTime.textContent="觀測時間："+observedLabel;
   if(state){state.textContent=data.status==="fresh"?"資料較新":"觀測稍舊";state.className="pill "+(data.status==="fresh"?"live-state-fresh":"live-state-stale");}
