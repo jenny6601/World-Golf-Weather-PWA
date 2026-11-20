@@ -22,14 +22,14 @@ for (const key of ["temperature_2m_max","temperature_2m_min","precipitation_sum"
 const monthlyParams = new URLSearchParams({
   latitude: String(lat), longitude: String(lon), timezone,
   forecast_days: "90", models: "ecmwf_seas5",
-  monthly: "temperature_2m_mean,temperature_2m_anomaly,precipitation_sum,precipitation_anomaly,wind_speed_10m_mean,wind_speed_10m_anomaly"
+  monthly: "temperature_2m_mean,temperature_2m_anomaly,precipitation_mean,precipitation_anomaly,wind_speed_10m_mean,wind_speed_10m_anomaly"
 });
 const monthlyResponse = await fetch(base + "?" + monthlyParams);
 assert.equal(monthlyResponse.status, 200, "SEAS5 monthly endpoint must return HTTP 200");
 const monthly = await monthlyResponse.json();
 assert.equal(monthly.timezone, timezone, "SEAS5 timezone must match selected course");
 assert.ok(Array.isArray(monthly.monthly?.time), "SEAS5 monthly.time must be an array");
-for (const key of ["temperature_2m_mean","temperature_2m_anomaly","precipitation_sum","precipitation_anomaly","wind_speed_10m_mean","wind_speed_10m_anomaly"]) {
+for (const key of ["temperature_2m_mean","temperature_2m_anomaly","precipitation_mean","precipitation_anomaly","wind_speed_10m_mean","wind_speed_10m_anomaly"]) {
   assert.ok(Array.isArray(monthly.monthly[key]), `SEAS5 monthly.${key} must be an array`);
 }
 console.log(`PASS EC46: ${daily.daily.time.length} daily rows; timezone ${daily.timezone}`);
