@@ -935,6 +935,34 @@ async function loadLiveObservation(course){
     if(alertLevel==="info")alertLevel="warn";
    }
    if(flags.length===0)flags.push("原始 METAR 未辨識到明顯降水、雷暴、低能見度或強風訊號；不代表球場現場一定無此天氣。");
+   // Compare the airport observation with the forecast consensus for the same local hour only.
+   if(o.observedAt&&Array.isArray(active?.rows)&&active.rows.length){
+    const observedDate=new Date(o.observedAt);
+    if(!Number.isNaN(observedDate.getTime())){
+     const tz=course.timezone||currentCourseTimezone||"Asia/Taipei";
+     const parts=new Intl.DateTimeFormat("en-CA",{timeZone:tz,year:"numeric",month:"2-digit",day:"2-digit",hour:"2-digit",minute:"2-digit",hourCycle:"h23"}).formatToParts(observedDate);
+     const local=Object.fromEntries(parts.map(x=>[x.type,x.value]));
+     const localDate=local.year+"-"+local.month+"-"+local.day;
+     const localHour=local.hour+":00";
+     if(localDate===active.date){
+      const forecast=active.rows.find(x=>x.time===localHour&&x.available);
+      if(forecast){
+       const comparisons=[];
+       if(Number.isFinite(Number(o.temperatureC))&&Number.isFinite(Number(forecast.temp))){
+        const delta=Number(o.temperatureC)-Number(forecast.temp);
+        comparisons.push("氣溫實測 "+fmt(o.temperatureC)+"°C／預報 "+fmt(forecast.temp)+"°C（差 "+(delta>0?"+":"")+fmt(delta)+"°C）");
+        if(Math.abs(delta)>=3)flags.push("同時段氣溫觀測與預報差距 "+fmt(Math.abs(delta))+"°C，請留意局部環境差異。");
+       }
+       if(Number.isFinite(Number(o.windKmh))&&Number.isFinite(Number(forecast.wind))){
+        const delta=Number(o.windKmh)-Number(forecast.wind);
+        comparisons.push("風速實測 "+fmt(o.windKmh)+"／預報 "+fmt(forecast.wind)+" km/h（差 "+(delta>0?"+":"")+fmt(delta)+"）");
+        if(Math.abs(delta)>=15)flags.push("同時段風速觀測與預報差距 "+fmt(Math.abs(delta))+" km/h。");
+       }
+       if(comparisons.length)flags.push("同時段交叉比對（"+localHour+"，"+localDate+"）："+comparisons.join("；")+"。");
+      }
+     }
+    }
+   }
    alertBox.className="live-observation-alert "+alertLevel;
    alertBox.textContent=flags.join(" ");
    alertBox.hidden=false;
