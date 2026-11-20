@@ -98,7 +98,7 @@ export async function onRequestGet({ request }) {
     values.push(value);
     return values;
   };
-  const lines = csvText.split(/\\r?\\n/);
+  const lines = csvText.split(/[\\r\\n]+/);
   const headerIndex = lines.findIndex(line => {
     const cells = parseCsvLine(line).map(value => value.trim().replace(/^"|"$/g, "").toLowerCase());
     return cells.includes("station_id") && cells.includes("latitude") && cells.includes("longitude") &&
@@ -110,7 +110,7 @@ export async function onRequestGet({ request }) {
   const headers = parseCsvLine(lines[headerIndex]).map(value => value.trim().replace(/^"|"$/g, ""));
   const reports = [];
   for (const line of lines.slice(headerIndex + 1)) {
-    if (!line.trim()) continue;
+    if (!line.trim() || line.trim().startsWith("#")) continue;
     const values = parseCsvLine(line);
     const row = Object.fromEntries(headers.map((key, index) => [key, values[index] ?? ""]));
     reports.push({
@@ -161,7 +161,15 @@ export async function onRequestGet({ request }) {
 
   const station = candidates[0];
   if (!station || station.distanceKm > 150) {
-    return json({ courseId, status: "no_nearby_recent_station", generatedAt: new Date().toISOString(), searchedStations: reports.length });
+    return json({ courseId, status: "no_nearby_recent_station", generatedAt: new Date().toISOString(),
+      searchedStations: reports.length,
+      diagnostic: reports.length === 0 ? {
+        csvBytes: csvBytes.length, lineCount: lines.length, headerIndex,
+        headers, firstDataLine: lines[headerIndex + 1]?.slice(0, 500) ?? null,
+        contentType: cacheResponse.headers.get("content-type"),
+        contentEncoding: cacheResponse.headers.get("content-encoding")
+      } : undefined
+    });
   }
   const apparentC = apparentTemperature(station.temperatureC, station.windKmh, station.humidityPercent);
   return json({
