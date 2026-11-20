@@ -1213,11 +1213,11 @@ function extract(data,date){
  }
  return out;
 }
-async function getRainProbability(lat,lon,date){
+async function getRainProbability(lat,lon,date,timezone=currentCourseTimezone){
  // 降雨機率獨立載入；系集請求逾時不應拖住核心預報。
- const models=[['ECMWF IFS ENS','ecmwf_ifs025'],['NOAA GFS ENS','gfs_seamless'],['DWD ICON EPS','icon_seamless']];
+ const models=[['ECMWF IFS ENS','ecmwf_ifs025_ensemble'],['NOAA GFS ENS','ncep_gefs_seamless'],['DWD ICON EPS','dwd_icon_seamless_eps']];
  const results=await Promise.allSettled(models.map(async ([label,model])=>{
-  const url=`https://ensemble-api.open-meteo.com/v1/ensemble?latitude=${lat}&longitude=${lon}&hourly=precipitation&models=${encodeURIComponent(model)}&timezone=Asia%2FTaipei&forecast_days=16`;
+  const url=`https://ensemble-api.open-meteo.com/v1/ensemble?latitude=${lat}&longitude=${lon}&hourly=precipitation&models=${encodeURIComponent(model)}&timezone=${encodeURIComponent(timezone)}&forecast_days=16`;
   const r=await fetchWithRetry(url,{},label,14000),d=await r.json(),h=d.hourly||{},times=h.time||[];
   const keys=Object.keys(h).filter(k=>/^precipitation_member\\d+$/i.test(k));
   if(keys.length<10)throw Error(label+' 系集成員欄位不足');
@@ -1228,7 +1228,7 @@ async function getRainProbability(lat,lon,date){
  for(const sys of systems)for(const [time,v] of Object.entries(sys.out))(combined[time]??=[]).push(v.prob);
  const rows={};for(const [time,probs] of Object.entries(combined))if(probs.length)rows[time]={prob:Math.round(probs.reduce((a,b)=>a+b,0)/probs.length),members:probs.length,source:'系集系統等權整合'};
  if(Object.keys(rows).length)return {rows,source:'系集系統等權整合',detail:`成功 ${systems.length}/3 組系集：${systems.map(x=>x.label+' '+x.keys+'成員').join('、')}；各系集內先計算 >0.1 mm 成員比例，再對系集等權平均`};
- const u=`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&hourly=precipitation_probability&timezone=Asia%2FTaipei&forecast_days=16`;
+ const u=`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&hourly=precipitation_probability&timezone=${encodeURIComponent(timezone)}&forecast_days=16`;
  const r=await fetchWithRetry(u,{},"Best Match 降雨機率",14000),d=await r.json(),h=d.hourly||{},fallback={};
  (h.time||[]).forEach((t,i)=>{if(!t.startsWith(date+'T'))return;const hour=Number(t.slice(11,13));if(hour<6||hour>18)return;const v=h.precipitation_probability?.[i];if(v!==null&&v!==undefined)fallback[t.slice(11,16)]={prob:Number(v),members:null,source:'Open-Meteo Best Match 系集機率'};});
  if(!Object.keys(fallback).length)throw Error('Best Match 未回傳所選日期的逐時降雨機率');
@@ -1504,7 +1504,7 @@ let amountWeights=null,probabilityWeights=null,weightingLabel="等權中位數�
  let base=consensusRows(active.modelRows,amountWeights,probabilityWeights,externalRainRows);
  if(probabilityWeights&&!base.some(x=>x.probabilityWeightingApplied))weightingLabel+="（本次機率採系集資料，尚未套用來源機率權重）";
  if(!base.length)throw Error("所選日期沒有06:00–18:00逐時資料。");
- let rainProbInfo;const cachedRain=base.some(x=>x.rain!==null&&x.rain!==undefined);if(cachedRain){rainProbInfo={source:'既有模式快取',detail:'降雨機率採有提供欄位的模型資料；有歷史 Brier 權重時採加權融合，否則使用既有系集／模式機率；AIFS 不提供原生降雨機率'};}else if(staleCacheInUse){rainProbInfo={source:'背景更新中',detail:'舊快取未包含降雨機率；目前先顯示其他預報欄位，降雨機率待即時更新完成後補入'};base=base.map(x=>({...x,rain:null}));}else{try{rainProbInfo=await getRainProbability(p.lat,p.lon,date);base=base.map(x=>({...x,rain:rainProbInfo.rows[x.time]?.prob??null,rainMembers:rainProbInfo.rows[x.time]?.members??null}));}catch(e){rainProbInfo={source:'不可用',detail:'降雨機率服務未回傳資料：'+e.message};base=base.map(x=>({...x,rain:null}));}}
+ let rainProbInfo;const cachedRain=base.some(x=>x.rain!==null&&x.rain!==undefined);if(cachedRain){rainProbInfo={source:'既有模式快取',detail:'降雨機率採有提供欄位的模型資料；有歷史 Brier 權重時採加權融合，否則使用既有系集／模式機率；AIFS 不提供原生降雨機率'};}else if(staleCacheInUse){rainProbInfo={source:'背景更新中',detail:'舊快取未包含降雨機率；目前先顯示其他預報欄位，降雨機率待即時更新完成後補入'};base=base.map(x=>({...x,rain:null}));}else{try{rainProbInfo=await getRainProbability(p.lat,p.lon,date,currentCourseTimezone);base=base.map(x=>({...x,rain:rainProbInfo.rows[x.time]?.prob??null,rainMembers:rainProbInfo.rows[x.time]?.members??null}));}catch(e){rainProbInfo={source:'不可用',detail:'降雨機率服務未回傳資料：'+e.message};base=base.map(x=>({...x,rain:null}));}}
  active.rows=base;
  const valid=base.filter(x=>x.available),avg=k=>{const a=valid.map(x=>x[k]).filter(v=>v!==null);return a.length?a.reduce((z,v)=>z+v,0)/a.length:null;},mx=k=>{const a=valid.map(x=>x[k]).filter(v=>v!==null);return a.length?Math.max(...a):null;};
  const fmt=(v,d=1)=>v===null||v===undefined?"—":Number(v).toFixed(d);
