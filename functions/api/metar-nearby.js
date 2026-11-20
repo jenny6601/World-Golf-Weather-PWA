@@ -98,7 +98,7 @@ export async function onRequestGet({ request }) {
     values.push(value);
     return values;
   };
-  const lines = csvText.split(/[\\r\\n]+/);
+  const lines = csvText.split(/\r\n?|\n/);
   const headerIndex = lines.findIndex(line => {
     const cells = parseCsvLine(line).map(value => value.trim().replace(/^"|"$/g, "").toLowerCase());
     return cells.includes("station_id") && cells.includes("latitude") && cells.includes("longitude") &&
