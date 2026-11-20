@@ -1222,6 +1222,128 @@
       "verification_status": "verified",
       "verified_at": "2026-11-20T00:00:00+09:00",
       "verification_note": "球場官方網站分列袖ヶ浦コース與新袖コース，兩者地址與官方地圖位置分開建檔。 GPS coordinates taken from the Google Maps iframe embedded on the official club access page."
+    },
+    {
+      "course_id": "vn-long-bien",
+      "name_en": "Long Bien Golf Course",
+      "short_name": "Long Bien Golf",
+      "aliases": [
+        "Long Bien Golf Club",
+        "Sân Golf Long Biên",
+        "Long Biên Golf Course"
+      ],
+      "search_keywords": [
+        "Long Bien",
+        "Long Biên",
+        "Phuc Dong",
+        "Phường Long Biên",
+        "Hanoi",
+        "Vietnam",
+        "Regiment 918"
+      ],
+      "country": "Vietnam",
+      "country_code": "VN",
+      "city": "Hanoi",
+      "region": "Hanoi",
+      "verification_status": "partially_verified",
+      "data_source": [
+        "https://www.longbiengolf.vn/lien-he.html",
+        "https://gltv.com.vn/golf-course-vn",
+        "https://www.where2golf.com/vietnam/long-bien-golf-club/"
+      ],
+      "local_name": "Sân Golf Long Biên",
+      "official_address": "Khu Trung Đoàn 918, Phường Long Biên, Hà Nội, Vietnam",
+      "local_address": "Khu Trung Đoàn 918, Phường Long Biên, Hà Nội, Việt Nam",
+      "timezone": "Asia/Ho_Chi_Minh",
+      "official_website": "https://www.longbiengolf.vn/",
+      "latitude": 21.0376812,
+      "longitude": 105.8957893,
+      "coordinate_source": "https://gltv.com.vn/golf-course-vn (Google Maps location link: Long Bien Golf Course)",
+      "verified_at": "2026-11-20T00:00:00+07:00",
+      "verification_note": "Official Long Bien Golf Course website confirms course identity and address; GLTV course directory links directly to its Google Maps pin. Coordinates are taken from the resolved Google Maps place pin. Kept partially verified pending official map iframe coordinate confirmation."
+    },
+    {
+      "course_id": "vn-legend-hill",
+      "name_en": "BRG Legend Hill Golf Resort",
+      "short_name": "Legend Hill Golf",
+      "aliases": [
+        "Legend Hill Country Club",
+        "BRG Legend Hill",
+        "Legend Hill Golf Club",
+        "Sân golf Legend Hill"
+      ],
+      "search_keywords": [
+        "Legend Hill",
+        "BRG",
+        "Cong Hoa",
+        "Soc Son",
+        "Hanoi",
+        "Noi Bai",
+        "Vietnam"
+      ],
+      "country": "Vietnam",
+      "country_code": "VN",
+      "city": "Soc Son",
+      "region": "Hanoi",
+      "verification_status": "partially_verified",
+      "data_source": [
+        "https://legendhillcountryclub.vn/",
+        "https://gltv.com.vn/golf-course-vn",
+        "https://kingsislandgolf.vn/Images/admin/File/E-Newsletter/2022/BRG%20Golf%20E-Newsletter%20012022%20EN.pdf"
+      ],
+      "local_name": "BRG Legend Hill Golf Resort",
+      "official_address": "Cong Hoa Hamlet, Soc Son Commune, Hanoi City, Vietnam",
+      "local_address": "Thôn Cộng Hòa, Xã Sóc Sơn, Hà Nội, Việt Nam",
+      "timezone": "Asia/Ho_Chi_Minh",
+      "official_website": "https://legendhillcountryclub.vn/",
+      "latitude": 21.2969144,
+      "longitude": 105.8415291,
+      "coordinate_source": "https://gltv.com.vn/golf-course-vn (Google Maps location link: BRG Legend Hill Golf Resort)",
+      "verified_at": "2026-11-20T00:00:00+07:00",
+      "verification_note": "Official BRG Legend Hill contact page confirms course identity and Cong Hoa, Soc Son address; GLTV course directory links directly to its Google Maps pin. Coordinates are taken from the resolved Google Maps place pin. Kept partially verified pending official map iframe coordinate confirmation."
+    },
+    {
+      "course_id": "vn-kings-island",
+      "name_en": "BRG Kings Island Golf Resort",
+      "short_name": "Kings Island Golf",
+      "aliases": [
+        "Kings Island",
+        "King's Island Golf Resort",
+        "BRG King's Island",
+        "Kings Island Golf Resort Hanoi",
+        "Đảo Vua"
+      ],
+      "search_keywords": [
+        "Kings Island",
+        "King's Island",
+        "BRG",
+        "Dong Mo",
+        "Đồng Mô",
+        "Doai Phuong",
+        "Son Tay",
+        "Hanoi",
+        "Vietnam"
+      ],
+      "country": "Vietnam",
+      "country_code": "VN",
+      "city": "Doai Phuong",
+      "region": "Hanoi",
+      "verification_status": "partially_verified",
+      "data_source": [
+        "https://kingsislandgolf.vn/",
+        "https://gltv.com.vn/golf-course-vn",
+        "https://playgolfvietnam.com/courses/brg-kings-island-golf-resort"
+      ],
+      "local_name": "BRG Kings Island Golf Resort",
+      "official_address": "Đồng Mô, Xã Đoài Phương, Thành phố Hà Nội, Vietnam",
+      "local_address": "Đồng Mô, Xã Đoài Phương, Thành phố Hà Nội, Việt Nam",
+      "timezone": "Asia/Ho_Chi_Minh",
+      "official_website": "https://kingsislandgolf.vn/",
+      "latitude": 21.0584904,
+      "longitude": 105.48877,
+      "coordinate_source": "https://gltv.com.vn/golf-course-vn (Google Maps location link: BRG Kings Island)",
+      "verified_at": "2026-11-20T00:00:00+07:00",
+      "verification_note": "Official BRG Kings Island website confirms Đồng Mô, Xã Đoài Phương, Hanoi and the 55-hole resort comprising Lakeside, Mountain View and Kings courses; GLTV course directory links directly to its Google Maps pin. Coordinates identify the resort, not an individual course entrance. Kept partially verified."
     }
   ]
 }
