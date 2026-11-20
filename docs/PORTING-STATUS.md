@@ -80,3 +80,11 @@ Added Long Bien Golf Course, BRG Legend Hill Golf Resort, and BRG Kings Island G
 - Added `scripts/test-long-range-api.mjs` and `.github/workflows/long-range-api-smoke.yml`. Live GitHub Actions run #44713210019 passed: Hanoi test location returned 46 EC46 daily rows and 3 SEAS5 monthly rows, both with timezone `Asia/Ho_Chi_Minh`.
 - The first smoke-test attempt found an invalid SEAS5 monthly variable (`precipitation_sum`); corrected it to the documented `precipitation_mean` field, and the subsequent live API test passed.
 - Browser/mobile visual testing and real course-by-course validation remain pending. No Cloudflare deployment or merge was performed.
+
+
+### Eight-country long-range API verification — 2026-11-20
+- Expanded the live smoke test from one Hanoi point to eight representative points: Tokyo (JP), Seoul (KR), Shanghai (CN), Hanoi (VN), Bangkok (TH), Kuala Lumpur (MY), Singapore (SG), and Bali (ID).
+- For every point, verified HTTP success, timezone echo, 46 EC46 daily rows with the required daily variables, and SEAS5 monthly data with the required monthly fields.
+- GitHub Actions run #44713420786 passed all eight points: each returned 46 daily rows and 3 monthly rows with the expected IANA timezone. Course database validation also passed on the same commit (#44713420800).
+- These are representative regional API smoke tests, not a validation of every golf-course coordinate or forecast accuracy. The app remains un-deployed; browser/mobile acceptance is still pending.
+- Clarified the 60-day panel heading: SEAS5 is shown as long-range monthly trend context after EC46, not as a daily forecast specifically covering days 47–60.
