@@ -418,7 +418,8 @@ footer{color:var(--muted);font-size:12px;padding:18px 0}
 <select id="countrySelect" style="width:100%;max-width:320px;padding:10px;border:1px solid #cbd5e1;border-radius:10px;background:#fff"><option value="">全部國家</option></select>
 <label for="courseRegionSelect" style="margin-top:12px">選擇地區／都道府縣</label>
 <select id="courseRegionSelect" style="width:100%;max-width:320px;padding:10px;border:1px solid #cbd5e1;border-radius:10px;background:#fff"><option value="">全部地區</option></select>
-<label for="courseSearchInput" style="margin-top:12px">搜尋球場（英文名稱、當地名稱、城市或地區）</label>
+<label for="courseSearchInput" class="county-field-title">搜尋球場</label>
+<div class="muted" style="margin:-3px 0 8px">可輸入英文名稱、當地名稱、城市或地區</div>
 <input id="courseSearchInput" type="search" autocomplete="off" placeholder="例如：Kise、Hanoi、Jeju、Tokyo..." style="width:100%;max-width:680px"/>
 <div class="muted" id="courseSearchStatus" aria-live="polite">球場資料庫準備中…</div>
 <div class="course-action-grid" aria-label="收藏與搜尋工具"><button type="button" class="secondary" id="showFavorites">★ 我的收藏</button><button type="button" class="secondary" id="exportFavorites">匯出收藏檔</button><button type="button" class="secondary" id="importFavorites">匯入收藏檔</button><button type="button" class="secondary" id="showRecent">最近搜尋</button><input type="file" id="favoritesFileInput" accept="application/json,.json" hidden/></div><div class="muted" id="favoritesSaveStatus" aria-live="polite">收藏會自動儲存在此瀏覽器；可匯出檔案備份或轉移。</div>
