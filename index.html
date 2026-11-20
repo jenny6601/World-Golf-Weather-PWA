@@ -872,7 +872,9 @@ function liveRainClass(value){
 async function loadLiveObservation(course){
  const state=$("liveObservationState"),summary=$("liveObservationSummary"),metrics=$("liveObservationMetrics");
  const heading=$("liveObservationHeading"),dateTime=$("liveObservationDateTime"),times=$("liveObservationTimes");
+ const alertBox=$("liveObservationAlert");
  const showUnavailable=(message)=>{
+  if(alertBox){alertBox.hidden=true;alertBox.textContent="";}
   if(state){state.textContent="無可用觀測";state.className="pill live-state-missing";}
   if(summary)summary.textContent=message||"附近沒有符合時效條件的 METAR 測站；不以預報值代替實測。";
   if(dateTime)dateTime.textContent="觀測時間：—";
@@ -882,6 +884,7 @@ async function loadLiveObservation(course){
  if(heading)heading.textContent="即時天氣觀測｜"+(course.name||"—");
  if(state){state.textContent="正在搜尋附近測站…";state.className="pill";}
  if(summary)summary.textContent="正在查詢球場附近全球航空氣象觀測站（METAR）。";
+ if(alertBox){alertBox.hidden=true;alertBox.textContent="";}
  if(metrics)metrics.innerHTML='<div class="metric"><small>附近測站</small><strong>搜尋中…</strong></div>';
  try{
   const response=await fetch("./api/metar-nearby?courseId="+encodeURIComponent(course.course_id),{cache:"no-store"});
@@ -919,18 +922,18 @@ async function loadLiveObservation(course){
     flags.push("測站天氣現象："+[...new Set(labels)].join("、")+"。");
     alertLevel=weatherCodes.some(code=>code.includes("TS")||code==="+RA"||code==="+TSRA")?"danger":"warn";
    }
-   if(Number.isFinite(Number(o.visibilityKm))&&Number(o.visibilityKm)<=5){
+   if(o.visibilityKm!==null&&o.visibilityKm!==undefined&&o.visibilityKm!==""&&Number.isFinite(Number(o.visibilityKm))&&Number(o.visibilityKm)<=5){
     flags.push("測站能見度偏低（"+fmt(o.visibilityKm)+" km）。");
     if(alertLevel!=="danger")alertLevel="warn";
    }
-   if(Number.isFinite(Number(o.gustKmh))&&Number(o.gustKmh)>=40){
+   if(o.gustKmh!==null&&o.gustKmh!==undefined&&o.gustKmh!==""&&Number.isFinite(Number(o.gustKmh))&&Number(o.gustKmh)>=40){
     flags.push("測站陣風達 "+fmt(o.gustKmh)+" km/h，請留意強風。");
     alertLevel="danger";
-   }else if(Number.isFinite(Number(o.windKmh))&&Number(o.windKmh)>=30){
+   }else if(o.windKmh!==null&&o.windKmh!==undefined&&o.windKmh!==""&&Number.isFinite(Number(o.windKmh))&&Number(o.windKmh)>=30){
     flags.push("測站平均風速達 "+fmt(o.windKmh)+" km/h，請留意風勢。");
     if(alertLevel!=="danger")alertLevel="warn";
    }
-   if(Number.isFinite(Number(o.distanceKm))&&Number(o.distanceKm)>80){
+   if(o.distanceKm!==null&&o.distanceKm!==undefined&&o.distanceKm!==""&&Number.isFinite(Number(o.distanceKm))&&Number(o.distanceKm)>80){
     flags.push("測站距球場超過 80 km，代表性較低，請勿視為球場現場狀況。");
     if(alertLevel==="info")alertLevel="warn";
    }
@@ -948,12 +951,12 @@ async function loadLiveObservation(course){
       const forecast=active.rows.find(x=>x.time===localHour&&x.available);
       if(forecast){
        const comparisons=[];
-       if(Number.isFinite(Number(o.temperatureC))&&Number.isFinite(Number(forecast.temp))){
+       if(o.temperatureC!==null&&o.temperatureC!==undefined&&Number.isFinite(Number(o.temperatureC))&&forecast.temp!==null&&forecast.temp!==undefined&&Number.isFinite(Number(forecast.temp))){
         const delta=Number(o.temperatureC)-Number(forecast.temp);
         comparisons.push("氣溫實測 "+fmt(o.temperatureC)+"°C／預報 "+fmt(forecast.temp)+"°C（差 "+(delta>0?"+":"")+fmt(delta)+"°C）");
         if(Math.abs(delta)>=3)flags.push("同時段氣溫觀測與預報差距 "+fmt(Math.abs(delta))+"°C，請留意局部環境差異。");
        }
-       if(Number.isFinite(Number(o.windKmh))&&Number.isFinite(Number(forecast.wind))){
+       if(o.windKmh!==null&&o.windKmh!==undefined&&Number.isFinite(Number(o.windKmh))&&forecast.wind!==null&&forecast.wind!==undefined&&Number.isFinite(Number(forecast.wind))){
         const delta=Number(o.windKmh)-Number(forecast.wind);
         comparisons.push("風速實測 "+fmt(o.windKmh)+"／預報 "+fmt(forecast.wind)+" km/h（差 "+(delta>0?"+":"")+fmt(delta)+"）");
         if(Math.abs(delta)>=15)flags.push("同時段風速觀測與預報差距 "+fmt(Math.abs(delta))+" km/h。");
