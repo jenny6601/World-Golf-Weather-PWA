@@ -1,4 +1,5 @@
 name: Cloudflare Pages development preview
+# Re-run preview deployment after GitHub Actions secrets setup
 
 on:
   workflow_dispatch:
