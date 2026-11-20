@@ -768,7 +768,7 @@ function updateWeatherDateHeadings(liveDate,forecastDate){
  const localToday=new Intl.DateTimeFormat("en-CA",{timeZone:currentCourseTimezone,year:"numeric",month:"2-digit",day:"2-digit"}).format(new Date());
  const dateLabel=golfDateLabel(forecastDate);
  const liveCourseName=(active?.name||$("locname")?.textContent||"").replace(/高爾夫球場/g,"").trim();
- if(live)live.textContent="即時天氣觀測｜"+(liveCourseName?liveCourseName+"｜":"")+golfDateLabel(taiwanToday);
+ if(live)live.textContent="即時天氣觀測｜"+(liveCourseName?liveCourseName+"｜":"")+golfDateLabel(localToday);
  renderSelectedHourlySections(active?.rows||[]);
 
 }
