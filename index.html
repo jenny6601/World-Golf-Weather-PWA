@@ -912,7 +912,7 @@ async function loadLiveObservation(course){
    const raw=String(o.raw||"").toUpperCase();
    const flags=[];
    let alertLevel="info";
-   const weatherMatch=raw.match(/(?:^|\\s)[+-]?(?:TSRA|SHRA|RA|DZ|SN|SG|PL|GR|GS|TS|FG|BR|HZ)(?=\\s|$)/g)||[];
+   const weatherMatch=raw.match(/(?:^|\s)[+-]?(?:TSRA|SHRA|RA|DZ|SN|SG|PL|GR|GS|TS|FG|BR|HZ)(?=\s|$)/g)||[];
    const weatherCodes=[...new Set(weatherMatch.map(x=>x.trim()))];
    if(weatherCodes.length){
     const labels=weatherCodes.map(code=>({RA:"降雨", "-RA":"小雨","+RA":"大雨",SHRA:"陣雨","-SHRA":"陣雨","+SHRA":"強陣雨",TS:"雷暴",TSRA:"雷雨", "-TSRA":"雷雨","+TSRA":"強雷雨",FG:"霧",BR:"霧霾／薄霧",HZ:"霾",DZ:"毛毛雨",SN:"降雪"}[code]||code));
