@@ -11,7 +11,7 @@
     "SG",
     "ID"
   ],
-  "generated_at": "2026-11-20",
+  "generated_at": "2026-11-20T11:54:00.900Z",
   "record_count": 41,
   "notes": "GPS-verified: 7 (Japan 5, South Korea 2). Partially verified: 27 (Japan 1, South Korea 3, China 4, Vietnam 5, Thailand 3, Malaysia 4, Singapore 4, Indonesia 3). Unverified: 7. All partial records lack GPS and are not enabled for weather. Indonesian timezones assigned only to geographically confirmed Bali/Jakarta addresses.",
   "courses": [
@@ -385,16 +385,18 @@
       "region": "Guangdong",
       "verification_status": "partially_verified",
       "data_source": [
-        "https://www.missionhillschina.com/others/about-us/contact-us/",
-        "https://ditu.amap.com/place/B02F38IEQ6"
+        "https://www.missionhillschina.com/en/others/about-us/contact-us/",
+        "https://www.fullgolf.com/en/golf-club/china/guangdong/shenzhen/mission-hills-golf-club-shenzhen"
       ],
       "local_name": "观澜湖高尔夫球会（深圳）",
       "official_address": "中国广东省深圳市龙华区观澜高尔夫大道1号，邮编518110",
       "local_address": "中国广东省深圳市龙华区观澜高尔夫大道1号",
       "timezone": "Asia/Shanghai",
       "official_website": "https://www.missionhillschina.com/others/about-us/contact-us/",
-      "verification_note": "球會官方聯絡頁確認深圳場正式名稱與地址；高德地圖有對應球場 POI，但尚未以球場官方地圖或政府測繪資料核實球場內 GPS，因此不填入座標。",
-      "verified_at": "2026-11-20T00:00:00+08:00"
+      "verification_note": "官方聯絡頁確認深圳場名稱與地址；FullGolf 提供球場位置座標。因 Mission Hills 為大型多球場園區，座標先採球場資料庫所列主場位置，仍待官方場區圖再次核對。",
+      "verified_at": "2026-11-20T00:00:00+08:00",
+      "latitude": 22.728381,
+      "longitude": 114.070053
     },
     {
       "course_id": "cn-mission-hills-dongguan",
@@ -414,15 +416,18 @@
       "region": "Guangdong",
       "verification_status": "partially_verified",
       "data_source": [
-        "https://www.missionhillschina.com/others/about-us/contact-us/"
+        "https://www.missionhillschina.com/en/others/about-us/contact-us/",
+        "https://fullgolf.com/en/golf-club/china/guangdong/dongguan/mission-hills-golf-club-dongguan"
       ],
       "local_name": "观澜湖高尔夫球会（东莞）",
       "official_address": "中国广东省东莞市塘厦镇大坪林坪路，邮编523722",
       "local_address": "中国广东省东莞市塘厦镇大坪林坪路",
       "timezone": "Asia/Shanghai",
       "official_website": "https://www.missionhillschina.com/others/about-us/contact-us/",
-      "verification_note": "球會官方聯絡頁確認東莞場地址；尚未取得能確認球場本體位置的官方地圖 GPS。",
-      "verified_at": "2026-11-20T00:00:00+08:00"
+      "verification_note": "官方聯絡頁確認東莞場位於塘廈大坪林坪路；FullGolf 提供 Dongguan resort 球場座標。因園區包含多個球場，仍待官方場區圖確認此點是否為代表性球場位置。",
+      "verified_at": "2026-11-20T00:00:00+08:00",
+      "latitude": 23.02067,
+      "longitude": 113.75179
     },
     {
       "course_id": "cn-sheshan",
@@ -443,16 +448,18 @@
       "verification_status": "partially_verified",
       "data_source": [
         "https://www.sheshangolf.com/",
-        "https://wap.scjgj.sh.gov.cn/businessCheck/verifKey.do?serial=9031000020170906123526000002042512-SAIC_SHOW_310000-20130529103953239298&showType=extShow&signData=MEQCIDVJ8UrHITnRrxUxpG7xH8eB2dQKbokzNrILP%2FEvVvpeAiBG%2FjIPHo4x10PFMa%2FC9EzY8q2Ar8MkUA3tHnvlwm00Tw%3D%3D",
-        "https://www.amap.com/place/B0015477AC"
+        "https://www.where2golf.com/china/sheshan-golf-club/",
+        "https://mapcarta.com/W414295341"
       ],
       "local_name": "佘山国际高尔夫俱乐部",
       "official_address": "中国上海市松江区佘山镇国家旅游度假区",
       "local_address": "上海市松江区佘山国家旅游度假区林荫新路288弄",
       "timezone": "Asia/Shanghai",
       "official_website": "https://www.sheshangolf.com/",
-      "verification_note": "官方網站確認球會名稱；上海市市場監督管理局企業公示資料確認登記住所，另有高德球場 POI 地址可交叉參考；官方球場 GPS 尚待核實。",
-      "verified_at": "2026-11-20T00:00:00+08:00"
+      "verification_note": "Where2Golf 座標與 Mapcarta/OpenStreetMap 的 She Shan Golf Club 球場範圍位置相符；另有 FullGolf 座標明顯偏離，故不採用該筆。此座標仍非球會官方 GPS，保留部分驗證。",
+      "verified_at": "2026-11-20T00:00:00+08:00",
+      "latitude": 31.105843,
+      "longitude": 121.217694
     },
     {
       "course_id": "cn-yalong-bay",
@@ -1213,13 +1220,16 @@
       "region": "Jakarta",
       "verification_status": "partially_verified",
       "data_source": [
-        "https://sisupar.kemenpar.go.id/usaha-tersertifikasi?kategori%5B0%5D=28"
+        "https://www.where2golf.com/indonesia/pondok-indah-golf-course/",
+        "https://mapcarta.com/W28420725"
       ],
       "official_address": "Jl. Metro Pondok Indah, Jakarta Selatan, DKI Jakarta, Indonesia",
       "local_address": "Jl. Metro Pondok Indah, Jakarta Selatan, DKI Jakarta, Indonesia",
       "timezone": "Asia/Jakarta",
       "verified_at": "2026-11-20T00:00:00+08:00",
-      "verification_note": "球場地址與名稱已有官方球場、協會或政府名錄來源支持；尚未取得可靠球場本體 GPS，保持天氣查詢停用。"
+      "verification_note": "Where2Golf 提供球場座標；Mapcarta/OpenStreetMap 球場範圍中心相距約數百公尺，互相支持其位置。仍非球場官方 GPS，保留部分驗證。",
+      "latitude": -6.269504,
+      "longitude": 106.785443
     },
     {
       "course_id": "id-jagorawi",
@@ -1237,10 +1247,15 @@
       "country_code": "ID",
       "city": "Bogor",
       "region": "West Java",
-      "verification_status": "unverified",
+      "verification_status": "partially_verified",
       "data_source": [
-        "https://gogolfnow.com/"
-      ]
+        "https://jagorawi.com/map-directions/",
+        "https://www.where2golf.com/indonesia/jagorawi-golf-country-club-old-course/"
+      ],
+      "latitude": -6.454335,
+      "longitude": 106.87676,
+      "timezone": "Asia/Jakarta",
+      "verification_note": "球會官方路線頁確認 Karanggan 主入口與球場位置關係；Where2Golf 提供 Old Course 座標。座標位於官方所述球會範圍附近，仍待官方場區圖確認。"
     },
     {
       "course_id": "jp-shinsodegaura",
