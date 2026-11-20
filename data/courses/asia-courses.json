@@ -663,7 +663,10 @@
       "timezone": "Asia/Bangkok",
       "official_website": "https://blackmountainhuahin.com/contact",
       "verified_at": "2026-11-20T00:00:00+08:00",
-      "verification_note": "球場地址與名稱已有官方球場、協會或政府名錄來源支持；尚未取得可靠球場本體 GPS，保持天氣查詢停用。"
+      "verification_note": "官方球場聯絡頁確認地址；高爾夫球場專業資料頁提供 clubhouse GPS 12.61440, 99.89170。座標屬 clubhouse 位置，保留部分核實狀態，後續再以官方地圖交叉確認。",
+      "latitude": 12.6144,
+      "longitude": 99.8917,
+      "coordinate_source": "https://playgolfglobal.com/thailand/courses/black-mountain-golf-club-hua-hin"
     },
     {
       "course_id": "th-pineapple-valley",
@@ -842,7 +845,10 @@
       "timezone": "Asia/Kuala_Lumpur",
       "official_website": "https://saujanagolf.com.my/",
       "verified_at": "2026-11-20T00:00:00+08:00",
-      "verification_note": "球場地址與名稱已有官方球場、協會或政府名錄來源支持；尚未取得可靠球場本體 GPS，保持天氣查詢停用。"
+      "verification_note": "雪蘭莪州官方旅遊局出版的 Selangor Breakaway 高爾夫名錄列出 Saujana Golf and Country Club GPS 3.10662, 101.57520；保留部分核實狀態，待官方球場地圖交叉確認。",
+      "latitude": 3.10662,
+      "longitude": 101.5752,
+      "coordinate_source": "https://selangor.travel/wp-content/uploads/2022/03/Selangor-Breakaway.pdf"
     },
     {
       "course_id": "my-kota-permai",
@@ -869,7 +875,10 @@
       "timezone": "Asia/Kuala_Lumpur",
       "official_website": "https://www.kotapermai.com.my/contact-us/",
       "verified_at": "2026-11-20T00:00:00+08:00",
-      "verification_note": "球場地址與名稱已有官方球場、協會或政府名錄來源支持；尚未取得可靠球場本體 GPS，保持天氣查詢停用。"
+      "verification_note": "雪蘭莪州官方旅遊局出版的 Selangor Breakaway 高爾夫名錄列出 Kota Permai Golf & Country Club GPS 2.99700, 101.53442；保留部分核實狀態，待官方球場地圖交叉確認。",
+      "latitude": 2.997,
+      "longitude": 101.53442,
+      "coordinate_source": "https://selangor.travel/wp-content/uploads/2022/03/Selangor-Breakaway.pdf"
     },
     {
       "course_id": "my-els-teluk-datai",
