@@ -54,7 +54,7 @@ async function assertVisibility(rawText, csvMiles, expectedKm) {
   const testRow = [
     rawText, "RJAA", "35.7653", "140.3864", observedAt, "18", "10", "180", "8", "", csvMiles, "29.91"
   ].join(",");
-  const testCsv = header + "\\n" + testRow + "\\n";
+  const testCsv = header + "\n" + testRow + "\n";
   const testContext = {
     URL, URLSearchParams, Request, Response, Blob, DecompressionStream, TextDecoder,
     Date, Math, Number, String, JSON, Uint8Array,
