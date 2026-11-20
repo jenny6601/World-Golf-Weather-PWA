@@ -896,7 +896,7 @@ async function loadLiveObservation(course){
   const windDirectionLabel=o.windDirection===null||o.windDirection===undefined||!Number.isFinite(Number(o.windDirection))
    ?"未提供":fmt(((Number(o.windDirection)%360)+360)%360,0)+"°（"+compass16[Math.round((((Number(o.windDirection)%360)+360)%360)/22.5)%16]+"）";
   const rawObservation=String(o.raw||"").toUpperCase();
-  const observedWeatherCodes=[...new Set((rawObservation.match(/(?:^|\\s)[+-]?(?:TSRA|SHRA|RA|DZ|SN|SG|PL|GR|GS|TS|FG|BR|HZ)(?=\\s|$)/g)||[]).map(x=>x.trim()))];
+  const observedWeatherCodes=[...new Set((rawObservation.match(/(?:^|\s)[+-]?(?:TSRA|SHRA|RA|DZ|SN|SG|PL|GR|GS|TS|FG|BR|HZ)(?=\s|$)/g)||[]).map(x=>x.trim()))];
   const weatherLabels={"RA":"降雨","-RA":"小雨","+RA":"大雨","SHRA":"陣雨","-SHRA":"陣雨","+SHRA":"強陣雨","TS":"雷暴","TSRA":"雷雨","-TSRA":"雷雨","+TSRA":"強雷雨","FG":"霧","BR":"薄霧","HZ":"霾","DZ":"毛毛雨","SN":"降雪","SG":"雪粒","PL":"冰粒","GR":"冰雹","GS":"小冰雹"};
   const observedWeather=observedWeatherCodes.length? [...new Set(observedWeatherCodes.map(x=>weatherLabels[x]||x))].join("、"):"未觀測到明顯天氣現象";
   let matchedForecast=null,matchedLocalHour="";
