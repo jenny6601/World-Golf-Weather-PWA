@@ -64,7 +64,14 @@ export async function onRequestGet({ request }) {
     return json({ courseId, status: "provider_unreachable", message: String(error) }, 502);
   }
   if (response.status === 204) return json({ courseId, status: "no_recent_observation", generatedAt: new Date().toISOString() });
-  if (!response.ok) return json({ courseId, status: "provider_error", providerStatus: response.status }, 502);
+  if (!response.ok) {
+    const providerBody = (await response.text()).slice(0, 1200);
+    return json({
+      courseId, status: "provider_error", providerStatus: response.status,
+      providerMessage: providerBody,
+      diagnostic: { bbox, endpoint: metarUrl.origin + metarUrl.pathname, query: { format: "json", hours: "3" } }
+    }, 502);
+  }
   let reports;
   try { reports = await response.json(); } catch { return json({ courseId, status: "invalid_provider_response" }, 502); }
   if (!Array.isArray(reports)) reports = reports?.data || reports?.metars || reports?.results || [];
