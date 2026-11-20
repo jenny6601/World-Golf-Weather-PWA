@@ -12,111 +12,185 @@
     "ID"
   ],
   "generated_at": "2026-11-20",
-  "record_count": 40,
-  "notes": "Discovery-only directory seed. All entries are unverified; no official addresses, GPS coordinates, timezones or photos have been asserted. Do not enable forecast selection until each record is independently verified.",
+  "record_count": 41,
+  "notes": "Discovery and verification directory. Japan records were updated from official club address/access pages; official embedded map coordinates used where available. Camellia Hills remains partial pending an official map coordinate. Other countries remain unverified.",
   "courses": [
     {
       "course_id": "jp-abiko",
       "name_en": "Abiko Golf Club",
       "short_name": "Abiko Golf Club",
       "aliases": [
-        "Abiko GC"
+        "Abiko GC",
+        "我孫子ゴルフ倶楽部",
+        "Abiko Golf Course"
       ],
       "search_keywords": [
         "Abiko",
         "Chiba",
-        "Japan"
+        "Japan",
+        "我孫子",
+        "岡発戸",
+        "270-1137"
       ],
       "country": "Japan",
       "country_code": "JP",
       "city": "Abiko",
       "region": "Chiba",
-      "verification_status": "unverified",
+      "verification_status": "verified",
       "data_source": [
-        "https://gogolfnow.com/"
-      ]
+        "https://www.abikogc.com/english/access/"
+      ],
+      "local_name": "我孫子ゴルフ倶楽部",
+      "official_address": "〒270-1137 千葉県我孫子市岡発戸1110",
+      "local_address": "〒270-1137 千葉県我孫子市岡発戸1110",
+      "timezone": "Asia/Tokyo",
+      "official_website": "https://www.abikogc.com/english/access/",
+      "latitude": 35.867525722534616,
+      "longitude": 140.04306791528322,
+      "map_address": "〒270-1137 千葉県我孫子市岡発戸1110",
+      "coordinate_source": "https://www.abikogc.com/english/access/",
+      "verified_at": "2026-11-20T00:00:00+09:00"
     },
     {
       "course_id": "jp-camellia-hills",
       "name_en": "Camellia Hills Country Club",
       "short_name": "Camellia Hills Country Club",
       "aliases": [
-        "Camellia Hills CC"
-      ],
-      "search_keywords": [
-        "Chiba",
-        "Chiba",
-        "Japan"
-      ],
-      "country": "Japan",
-      "country_code": "JP",
-      "city": "Chiba",
-      "region": "Chiba",
-      "verification_status": "unverified",
-      "data_source": [
-        "https://gogolfnow.com/"
-      ]
-    },
-    {
-      "course_id": "jp-sodegaura",
-      "name_en": "Sodegaura Country Club",
-      "short_name": "Sodegaura Country Club",
-      "aliases": [
-        "Sodegaura CC"
+        "Camellia Hills CC",
+        "カメリアヒルズカントリークラブ",
+        "Camellia Hills"
       ],
       "search_keywords": [
         "Sodegaura",
         "Chiba",
-        "Japan"
+        "Japan",
+        "袖ケ浦",
+        "大竹",
+        "299-0221"
       ],
       "country": "Japan",
       "country_code": "JP",
       "city": "Sodegaura",
       "region": "Chiba",
-      "verification_status": "unverified",
+      "verification_status": "partially_verified",
       "data_source": [
-        "https://gogolfnow.com/"
-      ]
+        "https://www.camelliahills.com/outline/"
+      ],
+      "local_name": "カメリアヒルズカントリークラブ",
+      "official_address": "〒299-0221 千葉県袖ケ浦市大竹265",
+      "local_address": "〒299-0221 千葉県袖ケ浦市大竹265",
+      "timezone": "Asia/Tokyo",
+      "official_website": "https://www.camelliahills.com/outline/",
+      "verified_at": "2026-11-20T00:00:00+09:00",
+      "verification_note": "官方名稱、地址及網站已核實；GPS 尚未由球場官方地圖取得，暫不開放天氣查詢。"
+    },
+    {
+      "course_id": "jp-sodegaura",
+      "name_en": "Sodegaura Country Club – Sodegaura Course",
+      "short_name": "Sodegaura Country Club – Sodegaura Course",
+      "aliases": [
+        "Sodegaura CC",
+        "袖ヶ浦カンツリークラブ 袖ヶ浦コース",
+        "Sodegaura Course",
+        "袖ヶ浦コース"
+      ],
+      "search_keywords": [
+        "Chiba",
+        "Japan",
+        "千葉市緑区",
+        "辺田町",
+        "266-0007"
+      ],
+      "country": "Japan",
+      "country_code": "JP",
+      "city": "Chiba",
+      "region": "Chiba",
+      "verification_status": "verified",
+      "data_source": [
+        "https://www.sodegaura.co.jp/access/"
+      ],
+      "local_name": "袖ヶ浦カンツリークラブ 袖ヶ浦コース",
+      "official_address": "〒266-0007 千葉県千葉市緑区辺田町567番地",
+      "local_address": "〒266-0007 千葉県千葉市緑区辺田町567番地",
+      "timezone": "Asia/Tokyo",
+      "official_website": "https://www.sodegaura.co.jp/access/",
+      "latitude": 35.559608423968655,
+      "longitude": 140.16336342587883,
+      "map_address": "〒266-0007 千葉県千葉市緑区辺田町567番地",
+      "coordinate_source": "https://www.sodegaura.co.jp/access/",
+      "verified_at": "2026-11-20T00:00:00+09:00"
     },
     {
       "course_id": "jp-kasumigaseki",
       "name_en": "Kasumigaseki Country Club",
       "short_name": "Kasumigaseki Country Club",
       "aliases": [
-        "Kasumigaseki CC"
+        "Kasumigaseki CC",
+        "霞ヶ関カンツリー倶楽部",
+        "Kasumi"
       ],
       "search_keywords": [
         "Kawagoe",
         "Saitama",
-        "Japan"
+        "Japan",
+        "川越市",
+        "笠幡",
+        "350-1175"
       ],
       "country": "Japan",
       "country_code": "JP",
       "city": "Kawagoe",
       "region": "Saitama",
-      "verification_status": "unverified",
+      "verification_status": "verified",
       "data_source": [
-        "https://gogolfnow.com/"
-      ]
+        "https://www.kasumigasekicc.or.jp/english/access/index.html"
+      ],
+      "local_name": "霞ヶ関カンツリー倶楽部",
+      "official_address": "〒350-1175 埼玉県川越市大字笠幡3398",
+      "local_address": "〒350-1175 埼玉県川越市大字笠幡3398",
+      "timezone": "Asia/Tokyo",
+      "official_website": "https://www.kasumigasekicc.or.jp/english/access/index.html",
+      "latitude": 35.901566179416555,
+      "longitude": 139.3957515608896,
+      "map_address": "〒350-1175 埼玉県川越市大字笠幡3398",
+      "coordinate_source": "https://www.kasumigasekicc.or.jp/english/access/index.html",
+      "verified_at": "2026-11-20T00:00:00+09:00"
     },
     {
       "course_id": "jp-tokyo-golf-club",
       "name_en": "Tokyo Golf Club",
       "short_name": "Tokyo Golf Club",
-      "aliases": [],
+      "aliases": [
+        "東京ゴルフ倶楽部",
+        "Tokyo GC",
+        "東京GC"
+      ],
       "search_keywords": [
         "Sayama",
         "Saitama",
-        "Japan"
+        "Japan",
+        "狭山市",
+        "柏原",
+        "350-1335"
       ],
       "country": "Japan",
       "country_code": "JP",
       "city": "Sayama",
       "region": "Saitama",
-      "verification_status": "unverified",
+      "verification_status": "verified",
       "data_source": [
-        "https://gogolfnow.com/"
-      ]
+        "https://www.tokyogolfclub.jp/english/access/"
+      ],
+      "local_name": "東京ゴルフ倶楽部",
+      "official_address": "〒350-1335 埼玉県狭山市柏原1984",
+      "local_address": "〒350-1335 埼玉県狭山市柏原1984",
+      "timezone": "Asia/Tokyo",
+      "official_website": "https://www.tokyogolfclub.jp/english/access/",
+      "latitude": 35.89612368014474,
+      "longitude": 139.4043753152647,
+      "map_address": "〒350-1335 埼玉県狭山市柏原1984",
+      "coordinate_source": "https://www.tokyogolfclub.jp/english/access/",
+      "verified_at": "2026-11-20T00:00:00+09:00"
     },
     {
       "course_id": "kr-nine-bridges",
@@ -852,6 +926,43 @@
       "data_source": [
         "https://gogolfnow.com/"
       ]
+    },
+    {
+      "course_id": "jp-shinsodegaura",
+      "name_en": "Sodegaura Country Club – New Sodegaura Course",
+      "short_name": "New Sodegaura Course",
+      "local_name": "袖ヶ浦カンツリークラブ 新袖コース",
+      "aliases": [
+        "Shin-Sodegaura Course",
+        "New Sodegaura",
+        "新袖コース",
+        "袖ヶ浦カンツリークラブ新袖"
+      ],
+      "search_keywords": [
+        "Chiba",
+        "Chiba City Wakaba Ward",
+        "Japan",
+        "千葉市若葉区",
+        "富田町",
+        "265-0041"
+      ],
+      "country": "Japan",
+      "country_code": "JP",
+      "city": "Chiba",
+      "region": "Chiba",
+      "official_address": "〒265-0041 千葉県千葉市若葉区富田町1140番地",
+      "local_address": "〒265-0041 千葉県千葉市若葉区富田町1140番地",
+      "latitude": 35.58116563392002,
+      "longitude": 140.202886209867,
+      "timezone": "Asia/Tokyo",
+      "official_website": "https://www.sodegaura.co.jp/access/",
+      "data_source": [
+        "https://www.sodegaura.co.jp/access/"
+      ],
+      "coordinate_source": "https://www.sodegaura.co.jp/access/",
+      "verification_status": "verified",
+      "verified_at": "2026-11-20T00:00:00+09:00",
+      "verification_note": "球場官方網站分列袖ヶ浦コース與新袖コース，兩者地址與官方地圖位置分開建檔。"
     }
   ]
 }
