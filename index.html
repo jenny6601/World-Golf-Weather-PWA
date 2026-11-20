@@ -602,7 +602,7 @@ function renderCourseDatabase(mode="search"){
  if(mode==="favorites")entries=entries.filter(x=>isCourseFavorite(x.c.course_id));
  else if(mode==="recent"){let recent=[];try{recent=JSON.parse(localStorage.getItem("wgw:recent")||"[]");}catch{}entries=recent.map(id=>entries.find(x=>x.c.course_id===id)).filter(Boolean);}
  else if(query)entries=entries.map(x=>({...x,score:courseSearchScore(x.c,query)})).filter(x=>x.score>0).sort((a,b)=>b.score-a.score);
- else entries=[];
+ else entries=entries;
  const root=$("courseList");
  if(!entries.length){root.innerHTML='<div class="muted">'+(courseDataReady?"目前沒有符合條件的球場資料。":"正在載入球場資料…")+'</div>';return;}
  root.innerHTML=entries.slice(0,100).map(({c,i})=>{
