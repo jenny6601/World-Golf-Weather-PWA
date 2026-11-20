@@ -661,6 +661,7 @@ function renderCourseDatabase(mode="search"){
  else if(query)entries=entries.map(x=>({...x,score:courseSearchScore(x.c,query)})).filter(x=>x.score>0).sort((a,b)=>b.score-a.score);
  else entries=entries;
  const root=$("courseList");
+ if(!country&&mode==="search"&&!query){root.innerHTML='<div class="muted">請選擇國家或輸入球場名稱搜尋。</div>';return;}
  if(!entries.length){root.innerHTML='<div class="muted">'+(mode==="favorites"?"尚未收藏球場，請在球場名稱右側點選 ☆。":courseDataReady?"目前沒有符合條件的球場資料。":"正在載入球場資料…")+'</div>';return;}
  root.innerHTML=entries.slice(0,100).map(({c,i})=>{
   const favorite=isCourseFavorite(c.course_id);
