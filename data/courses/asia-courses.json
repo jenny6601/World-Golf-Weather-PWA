@@ -13,7 +13,7 @@
   ],
   "generated_at": "2026-11-20",
   "record_count": 41,
-  "notes": "Japan: five records verified with official club addresses and official-site map pins; Camellia Hills partially verified. South Korea: Nine Bridges and Black Stone Jeju verified using club official sites plus Jeju official tourism portal for coordinates; Teddy Valley, Asiad CC and Woo Jeong Hills have official identity/address but GPS pending. Other five countries remain unverified.",
+  "notes": "Japan: five records verified with official club addresses and official-site map pins; Camellia Hills partially verified. South Korea: Nine Bridges and Black Stone Jeju verified using club official sites plus Jeju official tourism portal for coordinates; Teddy Valley, Asiad CC and Woo Jeong Hills have official identity/address but GPS pending. China: Mission Hills Shenzhen/Dongguan and Sheshan have official identity/address sources; Yalong Bay has corroborating map/banking directory address; all GPS pending. Vietnam: five course identities and addresses verified against official club sources; GPS pending. Thailand, Malaysia, Singapore and Indonesia remain unverified.",
   "courses": [
     {
       "course_id": "jp-abiko",
@@ -371,10 +371,18 @@
       "country_code": "CN",
       "city": "Shenzhen",
       "region": "Guangdong",
-      "verification_status": "unverified",
+      "verification_status": "partially_verified",
       "data_source": [
-        "https://gogolfnow.com/"
-      ]
+        "https://www.missionhillschina.com/others/about-us/contact-us/",
+        "https://ditu.amap.com/place/B02F38IEQ6"
+      ],
+      "local_name": "观澜湖高尔夫球会（深圳）",
+      "official_address": "中国广东省深圳市龙华区观澜高尔夫大道1号，邮编518110",
+      "local_address": "中国广东省深圳市龙华区观澜高尔夫大道1号",
+      "timezone": "Asia/Shanghai",
+      "official_website": "https://www.missionhillschina.com/others/about-us/contact-us/",
+      "verification_note": "球會官方聯絡頁確認深圳場正式名稱與地址；高德地圖有對應球場 POI，但尚未以球場官方地圖或政府測繪資料核實球場內 GPS，因此不填入座標。",
+      "verified_at": "2026-11-20T00:00:00+08:00"
     },
     {
       "course_id": "cn-mission-hills-dongguan",
@@ -392,10 +400,17 @@
       "country_code": "CN",
       "city": "Dongguan",
       "region": "Guangdong",
-      "verification_status": "unverified",
+      "verification_status": "partially_verified",
       "data_source": [
-        "https://gogolfnow.com/"
-      ]
+        "https://www.missionhillschina.com/others/about-us/contact-us/"
+      ],
+      "local_name": "观澜湖高尔夫球会（东莞）",
+      "official_address": "中国广东省东莞市塘厦镇大坪林坪路，邮编523722",
+      "local_address": "中国广东省东莞市塘厦镇大坪林坪路",
+      "timezone": "Asia/Shanghai",
+      "official_website": "https://www.missionhillschina.com/others/about-us/contact-us/",
+      "verification_note": "球會官方聯絡頁確認東莞場地址；尚未取得能確認球場本體位置的官方地圖 GPS。",
+      "verified_at": "2026-11-20T00:00:00+08:00"
     },
     {
       "course_id": "cn-sheshan",
@@ -413,10 +428,19 @@
       "country_code": "CN",
       "city": "Shanghai",
       "region": "Shanghai",
-      "verification_status": "unverified",
+      "verification_status": "partially_verified",
       "data_source": [
-        "https://gogolfnow.com/"
-      ]
+        "https://www.sheshangolf.com/",
+        "https://wap.scjgj.sh.gov.cn/businessCheck/verifKey.do?serial=9031000020170906123526000002042512-SAIC_SHOW_310000-20130529103953239298&showType=extShow&signData=MEQCIDVJ8UrHITnRrxUxpG7xH8eB2dQKbokzNrILP%2FEvVvpeAiBG%2FjIPHo4x10PFMa%2FC9EzY8q2Ar8MkUA3tHnvlwm00Tw%3D%3D",
+        "https://www.amap.com/place/B0015477AC"
+      ],
+      "local_name": "佘山国际高尔夫俱乐部",
+      "official_address": "中国上海市松江区佘山镇国家旅游度假区",
+      "local_address": "上海市松江区佘山国家旅游度假区林荫新路288弄",
+      "timezone": "Asia/Shanghai",
+      "official_website": "https://www.sheshangolf.com/",
+      "verification_note": "官方網站確認球會名稱；上海市市場監督管理局企業公示資料確認登記住所，另有高德球場 POI 地址可交叉參考；官方球場 GPS 尚待核實。",
+      "verified_at": "2026-11-20T00:00:00+08:00"
     },
     {
       "course_id": "cn-yalong-bay",
@@ -434,10 +458,17 @@
       "country_code": "CN",
       "city": "Sanya",
       "region": "Hainan",
-      "verification_status": "unverified",
+      "verification_status": "partially_verified",
       "data_source": [
-        "https://gogolfnow.com/"
-      ]
+        "https://ditu.amap.com/place/B0383004JE",
+        "https://www.hsbc.com.hk/content/dam/hsbc/hk/sc/docs/jade/golf-programme-address.pdf"
+      ],
+      "local_name": "亚龙湾高尔夫球会",
+      "official_address": "中国海南省三亚市吉阳区龙海路22号亚龙湾国家旅游度假区内",
+      "local_address": "三亚市吉阳区龙海路22号亚龙湾国家旅游度假区内",
+      "timezone": "Asia/Shanghai",
+      "verification_note": "高德地圖球場 POI 與匯豐高爾夫球會地址資料可交叉確認球場名稱及地址；尚無球場官方網站或官方 GPS 來源，暫不填入座標。",
+      "verified_at": "2026-11-20T00:00:00+08:00"
     },
     {
       "course_id": "cn-shanqin-bay",
@@ -476,10 +507,19 @@
       "country_code": "VN",
       "city": "Da Nang",
       "region": "Da Nang",
-      "verification_status": "unverified",
+      "verification_status": "partially_verified",
       "data_source": [
-        "https://gogolfnow.com/"
-      ]
+        "https://banahillsgolf.com/the-course/",
+        "https://banahillsgolf.com/",
+        "https://danangfantasticity.com/enjoy-mice-golf/experience-in-da-nang"
+      ],
+      "local_name": "Ba Na Hills Golf Club",
+      "official_address": "An Son Hamlet, Ba Na Commune, Da Nang City, Vietnam",
+      "local_address": "An Sơn, Hòa Ninh, Hòa Vang, Đà Nẵng, Việt Nam",
+      "timezone": "Asia/Ho_Chi_Minh",
+      "official_website": "https://banahillsgolf.com/",
+      "verification_note": "球場官方網站確認球場名稱及地址；峴港市觀光入口可交叉核對地址。尚未取得官方地圖 GPS。",
+      "verified_at": "2026-11-20T00:00:00+08:00"
     },
     {
       "course_id": "vn-hoiana-shores",
@@ -497,10 +537,17 @@
       "country_code": "VN",
       "city": "Duy Xuyen",
       "region": "Quang Nam",
-      "verification_status": "unverified",
+      "verification_status": "partially_verified",
       "data_source": [
-        "https://gogolfnow.com/"
-      ]
+        "https://www.hoiana.com/golf/home"
+      ],
+      "local_name": "Hoiana Shores Golf Club",
+      "official_address": "Hoiana Resort & Golf, Tay Son Tay Hamlet, Duy Nghia Commune, Da Nang City, Vietnam",
+      "local_address": "Thôn Tây Sơn Tây, xã Duy Nghĩa, thành phố Đà Nẵng, Việt Nam",
+      "timezone": "Asia/Ho_Chi_Minh",
+      "official_website": "https://www.hoiana.com/golf/home",
+      "verification_note": "Hoiana 官方高爾夫網站確認球場名稱、度假區位置及地址；尚未取得可核實球場本體的官方 GPS 座標。",
+      "verified_at": "2026-11-20T00:00:00+08:00"
     },
     {
       "course_id": "vn-laguna-lang-co",
@@ -518,10 +565,18 @@
       "country_code": "VN",
       "city": "Phu Loc",
       "region": "Thua Thien Hue",
-      "verification_status": "unverified",
+      "verification_status": "partially_verified",
       "data_source": [
-        "https://gogolfnow.com/"
-      ]
+        "https://www.lagunalangco.com/contact/",
+        "https://www.lagunalangco.com/golf/"
+      ],
+      "local_name": "Sân golf Laguna Lăng Cô",
+      "official_address": "Canh Duong Village, Chan May – Lang Co Commune, Hue City, Vietnam",
+      "local_address": "Thôn Cảnh Dương, xã Chân Mây – Lăng Cô, thành phố Huế, Việt Nam",
+      "timezone": "Asia/Ho_Chi_Minh",
+      "official_website": "https://www.lagunalangco.com/",
+      "verification_note": "Laguna 官方聯絡頁確認球場名稱、地址及聯絡資訊；頁面提供 Google Maps 導航連結，但尚未核實地圖 pin 的球場 GPS。",
+      "verified_at": "2026-11-20T00:00:00+08:00"
     },
     {
       "course_id": "vn-legend-da-nang",
@@ -539,10 +594,19 @@
       "country_code": "VN",
       "city": "Da Nang",
       "region": "Da Nang",
-      "verification_status": "unverified",
+      "verification_status": "partially_verified",
       "data_source": [
-        "https://gogolfnow.com/"
-      ]
+        "https://www.dananggolfclub.com/public/contact",
+        "https://www.dananggolfclub.com/",
+        "https://danangfantasticity.com/en/du-lich-golf/legend-danang-golf-resort"
+      ],
+      "local_name": "Legend Da Nang Golf Resort",
+      "official_address": "726 Truong Sa St., Ngu Hanh Son Ward, Da Nang City, Vietnam",
+      "local_address": "726 đường Trường Sa, phường Ngũ Hành Sơn, thành phố Đà Nẵng, Việt Nam",
+      "timezone": "Asia/Ho_Chi_Minh",
+      "official_website": "https://www.dananggolfclub.com/",
+      "verification_note": "球場官方網站及峴港市觀光入口均確認球場名稱與地址；尚未取得官方地圖 GPS。",
+      "verified_at": "2026-11-20T00:00:00+08:00"
     },
     {
       "course_id": "vn-montgomerie-links",
@@ -560,10 +624,19 @@
       "country_code": "VN",
       "city": "Da Nang",
       "region": "Quang Nam",
-      "verification_status": "unverified",
+      "verification_status": "partially_verified",
       "data_source": [
-        "https://gogolfnow.com/"
-      ]
+        "https://www.montgomerielinks.com/index.php/about-us",
+        "https://www.montgomerielinks.com/membership",
+        "https://danangfantasticity.com/en/montgomerie-links-3"
+      ],
+      "local_name": "Montgomerie Links Vietnam",
+      "official_address": "Coastal Road, Dien Ban Dong Ward, Da Nang City, Vietnam",
+      "local_address": "Đường ven biển, phường Điện Bàn Đông, thành phố Đà Nẵng, Việt Nam",
+      "timezone": "Asia/Ho_Chi_Minh",
+      "official_website": "https://www.montgomerielinks.com/",
+      "verification_note": "球場官方網站及峴港市觀光入口確認球場名稱與所在地；尚未取得官方地圖 GPS。",
+      "verified_at": "2026-11-20T00:00:00+08:00"
     },
     {
       "course_id": "th-black-mountain",
