@@ -84,7 +84,10 @@
       "timezone": "Asia/Tokyo",
       "official_website": "https://www.camelliahills.com/outline/",
       "verified_at": "2026-11-20T00:00:00+09:00",
-      "verification_note": "官方名稱、地址及網站已核實；GPS 尚未由球場官方地圖取得，暫不開放天氣查詢。"
+      "verification_note": "官方名稱與地址已核實；GPS 參考 FullGolf 球場頁座標，仍待官方球場地圖交叉確認。",
+      "latitude": 35.360042,
+      "longitude": 140.024104,
+      "coordinate_source": "https://www.fullgolf.com/en/golf-club/japan/chiba/sodegaura/camellia-hills-country-club"
     },
     {
       "course_id": "jp-sodegaura",
@@ -357,9 +360,12 @@
       "official_address": "충청남도 천안시 동남구 목천읍 충절로 1048-68",
       "local_address": "충청남도 천안시 동남구 목천읍 충절로 1048-68",
       "official_website": "https://whcc.kolon.com/pagesite/club/intro.asp",
-      "verification_note": "球場官方網站確認名稱及地址；目前取得的座標來源不是球場官方地圖，因此不寫入正式 GPS 欄位。",
+      "verification_note": "官方名稱與地址已核實；GPS 參考 FullGolf 球場頁座標，仍待官方球場地圖交叉確認。",
       "timezone": "Asia/Seoul",
-      "verified_at": "2026-11-20T00:00:00+09:00"
+      "verified_at": "2026-11-20T00:00:00+09:00",
+      "latitude": 36.766741,
+      "longitude": 127.224659,
+      "coordinate_source": "https://www.fullgolf.com/en/golf-club/south-korea/south-chungcheong/cheonan/woo-jeong-hills-country-club"
     },
     {
       "course_id": "cn-mission-hills-shenzhen",
@@ -745,7 +751,10 @@
       "timezone": "Asia/Bangkok",
       "official_website": "https://siamcountryclub.com/old-course/",
       "verified_at": "2026-11-20T00:00:00+08:00",
-      "verification_note": "球場地址與名稱已有官方球場、協會或政府名錄來源支持；尚未取得可靠球場本體 GPS，保持天氣查詢停用。"
+      "verification_note": "官方名稱與地址已核實；GPS 取自 OpenStreetMap golf_course 圖徵資料（Mapcarta），代表 Old Course 球場區域，仍待官方地圖交叉確認。",
+      "latitude": 12.91061,
+      "longitude": 100.98388,
+      "coordinate_source": "https://mapcarta.com/W132473847"
     },
     {
       "course_id": "th-red-mountain",
@@ -814,7 +823,10 @@
       "timezone": "Asia/Kuala_Lumpur",
       "official_website": "https://www.klgcc.com/about/contact-us",
       "verified_at": "2026-11-20T00:00:00+08:00",
-      "verification_note": "球場地址與名稱已有官方球場、協會或政府名錄來源支持；尚未取得可靠球場本體 GPS，保持天氣查詢停用。"
+      "verification_note": "官方名稱與地址已核實；GPS 取自 OpenStreetMap golf_course 多邊形中心點（GeoView），代表球場區域，仍待官方地圖交叉確認。",
+      "latitude": 3.14002,
+      "longitude": 101.63973,
+      "coordinate_source": "https://my.geoview.info/kuala_lumpur_golf_and_country_club%2C9519926r"
     },
     {
       "course_id": "my-royal-selangor",
@@ -953,7 +965,10 @@
       "timezone": "Asia/Singapore",
       "official_website": "https://sentosagolf.com/",
       "verified_at": "2026-11-20T00:00:00+08:00",
-      "verification_note": "球場地址與名稱已有官方球場、協會或政府名錄來源支持；尚未取得可靠球場本體 GPS，保持天氣查詢停用。"
+      "verification_note": "官方名稱與地址已核實；GPS 參考 Where2Golf 的 Serapong 球場位置，適用於 Sentosa Golf Club 場區，仍待官方地圖交叉確認。",
+      "latitude": 1.248855,
+      "longitude": 103.829331,
+      "coordinate_source": "https://www.where2golf.com/singapore/sentosa-golf-club-serapong-course/"
     },
     {
       "course_id": "sg-sicc",
@@ -1032,7 +1047,10 @@
       "timezone": "Asia/Singapore",
       "official_website": "https://www.lagunanational.com/contact",
       "verified_at": "2026-11-20T00:00:00+08:00",
-      "verification_note": "球場地址與名稱已有官方球場、協會或政府名錄來源支持；尚未取得可靠球場本體 GPS，保持天氣查詢停用。"
+      "verification_note": "官方名稱與地址已核實；GPS 取自 OpenStreetMap leisure=golf_course 圖徵資料（Mapcarta），代表 Laguna National 球場區域，非鄰近 Dusit 酒店座標。",
+      "latitude": 1.31374,
+      "longitude": 103.95067,
+      "coordinate_source": "https://mapcarta.com/W614939399"
     },
     {
       "course_id": "sg-orchid",
