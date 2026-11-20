@@ -635,16 +635,17 @@ async function initCourseDatabase(){
 function renderCourseDatabase(mode="search"){
  const country=$("countrySelect")?.value||"",query=$("courseSearchInput")?.value||"";
  let entries=asiaCourses.map((c,i)=>({c,i}));
- if(country)entries=entries.filter(x=>x.c.country_code===country);
+ if(country&&mode!=="favorites")entries=entries.filter(x=>x.c.country_code===country);
  if(mode==="favorites")entries=entries.filter(x=>isCourseFavorite(x.c.course_id));
  else if(mode==="recent"){let recent=[];try{recent=JSON.parse(localStorage.getItem("wgw:recent")||"[]");}catch{}entries=recent.map(id=>entries.find(x=>x.c.course_id===id)).filter(Boolean);}
  else if(query)entries=entries.map(x=>({...x,score:courseSearchScore(x.c,query)})).filter(x=>x.score>0).sort((a,b)=>b.score-a.score);
  else entries=entries;
  const root=$("courseList");
  if(!country&&mode!=="favorites"&&mode!=="recent"){root.innerHTML='<div class="muted">請先選擇國家，再瀏覽該國球場。</div>';return;}
- if(!entries.length){root.innerHTML='<div class="muted">'+(courseDataReady?"目前沒有符合條件的球場資料。":"正在載入球場資料…")+'</div>';return;}
+ if(!entries.length){root.innerHTML='<div class="muted">'+(mode==="favorites"?"尚未收藏球場，請在球場名稱右側點選 ☆。":courseDataReady?"目前沒有符合條件的球場資料。":"正在載入球場資料…")+'</div>';return;}
  root.innerHTML=entries.slice(0,100).map(({c,i})=>{
-  return '<article class="course-item" role="button" tabindex="0" aria-label="選擇 '+esc(c.name)+'" onclick="window.loadCourseByIndex('+i+',this)" onkeydown="if(event.key===\'Enter\'||event.key===\' \'){event.preventDefault();window.loadCourseByIndex('+i+',this)}" style="display:block;padding:14px 16px;border:1px solid var(--line);border-radius:12px;margin:8px 0;background:#fff;cursor:pointer;min-width:0"><strong style="display:block;font-size:17px;line-height:1.45;font-weight:600;overflow-wrap:anywhere;text-align:left">'+esc(c.name)+'</strong></article>';
+  const favorite=isCourseFavorite(c.course_id);
+  return '<article class="course-item" style="display:flex;align-items:center;gap:10px;padding:12px 12px;border:1px solid var(--line);border-radius:12px;margin:8px 0;background:#fff;min-width:0"><div role="button" tabindex="0" aria-label="選擇 '+esc(c.name)+'" onclick="window.loadCourseByIndex('+i+',this)" onkeydown="if(event.key===\\'Enter\\'||event.key===\\' \\'){event.preventDefault();window.loadCourseByIndex('+i+',this)}" style="flex:1;min-width:0;cursor:pointer"><strong style="display:block;font-size:16px;line-height:1.4;font-weight:650;overflow-wrap:anywhere;text-align:left">'+esc(c.name)+'</strong></div><button type="button" aria-label="'+(favorite?"取消收藏 ":"收藏 ")+esc(c.name)+'" aria-pressed="'+favorite+'" onclick="event.stopPropagation();window.toggleCourseFavorite(\\''+esc(c.course_id)+'\\')" style="flex:0 0 44px;width:44px;height:44px;padding:0;border:1px solid '+(favorite?"#d8e8dc":"#d9e1e8")+';border-radius:10px;background:'+(favorite?"#e8f5ec":"#f8fafc")+';color:'+(favorite?"#16734b":"#64748b")+';font-size:25px;line-height:1">'+(favorite?"★":"☆")+'</button></article>';
 }).join("");
 }
 window.toggleCourseFavorite=toggleCourseFavorite;
