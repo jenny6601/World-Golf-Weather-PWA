@@ -14,12 +14,12 @@
 - Added eight country filters: JP, KR, CN, VN, TH, MY, SG, ID.
 - Added a structured course data schema.
 - Added 41 course records across eight countries.
-- Current verification: 7 GPS-verified, 13 partially verified, 21 unverified.
+- Current verification: 7 GPS-verified, 27 partially verified, 7 unverified.
 - Japan: five courses have official addresses and official-site embedded map pins; Camellia Hills identity/address verified, GPS pending.
 - South Korea: Nine Bridges and Black Stone Jeju have coordinates from the Jeju official tourism portal; Teddy Valley, Asiad CC and Woo Jeong Hills have identity/address verified, GPS pending.
 - China: Mission Hills Shenzhen and Dongguan, Sheshan and Yalong Bay have identity/address sources recorded; GPS pending.
 - Vietnam: Ba Na Hills, Hoiana Shores, Laguna Lang Co, Legend Da Nang and Montgomerie Links have official club identity/address sources recorded; GPS pending.
-- Thailand, Malaysia, Singapore and Indonesia remain unverified candidates.
+- Thailand: three identity/address records partially verified; Malaysia: four; Singapore: four; Indonesia: three, with Bali and Jakarta timezones assigned individually. Seven remaining candidates across China, Thailand, Malaysia, Singapore and Indonesia are unverified.
 - Candidates without GPS coordinates do not have fabricated coordinates; forecast selection remains disabled until coordinates are available.
 - Disabled the inherited Taiwan live-observation snapshot lookup. The UI states that global observation/METAR integration is not yet available.
 - Disabled inherited Taiwan course-cache lookup; forecast requests fall back to the Open-Meteo model API.
@@ -28,7 +28,7 @@
 
 ## Not yet complete
 - Complete GPS verification for all partially verified courses, including Camellia Hills, Teddy Valley, Asiad CC, Woo Jeong Hills, the four China partial records and five Vietnam courses.
-- Verify Thailand, Malaysia, Singapore and Indonesia candidates.
+- Verify remaining candidates in Thailand, Malaysia, Singapore and Indonesia; obtain GPS for all partially verified courses.
 - Confirm Indonesia timezone per course coordinates (Asia/Jakarta, Asia/Makassar or Asia/Jayapura); do not infer a single country-wide zone.
 - Add licensed/official course photos and attribution.
 - Add external map/GPS discovery and geocoder policy.
