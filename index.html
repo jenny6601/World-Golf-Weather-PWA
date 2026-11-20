@@ -674,9 +674,9 @@ async function geocodeGolfCourse(c,button){
  const savedLat=Number(button.dataset.lat),savedLon=Number(button.dataset.lon);
  if(taiwan(savedLat,savedLon))return {lat:savedLat,lon:savedLon,label:"已快取球場座標",source:"球場地址座標快取"};
  const endpoints=[
-  {name:"Photon 地址定位",url:"https://photon.komoot.io/api/?limit=10&lang=zh&q="+encodeURIComponent(c.address+" Taiwan")},
-  {name:"Photon 球場名稱＋地址",url:"https://photon.komoot.io/api/?limit=10&lang=zh&q="+encodeURIComponent(c.name+" "+c.address)},
-  {name:"Nominatim 地址定位",url:"https://nominatim.openstreetmap.org/search?format=jsonv2&limit=10&addressdetails=1&accept-language=zh-TW&q="+encodeURIComponent(c.address+" Taiwan")},
+  {name:"Photon 地址定位",url:"https://photon.komoot.io/api/?limit=10&lang=zh&q="+encodeURIComponent(c.address)},
+  {name:"Photon 球場名稱＋地址",url:"https://photon.komoot.io/api/?limit=10&lang=zh&q="+encodeURIComponent(c.name+" "+c.address+" "+(c.country||""))},
+  {name:"Nominatim 地址定位",url:"https://nominatim.openstreetmap.org/search?format=jsonv2&limit=10&addressdetails=1&accept-language=en&q="+encodeURIComponent(c.address+" Taiwan")},
   {name:"Nominatim 球場名稱＋地址",url:"https://nominatim.openstreetmap.org/search?format=jsonv2&limit=10&addressdetails=1&accept-language=zh-TW&q="+encodeURIComponent(c.name+" "+c.address)}
  ];
  const errors=[];
@@ -703,7 +703,7 @@ async function geocodeGolfCourse(c,button){
     button.dataset.lat=String(hit.lat);button.dataset.lon=String(hit.lon);
     return {lat:hit.lat,lon:hit.lon,label:hit.label||ep.name,source:ep.name};
    }
-   errors.push(ep.name+": 無符合台灣範圍的地址結果");
+   errors.push(ep.name+": 無符合球場所在國家的地址結果");
   }catch(e){errors.push(ep.name+": "+(e.name==="AbortError"?"逾時":e.message));}
  }
  throw Error("無法將地址轉成球場座標。"+errors.join("；"));
@@ -735,7 +735,7 @@ function renderSelectedHourlySections(rows){
 function updateWeatherDateHeadings(liveDate,forecastDate){
  const live=$("liveObservationHeading");
  // 即時觀測維持台灣當地今日日期；四個預報區塊共用使用者選取的預報日期。
- const taiwanToday=new Intl.DateTimeFormat("en-CA",{timeZone:currentCourseTimezone,year:"numeric",month:"2-digit",day:"2-digit"}).format(new Date());
+ const localToday=new Intl.DateTimeFormat("en-CA",{timeZone:currentCourseTimezone,year:"numeric",month:"2-digit",day:"2-digit"}).format(new Date());
  const dateLabel=golfDateLabel(forecastDate);
  const liveCourseName=(active?.name||$("locname")?.textContent||"").replace(/高爾夫球場/g,"").trim();
  if(live)live.textContent="即時天氣觀測｜"+(liveCourseName?liveCourseName+"｜":"")+golfDateLabel(taiwanToday);
@@ -1187,7 +1187,7 @@ async function getModel(lat,lon,model){
  ];
  const failures=[];
  for(let i=0;i<attempts.length;i++){
-  const params=new URLSearchParams({latitude:String(lat),longitude:String(lon),hourly:attempts[i],timezone:"currentCourseTimezone",forecast_days:isAifs?"15":"16",wind_speed_unit:"kmh"});
+  const params=new URLSearchParams({latitude:String(lat),longitude:String(lon),hourly:attempts[i],timezone:currentCourseTimezone,forecast_days:isAifs?"15":"16",wind_speed_unit:"kmh"});
   if(model)params.set("models",model);
   const url="https://api.open-meteo.com/v1/forecast?"+params.toString();
   try{
