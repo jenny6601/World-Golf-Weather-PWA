@@ -13,7 +13,7 @@
   ],
   "generated_at": "2026-11-20",
   "record_count": 41,
-  "notes": "Japan: five records verified with official club addresses and official-site map pins; Camellia Hills partially verified. South Korea: Nine Bridges and Black Stone Jeju verified using club official sites plus Jeju official tourism portal for coordinates; Teddy Valley, Asiad CC and Woo Jeong Hills have official identity/address but GPS pending. China: Mission Hills Shenzhen/Dongguan and Sheshan have official identity/address sources; Yalong Bay has corroborating map/banking directory address; all GPS pending. Vietnam: five course identities and addresses verified against official club sources; GPS pending. Thailand, Malaysia, Singapore and Indonesia remain unverified.",
+  "notes": "GPS-verified: 7 (Japan 5, South Korea 2). Partially verified: 27 (Japan 1, South Korea 3, China 4, Vietnam 5, Thailand 3, Malaysia 4, Singapore 4, Indonesia 3). Unverified: 7. All partial records lack GPS and are not enabled for weather. Indonesian timezones assigned only to geographically confirmed Bali/Jakarta addresses.",
   "courses": [
     {
       "course_id": "jp-abiko",
@@ -654,10 +654,16 @@
       "country_code": "TH",
       "city": "Hua Hin",
       "region": "Prachuap Khiri Khan",
-      "verification_status": "unverified",
+      "verification_status": "partially_verified",
       "data_source": [
-        "https://gogolfnow.com/"
-      ]
+        "https://blackmountainhuahin.com/contact"
+      ],
+      "official_address": "565 Moo 7, Nong Hieng Road, Hin Lek Fai, Hua Hin District, Prachuap Khiri Khan 77110, Thailand",
+      "local_address": "565 Moo 7, Nong Hieng Road, Hin Lek Fai, Hua Hin District, Prachuap Khiri Khan 77110, Thailand",
+      "timezone": "Asia/Bangkok",
+      "official_website": "https://blackmountainhuahin.com/contact",
+      "verified_at": "2026-11-20T00:00:00+08:00",
+      "verification_note": "球場地址與名稱已有官方球場、協會或政府名錄來源支持；尚未取得可靠球場本體 GPS，保持天氣查詢停用。"
     },
     {
       "course_id": "th-pineapple-valley",
@@ -675,10 +681,16 @@
       "country_code": "TH",
       "city": "Hua Hin",
       "region": "Prachuap Khiri Khan",
-      "verification_status": "unverified",
+      "verification_status": "partially_verified",
       "data_source": [
-        "https://gogolfnow.com/"
-      ]
+        "https://pineapplevalleygolfclub.com/"
+      ],
+      "official_address": "101 Moo 9, Tambol Thap Tai, Hua Hin, Prachuap Khiri Khan 77110, Thailand",
+      "local_address": "101 Moo 9, Tambol Thap Tai, Hua Hin, Prachuap Khiri Khan 77110, Thailand",
+      "timezone": "Asia/Bangkok",
+      "official_website": "https://pineapplevalleygolfclub.com/",
+      "verified_at": "2026-11-20T00:00:00+08:00",
+      "verification_note": "球場地址與名稱已有官方球場、協會或政府名錄來源支持；尚未取得可靠球場本體 GPS，保持天氣查詢停用。"
     },
     {
       "course_id": "th-siam-old",
@@ -696,10 +708,17 @@
       "country_code": "TH",
       "city": "Pattaya",
       "region": "Chonburi",
-      "verification_status": "unverified",
+      "verification_status": "partially_verified",
       "data_source": [
-        "https://gogolfnow.com/"
-      ]
+        "https://www.siammotors.com/en/company/siam-country-club-pattaya-old-course/",
+        "https://siamcountryclub.com/old-course/"
+      ],
+      "official_address": "50 Moo 9, Tambon Pong, Bang Lamung, Chonburi 20150, Thailand",
+      "local_address": "50 Moo 9, Tambon Pong, Bang Lamung, Chonburi 20150, Thailand",
+      "timezone": "Asia/Bangkok",
+      "official_website": "https://siamcountryclub.com/old-course/",
+      "verified_at": "2026-11-20T00:00:00+08:00",
+      "verification_note": "球場地址與名稱已有官方球場、協會或政府名錄來源支持；尚未取得可靠球場本體 GPS，保持天氣查詢停用。"
     },
     {
       "course_id": "th-red-mountain",
@@ -759,10 +778,16 @@
       "country_code": "MY",
       "city": "Kuala Lumpur",
       "region": "Kuala Lumpur",
-      "verification_status": "unverified",
+      "verification_status": "partially_verified",
       "data_source": [
-        "https://gogolfnow.com/"
-      ]
+        "https://www.klgcc.com/about/contact-us"
+      ],
+      "official_address": "10, Jalan 1/70D, Off Jalan Bukit Kiara, 60000 Kuala Lumpur, Malaysia",
+      "local_address": "10, Jalan 1/70D, Off Jalan Bukit Kiara, 60000 Kuala Lumpur, Malaysia",
+      "timezone": "Asia/Kuala_Lumpur",
+      "official_website": "https://www.klgcc.com/about/contact-us",
+      "verified_at": "2026-11-20T00:00:00+08:00",
+      "verification_note": "球場地址與名稱已有官方球場、協會或政府名錄來源支持；尚未取得可靠球場本體 GPS，保持天氣查詢停用。"
     },
     {
       "course_id": "my-royal-selangor",
@@ -780,10 +805,16 @@
       "country_code": "MY",
       "city": "Kuala Lumpur",
       "region": "Kuala Lumpur",
-      "verification_status": "unverified",
+      "verification_status": "partially_verified",
       "data_source": [
-        "https://gogolfnow.com/"
-      ]
+        "https://rsgc.com.my/contact/"
+      ],
+      "official_address": "Jalan Kelab Golf, Off Jalan Tun Razak, 55000 Kuala Lumpur, Malaysia",
+      "local_address": "Jalan Kelab Golf, Off Jalan Tun Razak, 55000 Kuala Lumpur, Malaysia",
+      "timezone": "Asia/Kuala_Lumpur",
+      "official_website": "https://rsgc.com.my/contact/",
+      "verified_at": "2026-11-20T00:00:00+08:00",
+      "verification_note": "球場地址與名稱已有官方球場、協會或政府名錄來源支持；尚未取得可靠球場本體 GPS，保持天氣查詢停用。"
     },
     {
       "course_id": "my-saujana",
@@ -801,10 +832,17 @@
       "country_code": "MY",
       "city": "Shah Alam",
       "region": "Selangor",
-      "verification_status": "unverified",
+      "verification_status": "partially_verified",
       "data_source": [
-        "https://gogolfnow.com/"
-      ]
+        "https://mgaonline.com.my/affiliated-clubs/selangor/",
+        "https://saujanagolf.com.my/"
+      ],
+      "official_address": "Saujana Resort, Seksyen U2, 40150 Shah Alam, Selangor, Malaysia",
+      "local_address": "Saujana Resort, Seksyen U2, 40150 Shah Alam, Selangor, Malaysia",
+      "timezone": "Asia/Kuala_Lumpur",
+      "official_website": "https://saujanagolf.com.my/",
+      "verified_at": "2026-11-20T00:00:00+08:00",
+      "verification_note": "球場地址與名稱已有官方球場、協會或政府名錄來源支持；尚未取得可靠球場本體 GPS，保持天氣查詢停用。"
     },
     {
       "course_id": "my-kota-permai",
@@ -822,10 +860,16 @@
       "country_code": "MY",
       "city": "Shah Alam",
       "region": "Selangor",
-      "verification_status": "unverified",
+      "verification_status": "partially_verified",
       "data_source": [
-        "https://gogolfnow.com/"
-      ]
+        "https://www.kotapermai.com.my/contact-us/"
+      ],
+      "official_address": "No. 1, Jalan 31/100A, Kota Kemuning, Section 31, 40460 Shah Alam, Selangor, Malaysia",
+      "local_address": "No. 1, Jalan 31/100A, Kota Kemuning, Section 31, 40460 Shah Alam, Selangor, Malaysia",
+      "timezone": "Asia/Kuala_Lumpur",
+      "official_website": "https://www.kotapermai.com.my/contact-us/",
+      "verified_at": "2026-11-20T00:00:00+08:00",
+      "verification_note": "球場地址與名稱已有官方球場、協會或政府名錄來源支持；尚未取得可靠球場本體 GPS，保持天氣查詢停用。"
     },
     {
       "course_id": "my-els-teluk-datai",
@@ -864,10 +908,16 @@
       "country_code": "SG",
       "city": "Singapore",
       "region": "Singapore",
-      "verification_status": "unverified",
+      "verification_status": "partially_verified",
       "data_source": [
-        "https://gogolfnow.com/"
-      ]
+        "https://sentosagolf.com/"
+      ],
+      "official_address": "27 Bukit Manis Road, Singapore 099892",
+      "local_address": "27 Bukit Manis Road, Singapore 099892",
+      "timezone": "Asia/Singapore",
+      "official_website": "https://sentosagolf.com/",
+      "verified_at": "2026-11-20T00:00:00+08:00",
+      "verification_note": "球場地址與名稱已有官方球場、協會或政府名錄來源支持；尚未取得可靠球場本體 GPS，保持天氣查詢停用。"
     },
     {
       "course_id": "sg-sicc",
@@ -885,10 +935,17 @@
       "country_code": "SG",
       "city": "Singapore",
       "region": "Singapore",
-      "verification_status": "unverified",
+      "verification_status": "partially_verified",
       "data_source": [
-        "https://gogolfnow.com/"
-      ]
+        "https://sga.org.sg/golfsg/",
+        "https://www.sicc.org.sg/"
+      ],
+      "official_address": "240 Sime Road, Singapore 288303 (Bukit location)",
+      "local_address": "240 Sime Road, Singapore 288303 (Bukit location)",
+      "timezone": "Asia/Singapore",
+      "official_website": "https://www.sicc.org.sg/",
+      "verified_at": "2026-11-20T00:00:00+08:00",
+      "verification_note": "球場地址與名稱已有官方球場、協會或政府名錄來源支持；尚未取得可靠球場本體 GPS，保持天氣查詢停用。"
     },
     {
       "course_id": "sg-tanah-merah",
@@ -927,10 +984,16 @@
       "country_code": "SG",
       "city": "Singapore",
       "region": "Singapore",
-      "verification_status": "unverified",
+      "verification_status": "partially_verified",
       "data_source": [
-        "https://gogolfnow.com/"
-      ]
+        "https://www.lagunanational.com/contact"
+      ],
+      "official_address": "11 Laguna Golf Green, Singapore 488047",
+      "local_address": "11 Laguna Golf Green, Singapore 488047",
+      "timezone": "Asia/Singapore",
+      "official_website": "https://www.lagunanational.com/contact",
+      "verified_at": "2026-11-20T00:00:00+08:00",
+      "verification_note": "球場地址與名稱已有官方球場、協會或政府名錄來源支持；尚未取得可靠球場本體 GPS，保持天氣查詢停用。"
     },
     {
       "course_id": "sg-orchid",
@@ -948,10 +1011,17 @@
       "country_code": "SG",
       "city": "Singapore",
       "region": "Singapore",
-      "verification_status": "unverified",
+      "verification_status": "partially_verified",
       "data_source": [
-        "https://gogolfnow.com/"
-      ]
+        "https://sga.org.sg/golfsg/",
+        "https://www.orchidclub.com/"
+      ],
+      "official_address": "1 Orchid Club Road, Singapore 769162",
+      "local_address": "1 Orchid Club Road, Singapore 769162",
+      "timezone": "Asia/Singapore",
+      "official_website": "https://www.orchidclub.com/",
+      "verified_at": "2026-11-20T00:00:00+08:00",
+      "verification_note": "球場地址與名稱已有官方球場、協會或政府名錄來源支持；尚未取得可靠球場本體 GPS，保持天氣查詢停用。"
     },
     {
       "course_id": "id-new-kuta",
@@ -969,10 +1039,15 @@
       "country_code": "ID",
       "city": "Bali",
       "region": "Bali",
-      "verification_status": "unverified",
+      "verification_status": "partially_verified",
       "data_source": [
-        "https://gogolfnow.com/"
-      ]
+        "https://sisupar.kemenpar.go.id/usaha-tersertifikasi?kategori%5B0%5D=28"
+      ],
+      "official_address": "Kawasan Pecatu Indah Resort, Jl. New Kuta Golf, Pecatu, Kuta Selatan, Badung, Bali 80361, Indonesia",
+      "local_address": "Kawasan Pecatu Indah Resort, Jl. New Kuta Golf, Pecatu, Kuta Selatan, Badung, Bali 80361, Indonesia",
+      "timezone": "Asia/Makassar",
+      "verified_at": "2026-11-20T00:00:00+08:00",
+      "verification_note": "球場地址與名稱已有官方球場、協會或政府名錄來源支持；尚未取得可靠球場本體 GPS，保持天氣查詢停用。"
     },
     {
       "course_id": "id-handara",
@@ -1011,10 +1086,15 @@
       "country_code": "ID",
       "city": "Jakarta",
       "region": "Jakarta",
-      "verification_status": "unverified",
+      "verification_status": "partially_verified",
       "data_source": [
-        "https://gogolfnow.com/"
-      ]
+        "https://sisupar.kemenpar.go.id/usaha-tersertifikasi?kategori%5B0%5D=28"
+      ],
+      "official_address": "Jalan Pantai Indah Barat, Jakarta Utara, DKI Jakarta, Indonesia",
+      "local_address": "Jalan Pantai Indah Barat, Jakarta Utara, DKI Jakarta, Indonesia",
+      "timezone": "Asia/Jakarta",
+      "verified_at": "2026-11-20T00:00:00+08:00",
+      "verification_note": "球場地址與名稱已有官方球場、協會或政府名錄來源支持；尚未取得可靠球場本體 GPS，保持天氣查詢停用。"
     },
     {
       "course_id": "id-pondok-indah",
@@ -1032,10 +1112,15 @@
       "country_code": "ID",
       "city": "Jakarta",
       "region": "Jakarta",
-      "verification_status": "unverified",
+      "verification_status": "partially_verified",
       "data_source": [
-        "https://gogolfnow.com/"
-      ]
+        "https://sisupar.kemenpar.go.id/usaha-tersertifikasi?kategori%5B0%5D=28"
+      ],
+      "official_address": "Jl. Metro Pondok Indah, Jakarta Selatan, DKI Jakarta, Indonesia",
+      "local_address": "Jl. Metro Pondok Indah, Jakarta Selatan, DKI Jakarta, Indonesia",
+      "timezone": "Asia/Jakarta",
+      "verified_at": "2026-11-20T00:00:00+08:00",
+      "verification_note": "球場地址與名稱已有官方球場、協會或政府名錄來源支持；尚未取得可靠球場本體 GPS，保持天氣查詢停用。"
     },
     {
       "course_id": "id-jagorawi",
