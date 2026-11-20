@@ -1440,6 +1440,100 @@ async function fetchJsonBounded(url,timeoutMs=6000,cacheMode="default"){
  }finally{clearTimeout(timer);}
 }
 async function loadForecastCache(courseName){throw Error("亞洲版獨立預報快取尚未啟用，改用即時氣象 API。");}
+
+// World PWA: timezone-aware 16-day daytime forecast. Kept independent from hourly forecast.
+const dailyForecastCache = new Map();
+function dailyMedian(values){
+ const a=values.filter(v=>v!==null&&v!==undefined&&Number.isFinite(Number(v))).map(Number).sort((x,y)=>x-y);
+ if(!a.length)return null;const m=Math.floor(a.length/2);return a.length%2?a[m]:(a[m-1]+a[m])/2;
+}
+function courseLocalDate(offset=0,timezone=currentCourseTimezone||"Asia/Tokyo"){
+ const parts=new Intl.DateTimeFormat("en-CA",{timeZone:timezone,year:"numeric",month:"2-digit",day:"2-digit"}).formatToParts(new Date());
+ const p=Object.fromEntries(parts.map(x=>[x.type,x.value]));
+ const d=new Date(Date.UTC(Number(p.year),Number(p.month)-1,Number(p.day)+offset));
+ return d.toISOString().slice(0,10);
+}
+function dailyWx(code){
+ const n=Number(code);
+ if(!Number.isFinite(n))return {icon:"—",desc:"無資料"};
+ if(n===0)return {icon:dailyWeatherIcon("sun"),desc:"晴"};
+ if(n<=2)return {icon:dailyWeatherIcon("partly"),desc:"多雲時晴"};
+ if(n===3)return {icon:dailyWeatherIcon("cloud"),desc:"陰／多雲"};
+ if([45,48].includes(n))return {icon:dailyWeatherIcon("fog"),desc:"霧"};
+ if([51,53,55,56,57].includes(n))return {icon:dailyWeatherIcon("drizzle"),desc:"毛毛雨／小雨"};
+ if([61,63,65,66,67,80,81,82].includes(n))return {icon:dailyWeatherIcon("rain"),desc:n>=80?"陣雨":n>=65?"大雨":"中雨"};
+ if([95,96,99].includes(n))return {icon:dailyWeatherIcon("storm"),desc:"雷雨"};
+ return {icon:dailyWeatherIcon("cloud"),desc:"陰／多雲"};
+}
+async function fetchDailyForecast(lat,lon,timezone){
+ const key=[Number(lat).toFixed(4),Number(lon).toFixed(4),timezone].join("|");
+ const cached=dailyForecastCache.get(key);
+ if(cached&&Date.now()-cached.at<20*60*1000)return cached.rows;
+ const fields="temperature_2m,apparent_temperature,precipitation,precipitation_probability,weather_code";
+ const results=await Promise.allSettled(modelDefs.map(async model=>{
+  const q=new URLSearchParams({latitude:String(lat),longitude:String(lon),hourly:fields,timezone,forecast_days:model[1]==="ecmwf_aifs025_single"?"15":"16",wind_speed_unit:"kmh",models:model[1]});
+  const data=await fetchJsonBounded("https://api.open-meteo.com/v1/forecast?"+q.toString(),18000,"no-cache");
+  if(!Array.isArray(data.hourly?.time))throw Error(model[0]+"未回傳逐時資料");
+  const buckets=new Map(),h=data.hourly;
+  for(let i=0;i<h.time.length;i++){
+   const stamp=h.time[i],hour=Number(stamp.slice(11,13));if(hour<6||hour>18)continue;
+   const date=stamp.slice(0,10);if(!buckets.has(date))buckets.set(date,{temp:[],feel:[],rain:[],prob:[],codes:[]});
+   const b=buckets.get(date);
+   for(const [k,field] of [["temp","temperature_2m"],["feel","apparent_temperature"],["rain","precipitation"],["prob","precipitation_probability"]]){
+    const v=h[field]?.[i];if(v!==null&&v!==undefined&&Number.isFinite(Number(v)))b[k].push(Number(v));
+   }
+   const code=h.weather_code?.[i];if(code!==null&&code!==undefined&&Number.isFinite(Number(code)))b.codes.push(Number(code));
+  }
+  const daily={};
+  for(const [date,b] of buckets){
+   const counts={};b.codes.forEach(v=>counts[v]=(counts[v]||0)+1);
+   const code=Object.keys(counts).sort((a,z)=>counts[z]-counts[a])[0];
+   daily[date]={hi:b.temp.length?Math.max(...b.temp):null,lo:b.temp.length?Math.min(...b.temp):null,feel:dailyMedian(b.feel),rain:b.rain.length?b.rain.reduce((a,v)=>a+v,0):null,prob:b.prob.length?Math.max(...b.prob):null,code:code===undefined?null:Number(code)};
+  }
+  return daily;
+ }));
+ const good=results.filter(x=>x.status==="fulfilled").map(x=>x.value);
+ if(!good.length)throw Error("六個氣象模型均未能取得白天逐時資料");
+ const rows=Array.from({length:16},(_,i)=>{
+  const date=courseLocalDate(i,timezone),values={hi:[],lo:[],feel:[],rain:[],prob:[],codes:[]};
+  for(const model of good){const d=model[date];if(!d)continue;for(const k of ["hi","lo","feel","rain","prob"])if(d[k]!==null)values[k].push(d[k]);if(d.code!==null)values.codes.push(d.code);}
+  const counts={};values.codes.forEach(v=>counts[v]=(counts[v]||0)+1);
+  const code=Object.keys(counts).sort((a,z)=>counts[z]-counts[a])[0];
+  return {date,hi:dailyMedian(values.hi),lo:dailyMedian(values.lo),feel:dailyMedian(values.feel),rain:dailyMedian(values.rain),prob:dailyMedian(values.prob),code:code===undefined?null:Number(code),modelCount:values.hi.length,probModelCount:values.prob.length};
+ });
+ dailyForecastCache.set(key,{at:Date.now(),rows});return rows;
+}
+function syncDailyForecastToSelectedDate(){
+ const date=$("courseDate")?.value,scroller=$("dailyForecastScroll");if(!date||!scroller)return;
+ const move=()=>{const cell=Array.from(scroller.querySelectorAll(".daily-date-cell")).find(x=>x.dataset.dailyDate===date);if(!cell)return;const er=cell.getBoundingClientRect(),sr=scroller.getBoundingClientRect();scroller.scrollLeft=Math.max(0,scroller.scrollLeft+er.left-sr.left-(scroller.clientWidth-er.width)/2);};
+ move();requestAnimationFrame(()=>requestAnimationFrame(move));setTimeout(move,180);
+}
+function renderDailyForecast(rows,courseName){
+ const target=$("dailyForecastInner"),status=$("dailyForecastStatus"),heading=$("dailyForecastHeading"),scroller=$("dailyForecastScroll");
+ if(!target)return;if(!rows?.length){target.innerHTML='<div class="daily-forecast-placeholder">目前沒有可用逐日資料</div>';return;}
+ const display=rows.slice(0,16),col=112,width=col*16,height=190,temps=display.flatMap(r=>[r.hi,r.lo,r.feel]).filter(v=>v!==null);
+ if(!temps.length)throw Error("逐日資料沒有可用溫度");
+ const min=Math.floor(Math.min(...temps)-2),max=Math.ceil(Math.max(...temps)+2),range=Math.max(1,max-min),x=i=>col*(i+.5),y=v=>height-22-(Number(v)-min)/range*(height-44);
+ const series=[{key:"hi",color:"#e76b55",offset:-24},{key:"lo",color:"#399be0",offset:40},{key:"feel",color:"#d5a02c",offset:25}];
+ const paths=series.map(z=>{const pts=display.map((r,i)=>r[z.key]===null?null:[x(i),y(r[z.key])]).filter(Boolean);return pts.length>1?'<polyline points="'+pts.map(p=>p.join(",")).join(" ")+'" fill="none" stroke="'+z.color+'" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>':"";}).join("");
+ const points=series.map(z=>display.map((r,i)=>{const v=r[z.key];if(v===null)return "";const xx=x(i),yy=y(v);return '<circle cx="'+xx+'" cy="'+yy+'" r="3" fill="'+z.color+'"/><text x="'+xx+'" y="'+(yy+z.offset)+'" text-anchor="middle" font-size="26" font-weight="900" paint-order="stroke" stroke="#f8fbfd" stroke-width="3.5" fill="'+z.color+'">'+Math.round(v)+'°</text>';}).join("")).join("");
+ const grid=[min,Math.round((min+max)/2),max].map(v=>'<line x1="0" y1="'+y(v)+'" x2="'+width+'" y2="'+y(v)+'" stroke="#9aafbd" stroke-opacity=".25" stroke-dasharray="3 3"/>').join("");
+ const selected=$("courseDate")?.value||"";
+ const dates=display.map(r=>{const d=new Date(r.date+"T12:00:00Z"),wd=["日","一","二","三","四","五","六"][d.getUTCDay()],weekend=d.getUTCDay()===0||d.getUTCDay()===6;return '<button type="button" class="daily-date-cell'+(weekend?' weekend':'')+'" data-daily-date="'+r.date+'" onclick="window.selectDailyForecastDate(this.dataset.dailyDate)" aria-pressed="'+(selected===r.date?'true':'false')+'"><span class="weekday">星期'+wd+'</span><span class="date">'+r.date.slice(5).replace("-","/")+'</span></button>';}).join("");
+ const weather=display.map(r=>{const w=dailyWx(r.code);return '<div class="daily-weather-cell"><div class="daily-icon">'+w.icon+'</div><div class="daily-desc">'+w.desc+'</div></div>';}).join("");
+ const rain=display.map(r=>'<div class="daily-rain-cell"><small>降雨機率</small><div class="rain-prob">'+(r.prob===null?"—":Math.round(r.prob)+"%")+'</div><small>累積雨量</small><div class="rain-mm">'+(r.rain===null?"—":r.rain.toFixed(1))+'</div><small>mm</small></div>').join("");
+ const bands=display.map((r,i)=>'<rect x="'+(i*col)+'" y="0" width="'+col+'" height="'+height+'" fill="'+(selected===r.date?"#b8def4":i%2===0?"#f3f6f9":"#d5e2ed")+'" fill-opacity=".72"/>').join("");
+ target.innerHTML='<div class="daily-grid">'+dates+'</div><svg class="daily-temp-chart" width="'+width+'" height="'+height+'" viewBox="0 0 '+width+' '+height+'" role="img" aria-label="16天白天最高溫、最低溫與體感溫度曲線"><g>'+bands+grid+paths+points+'</g></svg><div class="daily-grid">'+weather+'</div><div class="daily-grid">'+rain+'</div>';
+ if(heading)heading.textContent="⓪ 16天白天高爾夫天氣預報｜"+courseName;
+ if(status)status.textContent="每日06:00–18:00｜六模型可用資料中位數｜顯示白天最高／最低溫、平均體感、降雨機率及累積雨量。";
+ syncDailyForecastToSelectedDate();
+}
+async function loadAndRenderDailyForecast(p){
+ const status=$("dailyForecastStatus");if(status)status.textContent="正在取得六模型16天逐日資料…";
+ try{const rows=await fetchDailyForecast(p.lat,p.lon,p.timezone||currentCourseTimezone||"Asia/Tokyo");renderDailyForecast(rows,p.name);}
+ catch(e){const target=$("dailyForecastInner");if(target)target.innerHTML='<div class="daily-forecast-placeholder">逐日預報暫時無法取得：'+esc(e.message)+'</div>';if(status)status.textContent="逐日預報載入失敗；原有逐時預報不受影響。";console.error("Daily forecast:",e);}
+}
+
 async function loadForecast(p,date,forceRefresh=false){
  if(!date)throw Error("請先選擇預報日期。");
  active={lat:Number(p.lat),lon:Number(p.lon),name:p.name,date,rows:[],modelRows:{}};
