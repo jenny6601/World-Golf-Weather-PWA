@@ -504,7 +504,7 @@ let courseDataReady = false;
 const ASIA_COUNTRIES = [{code:"JP",name:"日本"},{code:"KR",name:"南韓"},{code:"CN",name:"中國"},{code:"VN",name:"越南"},{code:"TH",name:"泰國"},{code:"MY",name:"馬來西亞"},{code:"SG",name:"新加坡"},{code:"ID",name:"印尼"}];
 function taiwanYmd(offsetDays=0){
  const d=new Date(Date.now()+offsetDays*86400000);
- const p=Object.fromEntries(new Intl.DateTimeFormat("en-US",{timeZone:"currentCourseTimezone",year:"numeric",month:"2-digit",day:"2-digit"}).formatToParts(d).map(x=>[x.type,x.value]));
+ const p=Object.fromEntries(new Intl.DateTimeFormat("en-US",{timeZone:currentCourseTimezone,year:"numeric",month:"2-digit",day:"2-digit"}).formatToParts(d).map(x=>[x.type,x.value]));
  return p.year+"-"+p.month+"-"+p.day;
 }
 
@@ -735,7 +735,7 @@ function renderSelectedHourlySections(rows){
 function updateWeatherDateHeadings(liveDate,forecastDate){
  const live=$("liveObservationHeading");
  // 即時觀測維持台灣當地今日日期；四個預報區塊共用使用者選取的預報日期。
- const taiwanToday=new Intl.DateTimeFormat("en-CA",{timeZone:"currentCourseTimezone",year:"numeric",month:"2-digit",day:"2-digit"}).format(new Date());
+ const taiwanToday=new Intl.DateTimeFormat("en-CA",{timeZone:currentCourseTimezone,year:"numeric",month:"2-digit",day:"2-digit"}).format(new Date());
  const dateLabel=golfDateLabel(forecastDate);
  const liveCourseName=(active?.name||$("locname")?.textContent||"").replace(/高爾夫球場/g,"").trim();
  if(live)live.textContent="即時天氣觀測｜"+(liveCourseName?liveCourseName+"｜":"")+golfDateLabel(taiwanToday);
@@ -847,8 +847,10 @@ async function autoLoadDatabaseCourse(c,button){
    if(!Number.isFinite(lat)||!Number.isFinite(lon)||lat < -90||lat > 90||lon < -180||lon > 180)throw Error("此球場座標資料無效。");
    $("courseAutoStatus").textContent=`${c.name}｜固定座標 ${lat.toFixed(5)}, ${lon.toFixed(5)}｜正在載入 ${selectedDate} 氣象…`;
    $("status").textContent=`${c.name}｜${lat.toFixed(5)}, ${lon.toFixed(5)}｜正在取得六組氣象模型…`;
+   currentCourseTimezone=c.timezone||"Asia/Tokyo";
+   rememberCourseSearch(c.course_id);
    loadLiveObservation(c);
-   await loadForecast({name:c.name,address:c.address,lat,lon,source:"使用者提供的57球場固定座標清單",timezone:"currentCourseTimezone"},selectedDate);
+   await loadForecast({name:c.name,address:c.address,lat,lon,source:"World Golf Weather 亞洲球場資料庫",timezone:currentCourseTimezone},selectedDate);
    $("courseAutoStatus").textContent="";$("courseAutoStatus").classList.remove("error");
  }catch(e){
    $("courseAutoStatus").textContent=`${c.name}：${e.message}`;$("courseAutoStatus").classList.add("error");
@@ -868,7 +870,7 @@ async function autoLoadDatabaseCourse(c,button){
  }
 }
 window.loadCourseByIndex=(index,button)=>{const c=taiwanCourses[Number(index)];if(c&&!databaseAutoBusy)autoLoadDatabaseCourse(c,button);};
-document.getElementById("quickCourseButtons").addEventListener("click",event=>{const btn=event.target.closest("button[data-quick-course]");if(!btn||databaseAutoBusy)return;const name=btn.dataset.quickCourse;const idx=taiwanCourses.findIndex(c=>c.name===name);if(idx<0)return;document.querySelectorAll("[data-quick-course]").forEach(x=>x.classList.toggle("quick-selected",x===btn));autoLoadDatabaseCourse(taiwanCourses[idx],btn);});
+
 // 選好球場後更改日期，立即以同一球場座標重新載入，不沿用舊日期資料。
 $("courseDate").addEventListener("change",async()=>{
  if(!selectedCourseForReload)return;
@@ -1259,7 +1261,7 @@ function consensusRows(modelRows,amountWeights=null,probabilityWeights=null,exte
  });
 }
 async function loadVisualCrossingRainRows(courseName,date){
- const base="https://raw.githubusercontent.com/jenny6601/Taiwan-Golf-Weather-PWA/visual-crossing-cache/";
+ const base="https://raw.githubusercontent.com/jenny6601/World-Golf-Weather-PWA/visual-crossing-cache/";
  const index=await fetchJsonBounded(base+"index.json?ts="+Date.now(),6000,"no-store");
  const rel=index.courses?.[courseName];
  if(!rel)return [];
@@ -1276,7 +1278,7 @@ async function loadVisualCrossingRainRows(courseName,date){
 let verificationWeightsPromise=null;
 async function loadVerificationWeights(){
  if(!verificationWeightsPromise){
-  const url="https://raw.githubusercontent.com/jenny6601/Taiwan-Golf-Weather-PWA/verification-history/verification/weights.json?ts="+Date.now();
+  const url="https://raw.githubusercontent.com/jenny6601/World-Golf-Weather-PWA/verification-history/verification/weights.json?ts="+Date.now();
   verificationWeightsPromise=fetchJsonBounded(url,5000,"no-store").catch(()=>null);
  }
  return verificationWeightsPromise;
@@ -1284,7 +1286,7 @@ async function loadVerificationWeights(){
 let verificationMetricsPromise=null;
 async function loadVerificationMetrics(){
  if(!verificationMetricsPromise){
-  const url="https://raw.githubusercontent.com/jenny6601/Taiwan-Golf-Weather-PWA/verification-history/verification/metrics/latest.json?ts="+Date.now();
+  const url="https://raw.githubusercontent.com/jenny6601/World-Golf-Weather-PWA/verification-history/verification/metrics/latest.json?ts="+Date.now();
   verificationMetricsPromise=fetchJsonBounded(url,6000,"no-store").catch(()=>null);
  }
  return verificationMetricsPromise;
@@ -1292,7 +1294,7 @@ async function loadVerificationMetrics(){
 let verificationStatusPromise=null;
 async function loadVerificationStatus(){
  if(!verificationStatusPromise){
-  const url="https://raw.githubusercontent.com/jenny6601/Taiwan-Golf-Weather-PWA/verification-history/verification/status.json?ts="+Date.now();
+  const url="https://raw.githubusercontent.com/jenny6601/World-Golf-Weather-PWA/verification-history/verification/status.json?ts="+Date.now();
   verificationStatusPromise=fetchJsonBounded(url,5000,"no-store").catch(()=>null);
  }
  return verificationStatusPromise;
@@ -1347,7 +1349,7 @@ async function loadV28ProviderCache(courseName,date){
  if(!status||!target)return;
  status.textContent="正在讀取 Visual Crossing 15天逐時快取…";target.innerHTML="";
  try{
-  const base="https://raw.githubusercontent.com/jenny6601/Taiwan-Golf-Weather-PWA/visual-crossing-cache/";
+  const base="https://raw.githubusercontent.com/jenny6601/World-Golf-Weather-PWA/visual-crossing-cache/";
   const index=await fetchJsonBounded(base+"index.json?ts="+Date.now(),9000,"no-store");
   const rel=index.courses?.[courseName];
   if(!rel)throw Error("全台快取尚未包含此球場："+courseName);
@@ -1397,12 +1399,12 @@ async function loadForecastCache(courseName){
  if(!name)throw Error("未指定球場，無法讀取球場預報快取");
  if(!forecastCachePromiseByCourse.has(name)){
   forecastCachePromiseByCourse.set(name,(async()=>{
-   if(!forecastCacheIndexPromise)forecastCacheIndexPromise=fetchJsonBounded("https://raw.githubusercontent.com/jenny6601/Taiwan-Golf-Weather-PWA/course-cache/index.json",6000,"no-cache").catch(e=>{forecastCacheIndexPromise=null;throw e;});
+   if(!forecastCacheIndexPromise)forecastCacheIndexPromise=fetchJsonBounded("https://raw.githubusercontent.com/jenny6601/World-Golf-Weather-PWA/course-cache/index.json",6000,"no-cache").catch(e=>{forecastCacheIndexPromise=null;throw e;});
    const index=await forecastCacheIndexPromise;
    const rel=index.courses?.[name];
    if(!rel)throw Error("分球場快取尚未包含「"+name+"」；改用即時API");
    const version=encodeURIComponent(index.generated_at||"latest");
-   const cache=await fetchJsonBounded("https://raw.githubusercontent.com/jenny6601/Taiwan-Golf-Weather-PWA/course-cache/"+rel+"?v="+version,6000,"default");
+   const cache=await fetchJsonBounded("https://raw.githubusercontent.com/jenny6601/World-Golf-Weather-PWA/course-cache/"+rel+"?v="+version,6000,"default");
    if(!cache||!cache.courses)throw Error("球場預報快取格式不正確");
    const t=Date.parse(cache.generated_at||index.generated_at||"");
    if(!Number.isFinite(t))throw Error("預報快取更新時間無效");
@@ -1544,7 +1546,7 @@ async function loadAndRenderDailyForecast(p){const status=$("dailyForecastStatus
 async function loadForecast(p,date,forceRefresh=false){
  if(!date)throw Error("請先選擇預報日期。");
  active={lat:Number(p.lat),lon:Number(p.lon),name:p.name,date,rows:[],modelRows:{}};
- updateWeatherDateHeadings(new Date().toLocaleDateString("sv-SE",{timeZone:"currentCourseTimezone"}),date);
+ updateWeatherDateHeadings(new Date().toLocaleDateString("sv-SE",{timeZone:currentCourseTimezone}),date);
  $("locname").textContent=p.name;
  $("coords").textContent=`${p.address||""}｜${p.lat.toFixed(5)}, ${p.lon.toFixed(5)}｜固定座標`;
  $("status").textContent="正在以球場座標取得六組氣象模型資料…";
@@ -1621,7 +1623,7 @@ async function loadForecast(p,date,forceRefresh=false){
  const diagLines=["球場："+p.name,"座標："+p.lat+", "+p.lon,"日期："+date,"主要資料來源："+forecastSource,"快取更新時間："+(cacheGeneratedAt||"非快取資料"),"快取年齡："+(cacheAgeMinutes===null?"—":Math.floor(cacheAgeMinutes/60)+"小時"+Math.floor(cacheAgeMinutes%60)+"分"),"快取狀態："+(cacheNotice||"正常（3小時內）"),"成功模型："+names.join("、"),"快取／API備註："+(modelErrors.length?modelErrors.join("\n"):"無")];
  const diagBox=$("apiDiagnosticsText");if(diagBox)diagBox.textContent=diagLines.join("\n");
 let amountWeights=null,probabilityWeights=null,weightingLabel="等權中位數（歷史資料累積中）";
- const localToday=new Date().toLocaleDateString("sv-SE",{timeZone:"currentCourseTimezone"});
+ const localToday=new Date().toLocaleDateString("sv-SE",{timeZone:currentCourseTimezone});
  const leadDays=Math.round((new Date(date+"T00:00:00+08:00")-new Date(localToday+"T00:00:00+08:00"))/86400000);
  if(leadDays>=1&&leadDays<=14){
   try{
@@ -1707,7 +1709,7 @@ $("teeTimeSelect")?.addEventListener("change",()=>{
  if(active?.rows?.length)renderSelectedHourlySections(active.rows);
  else{
   const date=$("courseDate")?.value;
-  if(date)updateWeatherDateHeadings(new Date().toLocaleDateString("sv-SE",{timeZone:"currentCourseTimezone"}),date);
+  if(date)updateWeatherDateHeadings(new Date().toLocaleDateString("sv-SE",{timeZone:currentCourseTimezone}),date);
  }
 });
 
