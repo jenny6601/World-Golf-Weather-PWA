@@ -12,7 +12,7 @@
     "ID"
   ],
   "generated_at": "2026-11-20T11:54:00.900Z",
-  "record_count": 52,
+  "record_count": 56,
   "notes": "資料品質盤點（2026-11-20）：共44筆、8國；verified 7筆、partially_verified 37筆、unverified 0筆。44筆目前均有經緯度及 IANA 時區，網站會依座標載入預報；partially_verified 表示球場位置／座標來源仍待進一步核實，不等同官方 GPS 核實。部分紀錄尚缺官方地址、官方網站或座標來源欄位，請以各筆資料實際欄位為準。",
   "courses": [
     {
@@ -1691,6 +1691,148 @@
       "coordinate_source": "https://fullgolf.com/en/golf-course/japan/okinawa/kunigami/bel-beach",
       "verification_status": "partially_verified",
       "verification_note": "官方網站及沖繩觀光資料核實名稱；GPS 座標採用 FullGolf 公開地圖座標，地址與官方網站需再交叉確認。"
+    },
+    {
+      "course_id": "jp-southern-links",
+      "name_en": "The Southern Links Golf Club",
+      "short_name": "Southern Links",
+      "local_name": "ザ・サザンリンクス・ゴルフクラブ",
+      "aliases": [
+        "Southern Links Golf Club",
+        "Southern Links Resort",
+        "ザ・サザンリンクス"
+      ],
+      "search_keywords": [
+        "Okinawa",
+        "Yaese",
+        "Yase",
+        "八重瀬町",
+        "玻名城",
+        "901-0513"
+      ],
+      "country": "Japan",
+      "country_code": "JP",
+      "city": "Yaese",
+      "region": "Okinawa",
+      "official_address": "〒901-0513 沖縄県島尻郡八重瀬町字玻名城697",
+      "local_address": "〒901-0513 沖縄県島尻郡八重瀬町字玻名城697",
+      "latitude": 26.1197,
+      "longitude": 127.7478,
+      "timezone": "Asia/Tokyo",
+      "official_website": "https://www.accordiagolf.com/en/grand/southernlinks/",
+      "data_source": [
+        "https://www.accordiagolf.com/en/grand/southernlinks/",
+        "https://reserve.accordiagolf.com/en/global/golfCourse/okinawa/southernlinks/access",
+        "https://www.japan.travel/en/sports/golf/courses/the-southern-links-golf-club/"
+      ],
+      "coordinate_source": "Approximate course-area coordinate; requires confirmation against official course map.",
+      "verification_status": "partially_verified",
+      "verification_note": "官方球場資料核實名稱及地址；目前座標為球場區域近似定位，尚未完成球場入口／球場中心座標核對，使用天氣預報前應再確認。"
+    },
+    {
+      "course_id": "jp-pgm-golf-resort-okinawa",
+      "name_en": "PGM Golf Resort Okinawa",
+      "short_name": "PGM Golf Resort Okinawa",
+      "local_name": "ＰＧＭゴルフリゾート沖縄",
+      "aliases": [
+        "PGM Okinawa",
+        "PGM Golf Resort",
+        "PGMゴルフリゾート沖縄"
+      ],
+      "search_keywords": [
+        "Okinawa",
+        "Onna",
+        "恩納村",
+        "冨着",
+        "904-0413"
+      ],
+      "country": "Japan",
+      "country_code": "JP",
+      "city": "Onna",
+      "region": "Okinawa",
+      "official_address": "〒904-0413 沖縄県国頭郡恩納村字冨着1043",
+      "local_address": "〒904-0413 沖縄県国頭郡恩納村字冨着1043",
+      "latitude": 26.45532,
+      "longitude": 127.817,
+      "timezone": "Asia/Tokyo",
+      "official_website": "https://www.pacificgolf.co.jp/okinawa/",
+      "data_source": [
+        "https://www.pacificgolf.co.jp/okinawa/",
+        "https://www.japan.travel/en/sports/golf/courses/pgm-golf-resort-okinawa/"
+      ],
+      "coordinate_source": "OpenStreetMap/Mapcarta nearby golf-course coordinate; needs exact PGM entrance confirmation.",
+      "verification_status": "partially_verified",
+      "verification_note": "官方 PGM 網站及 JNTO 核實球場名稱、地址與 27 洞資訊；座標以附近 OpenStreetMap 球場地標作初始定位，尚待精確核實。"
+    },
+    {
+      "course_id": "jp-palm-hills",
+      "name_en": "Palm Hills Golf Resort Club",
+      "short_name": "Palm Hills Golf Resort",
+      "local_name": "パームヒルズゴルフリゾートクラブ",
+      "aliases": [
+        "Palm Hills Golf Resort Club",
+        "Palm Hills",
+        "パームヒルズ"
+      ],
+      "search_keywords": [
+        "Okinawa",
+        "Itoman",
+        "糸満市",
+        "新垣",
+        "901-0323"
+      ],
+      "country": "Japan",
+      "country_code": "JP",
+      "city": "Itoman",
+      "region": "Okinawa",
+      "official_address": "〒901-0323 沖縄県糸満市字新垣762",
+      "local_address": "〒901-0323 沖縄県糸満市字新垣762",
+      "latitude": 26.1265,
+      "longitude": 127.7008,
+      "timezone": "Asia/Tokyo",
+      "official_website": "https://reserve.accordiagolf.com/en/global/golfcourse/okinawa/palmhills/",
+      "data_source": [
+        "https://reserve.accordiagolf.com/en/global/golfcourse/okinawa/palmhills/",
+        "https://reserve.accordiagolf.com/en/global/golfcourse/okinawa/palmhills/access/"
+      ],
+      "coordinate_source": "Approximate course-area coordinate; requires confirmation against official course map.",
+      "verification_status": "partially_verified",
+      "verification_note": "Accordia 官方球場頁核實名稱及地址；座標為球場區域近似定位，尚未完成官方地圖交叉核實。"
+    },
+    {
+      "course_id": "jp-chura-orchard",
+      "name_en": "Chura Orchard Golf Club",
+      "short_name": "Chura Orchard GC",
+      "local_name": "美らオーチャードゴルフ倶楽部",
+      "aliases": [
+        "Chura Orchard",
+        "Chura Orchard Golf",
+        "美らオーチャード"
+      ],
+      "search_keywords": [
+        "Okinawa",
+        "Onna",
+        "恩納村",
+        "安富祖",
+        "904-0402"
+      ],
+      "country": "Japan",
+      "country_code": "JP",
+      "city": "Onna",
+      "region": "Okinawa",
+      "official_address": "〒904-0402 沖縄県国頭郡恩納村字安富祖1577",
+      "local_address": "〒904-0402 沖縄県国頭郡恩納村字安富祖1577",
+      "latitude": 26.496499,
+      "longitude": 127.891015,
+      "timezone": "Asia/Tokyo",
+      "official_website": "https://www.churaorchard.jp/",
+      "data_source": [
+        "https://fullgolf.com/en/golf-club/japan/okinawa/kunigami/chura-orchard-golf-club",
+        "https://okinawasportsisland.jp/wp-content/uploads/2018/05/1012_RESORT-GOLF-OKINAWA_en.pdf"
+      ],
+      "coordinate_source": "https://mapcarta.com/W189138982",
+      "verification_status": "partially_verified",
+      "verification_note": "球場名稱、地址及 OpenStreetMap 座標由 FullGolf/Mapcarta 資料核對；官方網站網址仍待確認。"
     }
   ]
 }
