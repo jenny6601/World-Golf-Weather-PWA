@@ -70,3 +70,13 @@ Added Long Bien Golf Course, BRG Legend Hill Golf Resort, and BRG Kings Island G
 - Updated ensemble model identifiers to the currently documented Open-Meteo API names: `ecmwf_ifs025_ensemble`, `ncep_gefs_seamless`, and `dwd_icon_seamless_eps`.
 - Open-Meteo's official Ensemble API documentation lists IANA timezone support and these model identifiers. A direct live endpoint request could not be verified through the available web fetch environment; the GitHub Actions run for commit `73c2d8f` completed successfully (run #44712678931). This confirms static syntax/data checks, not a live weather endpoint response.
 - This fixes the rain-probability timestamp timezone path only. The separate six deterministic model endpoints still require live API/browser verification.
+
+
+### Long-range forecast panel — 2026-11-20
+- Added a separate long-range forecast section after the existing 16-day daily forecast, with 30-day and 60-day display controls. The existing 16-day and hourly forecast logic is unchanged.
+- The 30-day view displays daily maximum/minimum temperature, daily precipitation total, weather code and maximum wind from ECMWF EC46.
+- The 60-day view displays the EC46 daily forecast through day 46, then adds SEAS5 monthly anomaly context. It does not invent daily weather icons or daily rain probabilities for days 47–60.
+- The seasonal API data is global at 36 km and not bias-corrected; the UI labels it as regional trend guidance, not a course-level tee-time forecast.
+- Added `scripts/test-long-range-api.mjs` and `.github/workflows/long-range-api-smoke.yml`. Live GitHub Actions run #44713210019 passed: Hanoi test location returned 46 EC46 daily rows and 3 SEAS5 monthly rows, both with timezone `Asia/Ho_Chi_Minh`.
+- The first smoke-test attempt found an invalid SEAS5 monthly variable (`precipitation_sum`); corrected it to the documented `precipitation_mean` field, and the subsequent live API test passed.
+- Browser/mobile visual testing and real course-by-course validation remain pending. No Cloudflare deployment or merge was performed.
