@@ -60,5 +60,5 @@ Added Long Bien Golf Course, BRG Legend Hill Golf Resort, and BRG Kings Island G
 - Added `scripts/validate-course-data.mjs` using Node.js built-in assertions (no third-party dependencies).
 - Checks unique/stable course IDs, allowed country/status values, coordinate pair/ranges, valid IANA timezones, required fields for fully verified records, Vietnam course count, seven Hanoi search aliases, inline JavaScript syntax and PWA manifest icon entries.
 - Added `.github/workflows/validate-course-data.yml` for development/main pushes, main-targeted PRs and manual dispatch.
-- Files are committed to development. GitHub Actions run has not yet appeared in the repository, so CI execution is pending and is not reported as passed.
+- Files are committed to development. Pull-request CI run #44712504749 completed successfully. Runner output: PASS — 44 courses; 24 GPS+timezone; 8 Vietnam courses; 7 alias/name search cases; 1 inline script syntax; manifest checks. The parallel push-triggered run was still in progress at the last status check.
 - This automated check is static/data validation; it does not replace browser/mobile end-to-end tests or live Open-Meteo API checks.
