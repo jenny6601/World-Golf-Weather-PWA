@@ -95,3 +95,12 @@ Added Long Bien Golf Course, BRG Legend Hill Golf Resort, and BRG Kings Island G
 - Each record retains partially_verified status and records coordinate_source plus a note that official-club-map cross-check is still pending. No status was upgraded to verified.
 - GPS + timezone coverage increased from 24/44 (54.5%) to 30/44 (68.2%). Fourteen courses still lack one or both required location fields.
 - Sources used: FullGolf for Camellia Hills and Woo Jeong Hills; OpenStreetMap-derived Mapcarta/GeoView for Siam Old Course, KLGCC and Laguna National; Where2Golf for Sentosa. These are course-area references, not claims of official survey-grade tee/clubhouse pins.
+
+
+### Independent Visual Crossing + Foreca integration — 2026-11-20
+- Added Cloudflare Pages Function `functions/api/provider-compare.js` to call Visual Crossing Timeline hourly/daily and Foreca hourly forecasts server-side for a selected course.
+- Provider credentials are read only from encrypted Cloudflare Pages environment secrets `VC_API_KEY` and `FORECA_API_KEY`; they are never returned to the browser.
+- The endpoint validates course ID and requires course latitude, longitude and IANA timezone from the app course database. Foreca uses longitude,latitude order and requests up to 169 hourly periods; Visual Crossing requests hourly and daily data.
+- Provider responses remain separate and independently report success/failure; partial response is supported. No blind averaging and no changes to Open-Meteo, EC46, SEAS5, or existing forecast panels.
+- Added `docs/PROVIDER-API-SECURITY.md` with Cloudflare secret setup and rollout procedure.
+- Pending: Cloudflare Pages project/deployment is not configured yet; owner must add the two encrypted secrets in Cloudflare dashboard. Endpoint and live provider credentials have not yet been tested. No key values were requested or stored in chat or GitHub.
