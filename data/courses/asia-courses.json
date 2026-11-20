@@ -699,7 +699,10 @@
       "timezone": "Asia/Bangkok",
       "official_website": "https://pineapplevalleygolfclub.com/",
       "verified_at": "2026-11-20T00:00:00+08:00",
-      "verification_note": "球場地址與名稱已有官方球場、協會或政府名錄來源支持；尚未取得可靠球場本體 GPS，保持天氣查詢停用。"
+      "verification_note": "Golf-course specialist directory provides explicit course coordinates and confirms the Hua Hin course address. Kept partially verified pending official club map cross-check.",
+      "latitude": 12.495462,
+      "longitude": 99.941511,
+      "coordinate_source": "https://www.where2golf.com/thailand/pineapple-valley-golf-club/"
     },
     {
       "course_id": "th-siam-old",
@@ -823,7 +826,10 @@
       "timezone": "Asia/Kuala_Lumpur",
       "official_website": "https://rsgc.com.my/contact/",
       "verified_at": "2026-11-20T00:00:00+08:00",
-      "verification_note": "球場地址與名稱已有官方球場、協會或政府名錄來源支持；尚未取得可靠球場本體 GPS，保持天氣查詢停用。"
+      "verification_note": "Official RSGC contact page confirms the Jalan Kelab Golf address; Wikidata coordinate is corroborated by map position but is not an official club map. Kept partially verified pending official map cross-check.",
+      "latitude": 3.14889,
+      "longitude": 101.72583,
+      "coordinate_source": "https://www.wikidata.org/wiki/Q1822228"
     },
     {
       "course_id": "my-saujana",
