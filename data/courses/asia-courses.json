@@ -508,7 +508,8 @@
       "latitude": 19.0541,
       "longitude": 110.56244,
       "coordinate_source": "https://mapcarta.com/W878237942",
-      "verification_note": "座標取自 OpenStreetMap 球場範圍資料（Mapcarta）；仍待官方球場圖資交叉確認。"
+      "verification_note": "球場位置與座標參考 OpenStreetMap 球場範圍資料（Mapcarta）；時區依海南省所在地 IANA Asia/Shanghai。仍待官方球場圖資交叉確認。",
+      "timezone": "Asia/Shanghai"
     },
     {
       "course_id": "vn-ba-na-hills",
