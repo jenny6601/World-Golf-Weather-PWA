@@ -43,7 +43,8 @@ export async function onRequestGet({ request, env }) {
     contentType: "json",
     include: "hours,days",
     elements: "datetime,temp,tempmax,tempmin,feelslike,humidity,precip,precipprob,windspeed,winddir,windgust,conditions,icon",
-    lang: "zh"
+    lang: "zh",
+    timezone
   }).toString();
 
   const forecaUrl = new URL(`https://weatherapi.foreca.net/api/v1/forecast/hourly/${lon},${lat}`);
