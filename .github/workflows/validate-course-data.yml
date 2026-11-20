@@ -33,4 +33,8 @@ jobs:
       - name: Validate course records, search aliases and PWA shell
         run: node scripts/validate-course-data.mjs
       - name: Check Cloudflare Pages Function JavaScript syntax
-        run: node --check functions/api/provider-compare.js
+        run: |
+          node --check functions/api/provider-compare.js
+          node --check functions/api/metar-nearby.js
+      - name: Test nearby global METAR endpoint with mocked AWC responses
+        run: node scripts/test-metar-nearby.mjs
