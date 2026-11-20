@@ -286,6 +286,8 @@ footer{color:var(--muted);font-size:12px;padding:18px 0}
 .long-range-day .lr-icon{font-size:23px;line-height:1.5}
 .long-range-day .lr-temp{font-size:12px;font-weight:800;color:#172536}
 .long-range-day .lr-rain{font-size:11px;color:#1769aa;margin-top:3px}
+.long-range-unavailable{background:#f8fafc!important;border-style:dashed!important;opacity:.72}
+.long-range-unavailable .lr-desc{color:#8a98a8!important}
 .long-range-day .lr-desc{display:block;font-size:10px;font-weight:700;color:#526477;line-height:1.2}
 .long-range-day .lr-metric{display:flex;flex-direction:column;gap:2px;margin-top:5px;font-size:10px;line-height:1.25}
 .long-range-day .lr-metric span{color:#64748b}
@@ -1717,12 +1719,15 @@ async function loadLongRangeForecast(course){
 function renderLongRangeForecast(){
  const record=longRangeCache.get(longRangeSelectedCourse);if(!record)return;
  const daily=$("longRangeDaily"),status=$("longRangeStatus"),seasonal=$("longRangeSeasonal");
- const d=record.daily,limit=Math.min(longRangeDays,46),fmt=v=>v===null||v===undefined||!Number.isFinite(Number(v))?"—":Number(v).toFixed(0);
- daily.innerHTML=d.time.slice(0,limit).map((date,i)=>{
-  const code=d.weather_code?.[i],rain=d.precipitation_sum?.[i],hi=d.temperature_2m_max?.[i],lo=d.temperature_2m_min?.[i],prob=record.probability?.[date];
-  return '<div class="long-range-day"><div class="lr-date">'+date.slice(5).replace("-","/")+'</div><div class="lr-icon" title="'+longRangeWeatherLabel(code)+'">'+longRangeWeatherEmoji(code)+'<small class="lr-desc">'+longRangeWeatherLabel(code)+'</small></div><div class="lr-metric"><span>氣溫</span><b>'+fmt(hi)+'° / '+fmt(lo)+'°</b></div><div class="lr-metric"><span>降雨機率</span><b>'+(prob===undefined?"—":Math.round(prob)+"%")+'</b></div><div class="lr-metric"><span>雨量</span><b>'+(rain===null||rain===undefined?"—":Number(rain).toFixed(1)+" mm")+'</b></div></div>';
+ const d=record.daily,limit=longRangeDays,available=Math.min(limit,d.time.length),fmt=v=>v===null||v===undefined||!Number.isFinite(Number(v))?"—":Number(v).toFixed(0);
+ const dates=d.time.slice(0,available);
+ if(limit>available){const last=dates.length?new Date(dates[dates.length-1]+"T12:00:00Z"):new Date();for(let i=available;i<limit;i++){const next=new Date(last.getTime()+(i-available+1)*86400000);dates.push(next.toISOString().slice(0,10));}}
+ daily.innerHTML=dates.map((date,i)=>{
+  const hasDaily=i<available,code=hasDaily?d.weather_code?.[i]:null,rain=hasDaily?d.precipitation_sum?.[i]:null,hi=hasDaily?d.temperature_2m_max?.[i]:null,lo=hasDaily?d.temperature_2m_min?.[i]:null,prob=hasDaily?record.probability?.[date]:undefined;
+  const label=hasDaily?longRangeWeatherLabel(code):"超出預報範圍";
+  return '<div class="long-range-day'+(hasDaily?"":" long-range-unavailable")+'"><div class="lr-date">'+date.slice(5).replace("-","/")+'</div><div class="lr-icon" title="'+label+'">'+(hasDaily?longRangeWeatherEmoji(code):"—")+'<small class="lr-desc">'+label+'</small></div><div class="lr-metric"><span>氣溫</span><b>'+(hasDaily?fmt(hi)+'° / '+fmt(lo)+'°':"—")+'</b></div><div class="lr-metric"><span>降雨機率</span><b>'+(prob===undefined?"—":Math.round(prob)+"%")+'</b></div><div class="lr-metric"><span>雨量</span><b>'+(rain===null||rain===undefined?"—":Number(rain).toFixed(1)+" mm")+'</b></div></div>';
  }).join("");
- status.textContent="ECMWF EC46｜36 km 系集延伸預報｜顯示 "+limit+" 天；降雨機率僅在有可用預報資料時顯示，未提供的日期以「—」表示。"+(longRangeDays===60?" 第 47–60 天不提供可靠的逐日四項預報。":"");
+ status.textContent="ECMWF EC46｜36 km 系集延伸預報｜顯示 "+available+" 天可用逐日資料"+(limit>available?"；其餘日期保留欄位但標示超出預報範圍，不提供推估數值。":"。")+" 降雨機率僅在有可用資料時顯示。";
  seasonal.hidden=true;seasonal.innerHTML="";
 }
 
