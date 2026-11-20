@@ -1611,7 +1611,7 @@ function renderLongRangeForecast(){
  status.textContent="ECMWF EC46｜36 km 系集延伸預報｜顯示 "+limit+" 天逐日資料。";
  if(longRangeDays===60){
   seasonal.hidden=false;
-  if(record.seasonal){const m=record.seasonal,dates=m.time||[],items=dates.slice(0,3).map((date,i)=>{const t=m.temperature_2m_anomaly?.[i],r=m.precipitation_anomaly?.[i],w=m.wind_speed_10m_anomaly?.[i];return '<div class="long-range-seasonal-item"><b>'+date+'</b><div>氣溫距平：'+(t==null?"—":(Number(t)>0?"+":"")+Number(t).toFixed(1)+" °C")+'</div><div>降水距平：'+(r==null?"—":(Number(r)>0?"+":"")+Number(r).toFixed(1)+" mm")+'</div><div>風速距平：'+(w==null?"—":(Number(w)>0?"+":"")+Number(w).toFixed(1)+" km/h")+'</div></div>';}).join("");seasonal.innerHTML='<h4>第 47–60 天延伸參考｜SEAS5 月尺度趨勢</h4><div class="long-range-seasonal-grid">'+items+'</div><p class="muted">此處呈現模型月尺度距平，不代表第 47–60 天逐日預報。</p>';}
+  if(record.seasonal){const m=record.seasonal,dates=m.time||[],items=dates.slice(0,3).map((date,i)=>{const t=m.temperature_2m_anomaly?.[i],r=m.precipitation_anomaly?.[i],w=m.wind_speed_10m_anomaly?.[i];return '<div class="long-range-seasonal-item"><b>'+date+'</b><div>氣溫距平：'+(t==null?"—":(Number(t)>0?"+":"")+Number(t).toFixed(1)+" °C")+'</div><div>降水距平：'+(r==null?"—":(Number(r)>0?"+":"")+Number(r).toFixed(1)+" mm")+'</div><div>風速距平：'+(w==null?"—":(Number(w)>0?"+":"")+Number(w).toFixed(1)+" km/h")+'</div></div>';}).join("");seasonal.innerHTML='<h4>46 天之後的長期趨勢參考｜SEAS5 月尺度</h4><div class="long-range-seasonal-grid">'+items+'</div><p class="muted">此處呈現模型月尺度距平，不代表第 47–60 天逐日預報。</p>';}
   else if(!record.seasonalLoading)loadSeasonalTrend({lat:record.lat,lon:record.lon},longRangeSelectedCourse);
  }
  else{seasonal.hidden=true;seasonal.innerHTML="";}
