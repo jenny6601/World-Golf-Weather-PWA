@@ -104,3 +104,10 @@ Added Long Bien Golf Course, BRG Legend Hill Golf Resort, and BRG Kings Island G
 - Provider responses remain separate and independently report success/failure; partial response is supported. No blind averaging and no changes to Open-Meteo, EC46, SEAS5, or existing forecast panels.
 - Added `docs/PROVIDER-API-SECURITY.md` with Cloudflare secret setup and rollout procedure.
 - Pending: Cloudflare Pages project/deployment is not configured yet; owner must add the two encrypted secrets in Cloudflare dashboard. Endpoint and live provider credentials have not yet been tested. No key values were requested or stored in chat or GitHub.
+
+
+### Course GPS enrichment — second batch — 2026-11-20
+- Added sourced coordinates for nine additional courses: Yalong Bay and Shanqin Bay (CN), Red Mountain and Nikanti (TH), The Els Club Teluk Datai (MY), Tanah Merah Garden Course (SG), Handara, New Kuta and Damai Indah PIK (ID).
+- All nine remain partially_verified. Coordinate source URLs and provenance notes are stored per record; no record was upgraded to verified. Tanah Merah uses the Garden Course location as the club reference; course-specific routing may need a later check.
+- GPS + timezone coverage is now 39/44 (88.6%). Five courses still lack GPS: Mission Hills Shenzhen, Mission Hills Dongguan, Sheshan International (CN), Pondok Indah and Jagorawi (ID).
+- Sources include OpenStreetMap-derived Mapcarta/GeoView and golf-course directories (Where2Golf and Parscape). These are course-area reference points, not official survey-grade tee/clubhouse coordinates.
