@@ -17,7 +17,7 @@ const observedAt = new Date(now - 20 * 60000).toISOString();
 const header = "raw_text,station_id,latitude,longitude,observation,temp_c,dewpoint,wind_dir,wind_speed,wind_gust,visibility,altimeter";
 const row = [
   "RJAA 201000Z 18008KT 9999 FEW020 18/10 Q1013",
-  "RJAA", "35.7653", "140.3864", observedAt, "18", "10", "180", "8", "12", "10", "29.91"
+  "RJAA", "35.7653", "140.3864", observedAt, "18", "10", "180", "8", "12", "", "29.91"
 ].join(",");
 const csv = header + "\n" + row + "\n";
 
@@ -45,6 +45,8 @@ assert.equal(body.observation.temperatureC, 18);
 assert.equal(body.observation.dewpointC, 10);
 assert.equal(body.observation.windDirection, 180);
 assert.equal(body.observation.windKmh, 14.8);
+assert.equal(body.observation.visibilityKm, 10);
+assert.equal(body.observation.pressureHpa, 1012.9);
 assert.ok(body.observation.distanceKm > 0 && body.observation.distanceKm < 50);
 assert.equal(body.searchedStations, 1);
 console.log("METAR CSV tests passed: parsing, station selection, distance, observation mapping, and freshness.");
