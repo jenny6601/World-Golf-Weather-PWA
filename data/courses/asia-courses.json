@@ -12,7 +12,7 @@
     "ID"
   ],
   "generated_at": "2026-11-20T11:54:00.900Z",
-  "record_count": 44,
+  "record_count": 52,
   "notes": "資料品質盤點（2026-11-20）：共44筆、8國；verified 7筆、partially_verified 37筆、unverified 0筆。44筆目前均有經緯度及 IANA 時區，網站會依座標載入預報；partially_verified 表示球場位置／座標來源仍待進一步核實，不等同官方 GPS 核實。部分紀錄尚缺官方地址、官方網站或座標來源欄位，請以各筆資料實際欄位為準。",
   "courses": [
     {
@@ -1416,6 +1416,281 @@
       "coordinate_source": "https://gltv.com.vn/golf-course-vn (Google Maps location link: BRG Kings Island)",
       "verified_at": "2026-11-20T00:00:00+07:00",
       "verification_note": "Official BRG Kings Island website confirms Đồng Mô, Xã Đoài Phương, Hanoi and the 55-hole resort comprising Lakeside, Mountain View and Kings courses; GLTV course directory links directly to its Google Maps pin. Coordinates identify the resort, not an individual course entrance. Kept partially verified."
+    },
+    {
+      "course_id": "jp-okinawa-ocean-castle",
+      "name_en": "Ocean Castle Country Club",
+      "short_name": "Ocean Castle CC",
+      "local_name": "オーシャンキャッスルカントリークラブ",
+      "aliases": [
+        "Ocean Castle",
+        "オーシャンキャッスルCC"
+      ],
+      "search_keywords": [
+        "Okinawa",
+        "Nakagusuku",
+        "中城村",
+        "登又",
+        "901-2421"
+      ],
+      "country": "Japan",
+      "country_code": "JP",
+      "city": "Nakagusuku",
+      "region": "Okinawa",
+      "official_address": "〒901-2421 沖縄県中頭郡中城村字登又60",
+      "local_address": "〒901-2421 沖縄県中頭郡中城村字登又60",
+      "latitude": 26.281767,
+      "longitude": 127.790184,
+      "timezone": "Asia/Tokyo",
+      "official_website": "https://reserve.accordiagolf.com/en/global/golfCourse/okinawa/oceancastle/",
+      "data_source": [
+        "https://reserve.accordiagolf.com/en/global/golfCourse/okinawa/oceancastle/",
+        "https://www.japan47go.travel/en/detail/25e3e07d-6544-47b5-b038-12d0d546dafe"
+      ],
+      "coordinate_source": "https://fullgolf.com/en/golf-club/japan/okinawa/nakagami/ocean-castle-country-club",
+      "verification_status": "partially_verified",
+      "verification_note": "官方球場頁核實名稱及地址；GPS 座標採用 FullGolf 公開地圖座標，尚待官方地圖交叉確認。"
+    },
+    {
+      "course_id": "jp-okinawa-country-club",
+      "name_en": "Okinawa Country Club",
+      "short_name": "Okinawa Country Club",
+      "local_name": "沖縄カントリークラブ",
+      "aliases": [
+        "Okinawa CC",
+        "沖縄CC"
+      ],
+      "search_keywords": [
+        "Okinawa",
+        "Nishihara",
+        "西原町",
+        "東原",
+        "903-0114"
+      ],
+      "country": "Japan",
+      "country_code": "JP",
+      "city": "Nishihara",
+      "region": "Okinawa",
+      "official_address": "〒903-0114 沖縄県中頭郡西原町字桃原109",
+      "local_address": "〒903-0114 沖縄県中頭郡西原町字桃原109",
+      "latitude": 26.216972,
+      "longitude": 127.749678,
+      "timezone": "Asia/Tokyo",
+      "official_website": "https://reserve.accordiagolf.com/en/global/golfCourse/okinawa/okinawa/",
+      "data_source": [
+        "https://reserve.accordiagolf.com/en/global/golfCourse/okinawa/okinawa/",
+        "https://reserve.accordiagolf.com/en/global/golfcourse/okinawa/okinawa/access/"
+      ],
+      "coordinate_source": "https://fullgolf.com/en/golf-course/japan/okinawa/nakagami/okinawa",
+      "verification_status": "partially_verified",
+      "verification_note": "官方 Accordia 頁面核實球場名稱及地址；GPS 座標採用 FullGolf 公開地圖座標，尚待官方地圖交叉確認。"
+    },
+    {
+      "course_id": "jp-atta-terrace",
+      "name_en": "The Atta Terrace Golf Resort",
+      "short_name": "The Atta Terrace",
+      "local_name": "ジ・アッタテラス ゴルフリゾート",
+      "aliases": [
+        "Atta Terrace Golf Resort",
+        "Atta Terrace",
+        "ジ･アッタテラス"
+      ],
+      "search_keywords": [
+        "Okinawa",
+        "Onna",
+        "恩納村",
+        "安富祖",
+        "904-0402"
+      ],
+      "country": "Japan",
+      "country_code": "JP",
+      "city": "Onna",
+      "region": "Okinawa",
+      "official_address": "〒904-0402 沖縄県国頭郡恩納村安富祖1079",
+      "local_address": "〒904-0402 沖縄県国頭郡恩納村安富祖1079",
+      "latitude": 26.499693,
+      "longitude": 127.896228,
+      "timezone": "Asia/Tokyo",
+      "official_website": "https://www.terrace.co.jp/en/atta/information/outline.php",
+      "data_source": [
+        "https://www.terrace.co.jp/en/atta/information/outline.php",
+        "https://www.japan.travel/en/sports/golf/courses/the-atta-terrace-golf-resort/"
+      ],
+      "coordinate_source": "https://www.where2golf.com/japan/the-atta-terrace-golf-resort/",
+      "verification_status": "partially_verified",
+      "verification_note": "官方網站核實球場名稱及地址；GPS 座標採用 Where2Golf 公開座標，尚待官方地圖交叉確認。"
+    },
+    {
+      "course_id": "jp-ginoza-country-club",
+      "name_en": "Ginoza Country Club",
+      "short_name": "Ginoza Country Club",
+      "local_name": "宜野座カントリークラブ",
+      "aliases": [
+        "Ginoza CC",
+        "宜野座CC"
+      ],
+      "search_keywords": [
+        "Okinawa",
+        "Ginoza",
+        "宜野座村",
+        "松田",
+        "904-1301"
+      ],
+      "country": "Japan",
+      "country_code": "JP",
+      "city": "Ginoza",
+      "region": "Okinawa",
+      "official_address": "〒904-1301 沖縄県国頭郡宜野座村字松田2824-264",
+      "local_address": "〒904-1301 沖縄県国頭郡宜野座村字松田2824-264",
+      "latitude": 26.50318,
+      "longitude": 127.98817,
+      "timezone": "Asia/Tokyo",
+      "official_website": "https://www.ginozacc.com/",
+      "data_source": [
+        "https://www.ginozacc.com/",
+        "https://www.japan47go.travel/en/detail/eb6531fa-d936-4bc4-b468-2f4246c4dba3"
+      ],
+      "coordinate_source": "https://mapcarta.com/W189138990",
+      "verification_status": "partially_verified",
+      "verification_note": "官方球場網站及 JAPAN 47 GO 核實名稱與地址；GPS 座標採用 OpenStreetMap/Mapcarta 資料，尚待官方地圖交叉確認。"
+    },
+    {
+      "course_id": "jp-kanehide-kise",
+      "name_en": "Kanehide Kise Country Club",
+      "short_name": "Kanehide Kise CC",
+      "local_name": "かねひで喜瀬カントリークラブ",
+      "aliases": [
+        "Kise Country Club",
+        "Kise CC",
+        "喜瀬カントリークラブ"
+      ],
+      "search_keywords": [
+        "Okinawa",
+        "Nago",
+        "名護市",
+        "喜瀬",
+        "905-0026"
+      ],
+      "country": "Japan",
+      "country_code": "JP",
+      "city": "Nago",
+      "region": "Okinawa",
+      "official_address": "〒905-0026 沖縄県名護市字喜瀬1107-1",
+      "local_address": "〒905-0026 沖縄県名護市字喜瀬1107-1",
+      "latitude": 26.524415,
+      "longitude": 127.93946,
+      "timezone": "Asia/Tokyo",
+      "official_website": "https://www.kise-cc.jp/en/",
+      "data_source": [
+        "https://www.kise-cc.jp/en/",
+        "https://www.japan47go.travel/en/detail/3d922775-986e-4f6d-b08a-5ed2101c7d90"
+      ],
+      "coordinate_source": "https://www.travelmyth.co.uk/Nago/Hotels/Kanehide-Kise-Country-Club_tmid257562",
+      "verification_status": "partially_verified",
+      "verification_note": "官方網站及 JAPAN 47 GO 核實名稱與地址；GPS 座標採用公開地圖住宿頁座標，尚待官方球場地圖交叉確認。"
+    },
+    {
+      "course_id": "jp-ryukyu-golf-club",
+      "name_en": "Ryukyu Golf Club",
+      "short_name": "Ryukyu Golf Club",
+      "local_name": "琉球ゴルフ倶楽部",
+      "aliases": [
+        "Ryukyu GC",
+        "琉球GC"
+      ],
+      "search_keywords": [
+        "Okinawa",
+        "Nanjo",
+        "南城市",
+        "玉城",
+        "901-0608"
+      ],
+      "country": "Japan",
+      "country_code": "JP",
+      "city": "Nanjo",
+      "region": "Okinawa",
+      "official_address": "〒901-0608 沖縄県南城市玉城字親慶原1",
+      "local_address": "〒901-0608 沖縄県南城市玉城字親慶原1",
+      "latitude": 26.14932,
+      "longitude": 127.78108,
+      "timezone": "Asia/Tokyo",
+      "official_website": "https://www.ryukyugolf.com/",
+      "data_source": [
+        "https://www.ryukyugolf.com/",
+        "https://mapcarta.com/W189138987"
+      ],
+      "coordinate_source": "https://mapcarta.com/W189138987",
+      "verification_status": "partially_verified",
+      "verification_note": "官方網站核實球場名稱；GPS 座標採用 OpenStreetMap/Mapcarta 球場範圍座標，官方地址仍需進一步核對，故暫列部分核實。"
+    },
+    {
+      "course_id": "jp-shigira-bay",
+      "name_en": "Shigira Bay Country Club",
+      "short_name": "Shigira Bay CC",
+      "local_name": "シギラベイカントリークラブ",
+      "aliases": [
+        "Shigira Bay",
+        "Shigira Golf",
+        "シギラベイCC"
+      ],
+      "search_keywords": [
+        "Okinawa",
+        "Miyakojima",
+        "宮古島",
+        "上野新里",
+        "906-0202"
+      ],
+      "country": "Japan",
+      "country_code": "JP",
+      "city": "Miyakojima",
+      "region": "Okinawa",
+      "official_address": "〒906-0202 沖縄県宮古島市上野新里1264",
+      "local_address": "〒906-0202 沖縄県宮古島市上野新里1264",
+      "latitude": 24.730192,
+      "longitude": 125.338395,
+      "timezone": "Asia/Tokyo",
+      "official_website": "https://shigira.com/en/golf",
+      "data_source": [
+        "https://shigira.com/en/golf",
+        "https://www.okinawasportsisland.jp/wp-content/uploads/2026/02/2026_Okinawa.pdf"
+      ],
+      "coordinate_source": "https://www.fullgolf.com/en/golf-club/japan/okinawa/miyako/shigira-bay-country-club",
+      "verification_status": "partially_verified",
+      "verification_note": "官方 Shigira 網站及沖繩觀光資料核實名稱與地址；GPS 座標採用 FullGolf 公開地圖座標，尚待官方地圖交叉確認。"
+    },
+    {
+      "course_id": "jp-bel-beach",
+      "name_en": "Bel Beach Golf Club",
+      "short_name": "Bel Beach GC",
+      "local_name": "ベルビーチゴルフクラブ",
+      "aliases": [
+        "Bel Beach",
+        "ベルビーチGC"
+      ],
+      "search_keywords": [
+        "Okinawa",
+        "Motobu",
+        "本部町",
+        "崎本部",
+        "905-0225"
+      ],
+      "country": "Japan",
+      "country_code": "JP",
+      "city": "Motobu",
+      "region": "Okinawa",
+      "official_address": "〒905-0225 沖縄県国頭郡本部町字崎本部5151",
+      "local_address": "〒905-0225 沖縄県国頭郡本部町字崎本部5151",
+      "latitude": 26.640416,
+      "longitude": 127.886964,
+      "timezone": "Asia/Tokyo",
+      "official_website": "https://www.belbeach.com/",
+      "data_source": [
+        "https://www.belbeach.com/",
+        "https://www.okinawasportsisland.jp/wp-content/uploads/sites/2/2021/11/resortgolfokinawa_en.pdf"
+      ],
+      "coordinate_source": "https://fullgolf.com/en/golf-course/japan/okinawa/kunigami/bel-beach",
+      "verification_status": "partially_verified",
+      "verification_note": "官方網站及沖繩觀光資料核實名稱；GPS 座標採用 FullGolf 公開地圖座標，地址與官方網站需再交叉確認。"
     }
   ]
 }
