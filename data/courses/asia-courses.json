@@ -12,7 +12,7 @@
     "ID"
   ],
   "generated_at": "2026-11-20T11:54:00.900Z",
-  "record_count": 41,
+  "record_count": 44,
   "notes": "GPS-verified: 7 (Japan 5, South Korea 2). Partially verified: 27 (Japan 1, South Korea 3, China 4, Vietnam 5, Thailand 3, Malaysia 4, Singapore 4, Indonesia 3). Unverified: 7. All partial records lack GPS and are not enabled for weather. Indonesian timezones assigned only to geographically confirmed Bali/Jakarta addresses.",
   "courses": [
     {
