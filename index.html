@@ -866,9 +866,49 @@ function liveRainClass(value){
 }
 async function loadLiveObservation(course){
  const state=$("liveObservationState"),summary=$("liveObservationSummary"),metrics=$("liveObservationMetrics");
- if(state){state.textContent="全球觀測源尚未接入";state.className="pill";}
- if(summary)summary.textContent="目前顯示的是球場座標的數值天氣預報；全球即時觀測站／METAR 串接完成前，不以預報值冒充實測。";
- if(metrics)metrics.innerHTML='<div class="metric"><small>即時觀測</small><strong>尚未接入</strong></div>';
+ const heading=$("liveObservationHeading"),dateTime=$("liveObservationDateTime"),times=$("liveObservationTimes");
+ const showUnavailable=(message)=>{
+  if(state){state.textContent="無可用觀測";state.className="pill live-state-missing";}
+  if(summary)summary.textContent=message||"附近沒有符合時效條件的 METAR 測站；不以預報值代替實測。";
+  if(dateTime)dateTime.textContent="觀測時間：—";
+  if(times)times.textContent="資料來源：Aviation Weather Center（全球 METAR）";
+  if(metrics)metrics.innerHTML='<div class="metric"><small>即時觀測</small><strong>無可用資料</strong></div>';
+ };
+ if(heading)heading.textContent="即時天氣觀測｜"+(course.name||"—");
+ if(state){state.textContent="正在搜尋附近測站…";state.className="pill";}
+ if(summary)summary.textContent="正在查詢球場附近全球航空氣象觀測站（METAR）。";
+ if(metrics)metrics.innerHTML='<div class="metric"><small>附近測站</small><strong>搜尋中…</strong></div>';
+ try{
+  const response=await fetch("./api/metar-nearby?courseId="+encodeURIComponent(course.course_id),{cache:"no-store"});
+  const data=await response.json();
+  if(!response.ok||!data.observation){showUnavailable(data.status==="no_recent_observation"?"附近測站目前沒有最近3小時內的觀測資料。":data.status==="no_nearby_recent_station"?"搜尋範圍內沒有150公里內、最近3小時的有效測站觀測。":"即時觀測服務暫時無法取得資料；請稍後重試。");return;}
+  const o=data.observation;
+  const fmt=(v,d=1)=>v===null||v===undefined||!Number.isFinite(Number(v))?"—":Number(v).toFixed(d);
+  const metricRows=[
+   ["測站",o.stationId||o.stationName||"—"],
+   ["氣溫",o.temperatureC===null?"—":fmt(o.temperatureC)+" °C"],
+   ["估算體感",o.apparentTemperatureC===null?"—":fmt(o.apparentTemperatureC)+" °C"],
+   ["相對濕度",o.humidityPercent===null?"未提供":fmt(o.humidityPercent,0)+" %"],
+   ["風速",o.windKmh===null?"未提供":fmt(o.windKmh)+" km/h"],
+   ["陣風",o.gustKmh===null?"未提供":fmt(o.gustKmh)+" km/h"],
+   ["能見度",o.visibilityKm===null?"未提供":fmt(o.visibilityKm)+" km"],
+   ["氣壓",o.pressureHpa===null?"未提供":fmt(o.pressureHpa)+" hPa"]
+  ];
+  if(metrics){
+   metrics.innerHTML=metricRows.map((r,i)=>'<div class="metric"><small></small><strong></strong></div>').join("");
+   metrics.querySelectorAll(".metric").forEach((el,i)=>{el.querySelector("small").textContent=metricRows[i][0];el.querySelector("strong").textContent=metricRows[i][1];});
+  }
+  const timezone=course.timezone||"Asia/Taipei";
+  const observed=o.observedAt?new Date(o.observedAt):null;
+  const observedLabel=observed&&!Number.isNaN(observed.getTime())?new Intl.DateTimeFormat("zh-TW",{timeZone:timezone,dateStyle:"medium",timeStyle:"short"}).format(observed):"時間未知";
+  const age=Math.round(o.ageMinutes||0);
+  if(dateTime)dateTime.textContent="觀測時間："+observedLabel;
+  if(state){state.textContent=data.status==="fresh"?"資料較新":"觀測稍舊";state.className="pill "+(data.status==="fresh"?"live-state-fresh":"live-state-stale");}
+  if(summary)summary.textContent=(o.stationName||o.stationId||"附近測站")+"｜距球場 "+fmt(o.distanceKm)+" km｜"+age+" 分鐘前觀測。來源為機場／航空氣象站，不代表球場內實測。";
+  if(times)times.textContent="資料來源："+(data.source||"AWC METAR")+"｜伺服器查詢："+new Date(data.generatedAt||Date.now()).toLocaleString("zh-TW",{timeZone:timezone})+"｜搜尋測站："+(data.searchedStations??"—");
+ }catch(error){
+  showUnavailable("即時觀測連線失敗；請稍後重試。預報資料仍獨立顯示，不會混作實測。");
+ }
 }
 
 async function autoLoadDatabaseCourse(c,button){
