@@ -145,7 +145,7 @@ export async function onRequestGet({ request }) {
     const raw = report.rawOb ?? report.raw_text ?? report.raw ?? null;
     let visibility = numberOrNull(report.visib ?? report.visibility);
     if (visibility === null && raw) {
-      const visibilityMatch = raw.match(/(?:KT|MPS|KMH)\\s+(9999|P?\\d+(?:\\.\\d+)?)/);
+      const visibilityMatch = raw.match(/(?:KT|MPS|KMH)\s+(9999|P?\d+(?:\.\d+)?)/);
       if (visibilityMatch) {
         const token = visibilityMatch[1];
         visibility = token === "9999" ? 10 : Number(token.replace(/^P/, "")) * 1.609344;
