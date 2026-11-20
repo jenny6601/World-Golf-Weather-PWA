@@ -88,3 +88,10 @@ Added Long Bien Golf Course, BRG Legend Hill Golf Resort, and BRG Kings Island G
 - GitHub Actions run #44713420786 passed all eight points: each returned 46 daily rows and 3 monthly rows with the expected IANA timezone. Course database validation also passed on the same commit (#44713420800).
 - These are representative regional API smoke tests, not a validation of every golf-course coordinate or forecast accuracy. The app remains un-deployed; browser/mobile acceptance is still pending.
 - Clarified the 60-day panel heading: SEAS5 is shown as long-range monthly trend context after EC46, not as a daily forecast specifically covering days 47–60.
+
+
+### Course GPS enrichment — 2026-11-20
+- Added sourced golf-course-area coordinates for six records: Camellia Hills (JP), Woo Jeong Hills (KR), Siam Country Club Old Course (TH), KLGCC (MY), Sentosa Golf Club (SG), and Laguna National (SG).
+- Each record retains partially_verified status and records coordinate_source plus a note that official-club-map cross-check is still pending. No status was upgraded to verified.
+- GPS + timezone coverage increased from 24/44 (54.5%) to 30/44 (68.2%). Fourteen courses still lack one or both required location fields.
+- Sources used: FullGolf for Camellia Hills and Woo Jeong Hills; OpenStreetMap-derived Mapcarta/GeoView for Siam Old Course, KLGCC and Laguna National; Where2Golf for Sentosa. These are course-area references, not claims of official survey-grade tee/clubhouse pins.
