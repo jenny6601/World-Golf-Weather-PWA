@@ -13,15 +13,23 @@
 - Added local favorites and last-10 recent course selections.
 - Added eight country filters: JP, KR, CN, VN, TH, MY, SG, ID.
 - Added a structured course data schema.
-- Added 40 discovery candidates (five per country), all explicitly marked `unverified`.
-- Unverified candidates have no fabricated coordinates, official addresses, timezones or photos; forecast selection remains disabled until these fields are checked.
+- Added 41 course records across eight countries.
+- Current verification: 7 GPS-verified, 13 partially verified, 21 unverified.
+- Japan: five courses have official addresses and official-site embedded map pins; Camellia Hills identity/address verified, GPS pending.
+- South Korea: Nine Bridges and Black Stone Jeju have coordinates from the Jeju official tourism portal; Teddy Valley, Asiad CC and Woo Jeong Hills have identity/address verified, GPS pending.
+- China: Mission Hills Shenzhen and Dongguan, Sheshan and Yalong Bay have identity/address sources recorded; GPS pending.
+- Vietnam: Ba Na Hills, Hoiana Shores, Laguna Lang Co, Legend Da Nang and Montgomerie Links have official club identity/address sources recorded; GPS pending.
+- Thailand, Malaysia, Singapore and Indonesia remain unverified candidates.
+- Candidates without GPS coordinates do not have fabricated coordinates; forecast selection remains disabled until coordinates are available.
 - Disabled the inherited Taiwan live-observation snapshot lookup. The UI states that global observation/METAR integration is not yet available.
 - Disabled inherited Taiwan course-cache lookup; forecast requests fall back to the Open-Meteo model API.
 - Replaced inherited Taiwan repository cache URLs with this World Golf Weather repository namespace.
 - Added a separate manifest, service worker cache namespace, offline page, installation script and app icons.
 
 ## Not yet complete
-- Complete GPS verification for Camellia Hills, Teddy Valley, Asiad CC and Woo Jeong Hills; continue official identity/address/GPS/timezone verification for China, Vietnam, Thailand, Malaysia, Singapore and Indonesia.
+- Complete GPS verification for all partially verified courses, including Camellia Hills, Teddy Valley, Asiad CC, Woo Jeong Hills, the four China partial records and five Vietnam courses.
+- Verify Thailand, Malaysia, Singapore and Indonesia candidates.
+- Confirm Indonesia timezone per course coordinates (Asia/Jakarta, Asia/Makassar or Asia/Jayapura); do not infer a single country-wide zone.
 - Add licensed/official course photos and attribution.
 - Add external map/GPS discovery and geocoder policy.
 - Implement global current observations using a validated source hierarchy (station/METAR where available, commercial observations where licensed, and clearly labelled model estimates).
