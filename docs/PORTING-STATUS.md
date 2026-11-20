@@ -54,3 +54,11 @@ Added Long Bien Golf Course, BRG Legend Hill Golf Resort, and BRG Kings Island G
 - Exercised the same normalization/ranking rules against the current 44-record course JSON. Exact-match results resolve correctly for: Long Bien / Long Biên / Long Bien Golf Course; Legend Hill / BRG Legend Hill; Kings Island / King's Island / Đảo Vua.
 - All three newly added Hanoi records have GPS + Asia/Ho_Chi_Minh and therefore satisfy the UI's current selection gate (finite latitude + longitude + timezone).
 - This is a data/search-logic smoke test, not a real browser/mobile or live weather API test. Kings Island's point is the resort-level pin, not an individual 18-hole layout entrance.
+
+
+### Automated validation added — 2026-11-20
+- Added `scripts/validate-course-data.mjs` using Node.js built-in assertions (no third-party dependencies).
+- Checks unique/stable course IDs, allowed country/status values, coordinate pair/ranges, valid IANA timezones, required fields for fully verified records, Vietnam course count, seven Hanoi search aliases, inline JavaScript syntax and PWA manifest icon entries.
+- Added `.github/workflows/validate-course-data.yml` for development/main pushes, main-targeted PRs and manual dispatch.
+- Files are committed to development. GitHub Actions run has not yet appeared in the repository, so CI execution is pending and is not reported as passed.
+- This automated check is static/data validation; it does not replace browser/mobile end-to-end tests or live Open-Meteo API checks.
