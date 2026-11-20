@@ -13,7 +13,7 @@
   ],
   "generated_at": "2026-11-20",
   "record_count": 41,
-  "notes": "Japan club identity/address and official embedded map locations have been checked against each club's official website. Camellia Hills has verified identity/address but awaits a sufficiently authoritative course GPS pin. Remaining countries are discovery candidates only.",
+  "notes": "Japan: five records verified with official club addresses and official-site map pins; Camellia Hills partially verified. South Korea: Nine Bridges and Black Stone Jeju verified using club official sites plus Jeju official tourism portal for coordinates; Teddy Valley, Asiad CC and Woo Jeong Hills have official identity/address but GPS pending. Other five countries remain unverified.",
   "courses": [
     {
       "course_id": "jp-abiko",
@@ -203,93 +203,136 @@
     {
       "course_id": "kr-nine-bridges",
       "name_en": "The Club at Nine Bridges",
-      "short_name": "The Club at Nine Bridges",
+      "short_name": "Nine Bridges",
       "aliases": [
-        "Nine Bridges"
+        "Nine Bridges",
+        "Club Nine Bridges",
+        "나인브릿지"
       ],
       "search_keywords": [
-        "Jeju",
         "Jeju",
         "South Korea"
       ],
       "country": "South Korea",
       "country_code": "KR",
-      "city": "Jeju",
+      "city": "Seogwipo",
       "region": "Jeju",
-      "verification_status": "unverified",
+      "verification_status": "verified",
       "data_source": [
-        "https://gogolfnow.com/"
-      ]
+        "https://www.ninebridges.co.kr/eng/introduction/location.asp",
+        "https://www.visitjeju.net/kr/detail/view?contentsid=CNTS_000000000020301"
+      ],
+      "local_name": "클럽나인브릿지",
+      "official_address": "제주특별자치도 서귀포시 안덕면 광평로 34-156",
+      "local_address": "제주특별자치도 서귀포시 안덕면 광평로 34-156",
+      "latitude": 33.3420536,
+      "longitude": 126.4046382,
+      "timezone": "Asia/Seoul",
+      "official_website": "https://www.ninebridges.co.kr/index.asp",
+      "coordinate_source": "https://www.visitjeju.net/kr/detail/view?contentsid=CNTS_000000000020301",
+      "verification_note": "球場官方網站確認名稱及地址；濟州官方觀光入口提供地址及 GPS 座標。",
+      "verified_at": "2026-11-20T00:00:00+09:00"
     },
     {
       "course_id": "kr-blackstone-jeju",
-      "name_en": "Blackstone Golf & Resort Jeju",
-      "short_name": "Blackstone Golf & Resort Jeju",
+      "name_en": "Black Stone Golf & Resort Jeju",
+      "short_name": "Black Stone Jeju",
       "aliases": [
-        "Blackstone Jeju"
+        "Blackstone Jeju",
+        "Black Stone Jeju",
+        "블랙스톤 제주"
       ],
       "search_keywords": [
-        "Jeju",
         "Jeju",
         "South Korea"
       ],
       "country": "South Korea",
       "country_code": "KR",
-      "city": "Jeju",
+      "city": "Jeju-si",
       "region": "Jeju",
-      "verification_status": "unverified",
+      "verification_status": "verified",
       "data_source": [
-        "https://gogolfnow.com/"
-      ]
+        "https://www.blackstoneresort.com/jj/aboutList",
+        "https://www.visitjeju.net/kr/detail/view?contentsid=CONT_000000000500761"
+      ],
+      "local_name": "블랙스톤 골프앤리조트 제주",
+      "official_address": "제주특별자치도 제주시 한림읍 한창로 925-122",
+      "local_address": "제주특별자치도 제주시 한림읍 한창로 925-122",
+      "latitude": 33.33866,
+      "longitude": 126.31243,
+      "official_website": "https://www.blackstoneresort.com/jj/",
+      "coordinate_source": "https://www.visitjeju.net/kr/detail/view?contentsid=CONT_000000000500761",
+      "verification_note": "球場官方網站確認正式名稱與地址；濟州官方觀光入口提供相同地址及 GPS 座標。",
+      "timezone": "Asia/Seoul",
+      "verified_at": "2026-11-20T00:00:00+09:00"
     },
     {
       "course_id": "kr-teddy-valley",
       "name_en": "Teddy Valley Golf & Resort",
-      "short_name": "Teddy Valley Golf & Resort",
+      "short_name": "Teddy Valley",
       "aliases": [
-        "Teddy Valley"
+        "Teddy Valley",
+        "Teddy Valley Golf Resort",
+        "테디밸리"
       ],
       "search_keywords": [
-        "Jeju",
         "Jeju",
         "South Korea"
       ],
       "country": "South Korea",
       "country_code": "KR",
-      "city": "Jeju",
+      "city": "Seogwipo",
       "region": "Jeju",
-      "verification_status": "unverified",
+      "verification_status": "partially_verified",
       "data_source": [
-        "https://gogolfnow.com/"
-      ]
+        "http://www.teddyvalley.com/",
+        "https://www.visitjeju.net/kr/detail/view?contentsid=CNTS_000000000018152"
+      ],
+      "local_name": "테디밸리 골프앤리조트",
+      "official_address": "제주특별자치도 서귀포시 안덕면 한창로 365",
+      "local_address": "제주특별자치도 서귀포시 안덕면 한창로 365",
+      "official_website": "http://www.teddyvalley.com/",
+      "verification_note": "濟州官方觀光入口確認名稱、地址及網站；尚未取得足以核實球場地點的 GPS 座標。",
+      "timezone": "Asia/Seoul",
+      "verified_at": "2026-11-20T00:00:00+09:00"
     },
     {
       "course_id": "kr-asiad",
       "name_en": "Asiad Country Club",
-      "short_name": "Asiad Country Club",
+      "short_name": "Asiad CC",
       "aliases": [
-        "Asiad CC"
+        "Asiad CC",
+        "아시아드CC",
+        "아시아드C.C."
       ],
       "search_keywords": [
-        "Busan",
         "Busan",
         "South Korea"
       ],
       "country": "South Korea",
       "country_code": "KR",
-      "city": "Busan",
+      "city": "Gijang-gun",
       "region": "Busan",
-      "verification_status": "unverified",
+      "verification_status": "partially_verified",
       "data_source": [
-        "https://gogolfnow.com/"
-      ]
+        "https://www.asiadcc.co.kr/"
+      ],
+      "local_name": "아시아드 컨트리클럽",
+      "official_address": "부산광역시 기장군 일광면 차양길 26",
+      "local_address": "부산광역시 기장군 일광면 차양길 26",
+      "official_website": "https://www.asiadcc.co.kr/",
+      "verification_note": "球場官方網站確認正式名稱及地址；GPS 尚未從官方地圖取得。",
+      "timezone": "Asia/Seoul",
+      "verified_at": "2026-11-20T00:00:00+09:00"
     },
     {
       "course_id": "kr-woo-jeong-hills",
       "name_en": "Woo Jeong Hills Country Club",
-      "short_name": "Woo Jeong Hills Country Club",
+      "short_name": "Woo Jeong Hills",
       "aliases": [
-        "Woo Jeong Hills"
+        "Woojeong Hills",
+        "Woo Jeong Hills CC",
+        "우정힐스CC"
       ],
       "search_keywords": [
         "Cheonan",
@@ -299,11 +342,18 @@
       "country": "South Korea",
       "country_code": "KR",
       "city": "Cheonan",
-      "region": "Chungcheong",
-      "verification_status": "unverified",
+      "region": "Chungcheongnam-do",
+      "verification_status": "partially_verified",
       "data_source": [
-        "https://gogolfnow.com/"
-      ]
+        "https://whcc.kolon.com/pagesite/club/intro.asp"
+      ],
+      "local_name": "우정힐스 컨트리클럽",
+      "official_address": "충청남도 천안시 동남구 목천읍 충절로 1048-68",
+      "local_address": "충청남도 천안시 동남구 목천읍 충절로 1048-68",
+      "official_website": "https://whcc.kolon.com/pagesite/club/intro.asp",
+      "verification_note": "球場官方網站確認名稱及地址；目前取得的座標來源不是球場官方地圖，因此不寫入正式 GPS 欄位。",
+      "timezone": "Asia/Seoul",
+      "verified_at": "2026-11-20T00:00:00+09:00"
     },
     {
       "course_id": "cn-mission-hills-shenzhen",
