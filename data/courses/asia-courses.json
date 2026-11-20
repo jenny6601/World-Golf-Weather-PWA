@@ -13,7 +13,7 @@
   ],
   "generated_at": "2026-11-20",
   "record_count": 41,
-  "notes": "Discovery and verification directory. Japan records were updated from official club address/access pages; official embedded map coordinates used where available. Camellia Hills remains partial pending an official map coordinate. Other countries remain unverified.",
+  "notes": "Japan club identity/address and official embedded map locations have been checked against each club's official website. Camellia Hills has verified identity/address but awaits a sufficiently authoritative course GPS pin. Remaining countries are discovery candidates only.",
   "courses": [
     {
       "course_id": "jp-abiko",
@@ -38,7 +38,8 @@
       "region": "Chiba",
       "verification_status": "verified",
       "data_source": [
-        "https://www.abikogc.com/english/access/"
+        "https://www.abikogc.com/english/access/",
+        "https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d12932.977831795837!2d140.04306791528322!3d35.867525722534616!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0:0x9c535c870e173433!2z5oiR5a2r5a2Q44K044Or44OV5YC25qW96YOo!5e0!3m2!1sja!2sjp!4v1638514604211!5m2!1sja!2sjp"
       ],
       "local_name": "我孫子ゴルフ倶楽部",
       "official_address": "〒270-1137 千葉県我孫子市岡発戸1110",
@@ -48,8 +49,9 @@
       "latitude": 35.867525722534616,
       "longitude": 140.04306791528322,
       "map_address": "〒270-1137 千葉県我孫子市岡発戸1110",
-      "coordinate_source": "https://www.abikogc.com/english/access/",
-      "verified_at": "2026-11-20T00:00:00+09:00"
+      "coordinate_source": "https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d12932.977831795837!2d140.04306791528322!3d35.867525722534616!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0:0x9c535c870e173433!2z5oiR5a2r5a2Q44K044Or44OV5YC25qW96YOo!5e0!3m2!1sja!2sjp!4v1638514604211!5m2!1sja!2sjp",
+      "verified_at": "2026-11-20T00:00:00+09:00",
+      "verification_note": "GPS coordinates taken from the Google Maps iframe embedded on the official club access page."
     },
     {
       "course_id": "jp-camellia-hills",
@@ -107,7 +109,8 @@
       "region": "Chiba",
       "verification_status": "verified",
       "data_source": [
-        "https://www.sodegaura.co.jp/access/"
+        "https://www.sodegaura.co.jp/access/",
+        "https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d25966.08668567278!2d140.16336342587883!3d35.559608423968655!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x602290a9bc23b9c9:0x8c2f48ce212192ff!2z6KKW44O25rWm44Kr44Oz44OE44Oq44O844Kv44Op44OW6KKW44O25rWm44Kz44O844K5!5e0!3m2!1sja!2sjp!4v1584337120216!5m2!1sja!2sjp"
       ],
       "local_name": "袖ヶ浦カンツリークラブ 袖ヶ浦コース",
       "official_address": "〒266-0007 千葉県千葉市緑区辺田町567番地",
@@ -117,8 +120,9 @@
       "latitude": 35.559608423968655,
       "longitude": 140.16336342587883,
       "map_address": "〒266-0007 千葉県千葉市緑区辺田町567番地",
-      "coordinate_source": "https://www.sodegaura.co.jp/access/",
-      "verified_at": "2026-11-20T00:00:00+09:00"
+      "coordinate_source": "https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d25966.08668567278!2d140.16336342587883!3d35.559608423968655!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x602290a9bc23b9c9:0x8c2f48ce212192ff!2z6KKW44O25rWm44Kr44Oz44OE44Oq44O844Kv44Op44OW6KKW44O25rWm44Kz44O844K5!5e0!3m2!1sja!2sjp!4v1584337120216!5m2!1sja!2sjp",
+      "verified_at": "2026-11-20T00:00:00+09:00",
+      "verification_note": "GPS coordinates taken from the Google Maps iframe embedded on the official club access page."
     },
     {
       "course_id": "jp-kasumigaseki",
@@ -143,7 +147,8 @@
       "region": "Saitama",
       "verification_status": "verified",
       "data_source": [
-        "https://www.kasumigasekicc.or.jp/english/access/index.html"
+        "https://www.kasumigasekicc.or.jp/english/access/index.html",
+        "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d12927.42010142687!2d139.3957515608896!3d35.901566179416555!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6018d82b61d4fb8b:0x23f567cae9e19846!2z44CSMzUwLTExNzUg5Z-8546J55yM5bed6LaK5biC56yg5bmh77yT77yT77yZ77yY!5e0!3m2!1sja!2sjp!4v1540357932835"
       ],
       "local_name": "霞ヶ関カンツリー倶楽部",
       "official_address": "〒350-1175 埼玉県川越市大字笠幡3398",
@@ -153,8 +158,9 @@
       "latitude": 35.901566179416555,
       "longitude": 139.3957515608896,
       "map_address": "〒350-1175 埼玉県川越市大字笠幡3398",
-      "coordinate_source": "https://www.kasumigasekicc.or.jp/english/access/index.html",
-      "verified_at": "2026-11-20T00:00:00+09:00"
+      "coordinate_source": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d12927.42010142687!2d139.3957515608896!3d35.901566179416555!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6018d82b61d4fb8b:0x23f567cae9e19846!2z44CSMzUwLTExNzUg5Z-8546J55yM5bed6LaK5biC56yg5bmh77yT77yT77yZ77yY!5e0!3m2!1sja!2sjp!4v1540357932835",
+      "verified_at": "2026-11-20T00:00:00+09:00",
+      "verification_note": "GPS coordinates taken from the Google Maps iframe embedded on the official club access page."
     },
     {
       "course_id": "jp-tokyo-golf-club",
@@ -179,7 +185,8 @@
       "region": "Saitama",
       "verification_status": "verified",
       "data_source": [
-        "https://www.tokyogolfclub.jp/english/access/"
+        "https://www.tokyogolfclub.jp/english/access/",
+        "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3232.077248998372!2d139.4043753152647!3d35.89612368014474!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6018d9cd243c34ed:0x94a44bee57926ad9!2sTokyo+Golf+Club!5e0!3m2!1sen!2sjp!4v1602670080541"
       ],
       "local_name": "東京ゴルフ倶楽部",
       "official_address": "〒350-1335 埼玉県狭山市柏原1984",
@@ -189,8 +196,9 @@
       "latitude": 35.89612368014474,
       "longitude": 139.4043753152647,
       "map_address": "〒350-1335 埼玉県狭山市柏原1984",
-      "coordinate_source": "https://www.tokyogolfclub.jp/english/access/",
-      "verified_at": "2026-11-20T00:00:00+09:00"
+      "coordinate_source": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3232.077248998372!2d139.4043753152647!3d35.89612368014474!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6018d9cd243c34ed:0x94a44bee57926ad9!2sTokyo+Golf+Club!5e0!3m2!1sen!2sjp!4v1602670080541",
+      "verified_at": "2026-11-20T00:00:00+09:00",
+      "verification_note": "GPS coordinates taken from the Google Maps iframe embedded on the official club access page."
     },
     {
       "course_id": "kr-nine-bridges",
@@ -957,12 +965,13 @@
       "timezone": "Asia/Tokyo",
       "official_website": "https://www.sodegaura.co.jp/access/",
       "data_source": [
-        "https://www.sodegaura.co.jp/access/"
+        "https://www.sodegaura.co.jp/access/",
+        "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d25959.100919205597!2d140.202886209867!3d35.58116563392002!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6022915b38da9eff:0xa8ffcbc185499c26!2z6KKW44O25rWm44Kr44Oz44OE44Oq44O844Kv44Op44OW5paw6KKW44Kz44O844K5!5e0!3m2!1sja!2sjp!4v1584336852748!5m2!1sja!2sjp"
       ],
-      "coordinate_source": "https://www.sodegaura.co.jp/access/",
+      "coordinate_source": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d25959.100919205597!2d140.202886209867!3d35.58116563392002!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6022915b38da9eff:0xa8ffcbc185499c26!2z6KKW44O25rWm44Kr44Oz44OE44Oq44O844Kv44Op44OW5paw6KKW44Kz44O844K5!5e0!3m2!1sja!2sjp!4v1584336852748!5m2!1sja!2sjp",
       "verification_status": "verified",
       "verified_at": "2026-11-20T00:00:00+09:00",
-      "verification_note": "球場官方網站分列袖ヶ浦コース與新袖コース，兩者地址與官方地圖位置分開建檔。"
+      "verification_note": "球場官方網站分列袖ヶ浦コース與新袖コース，兩者地址與官方地圖位置分開建檔。 GPS coordinates taken from the Google Maps iframe embedded on the official club access page."
     }
   ]
 }
