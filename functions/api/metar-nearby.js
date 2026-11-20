@@ -142,6 +142,20 @@ export async function onRequestGet({ request }) {
     const humidity = relativeHumidity(temp, dewpoint);
     const windKnots = numberOrNull(report.wspd ?? report.windSpeed);
     const gustKnots = numberOrNull(report.wgst ?? report.windGust);
+    const raw = report.rawOb ?? report.raw_text ?? report.raw ?? null;
+    let visibility = numberOrNull(report.visib ?? report.visibility);
+    if (visibility === null && raw) {
+      const visibilityMatch = raw.match(/(?:KT|MPS|KMH)\\s+(9999|P?\\d+(?:\\.\\d+)?)/);
+      if (visibilityMatch) {
+        const token = visibilityMatch[1];
+        visibility = token === "9999" ? 10 : Number(token.replace(/^P/, "")) * 1.609344;
+      }
+    }
+    const altimeterInHg = numberOrNull(report.altim ?? report.altimeter);
+    const pressureHpa = altimeterInHg === null ? null :
+      (altimeterInHg >= 20 && altimeterInHg <= 35
+        ? Math.round(altimeterInHg * 33.8638867 * 10) / 10
+        : altimeterInHg);
     return {
       stationId: report.icaoId ?? report.stationId ?? report.id ?? null,
       stationName: report.name ?? report.stationName ?? report.icaoId ?? "未知測站",
@@ -152,9 +166,9 @@ export async function onRequestGet({ request }) {
       windKmh: windKnots === null ? null : Math.round(windKnots * 1.852 * 10) / 10,
       gustKmh: gustKnots === null ? null : Math.round(gustKnots * 1.852 * 10) / 10,
       windDirection: numberOrNull(report.wdir ?? report.windDirection),
-      visibilityKm: numberOrNull(report.visib ?? report.visibility),
-      pressureHpa: numberOrNull(report.altim ?? report.altimeter),
-      raw: report.rawOb ?? report.raw_text ?? report.raw ?? null
+      visibilityKm: visibility,
+      pressureHpa,
+      raw
     };
   }).filter(item => item.distanceKm !== null && item.ageMinutes !== null && item.ageMinutes <= 180)
     .sort((a,b) => a.distanceKm - b.distanceKm);
