@@ -1,1 +1,0 @@
-(()=>{if(!("serviceWorker" in navigator))return;window.addEventListener("load",async()=>{try{const r=await navigator.serviceWorker.register("./sw.js",{scope:"./",updateViaCache:"none"});await r.update();console.log("World Golf Weather PWA registered",r.scope);}catch(e){console.error("PWA registration failed",e);}});})();
