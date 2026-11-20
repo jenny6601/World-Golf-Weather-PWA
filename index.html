@@ -282,7 +282,7 @@ footer{color:var(--muted);font-size:12px;padding:18px 0}
 .long-range-controls button.active{background:#1769aa;color:#fff;border-color:#1769aa}
 .long-range-grid{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:7px}
 .long-range-day{min-width:0;text-align:center;background:#f1f5f9;border:1px solid #dbe4ed;border-radius:10px;padding:8px 3px}
-.long-range-day .lr-date{font-size:11px;color:#526477;font-weight:800}
+.long-range-day .lr-date{font-size:11px;color:#526477;font-weight:800;display:flex;flex-direction:column;gap:2px;line-height:1.25}.long-range-day .lr-weekday{font-size:10px;color:#64748b;font-weight:700}.long-range-day.weekend .lr-date,.long-range-day.weekend .lr-weekday{color:#d32f2f!important}
 .long-range-day .lr-icon{font-size:23px;line-height:1.5}
 .long-range-day .lr-temp{font-size:12px;font-weight:800;color:#172536}
 .long-range-day .lr-rain{font-size:11px;color:#1769aa;margin-top:3px}
@@ -1725,8 +1725,8 @@ function renderLongRangeForecast(){
  if(limit>available){const last=dates.length?new Date(dates[dates.length-1]+"T12:00:00Z"):new Date();for(let i=available;i<limit;i++){const next=new Date(last.getTime()+(i-available+1)*86400000);dates.push(next.toISOString().slice(0,10));}}
  daily.innerHTML=dates.map((date,i)=>{
   const hasDaily=i<available,code=hasDaily?d.weather_code?.[i]:null,rain=hasDaily?d.precipitation_sum?.[i]:null,hi=hasDaily?d.temperature_2m_max?.[i]:null,lo=hasDaily?d.temperature_2m_min?.[i]:null,prob=hasDaily?record.probability?.[date]:undefined;
-  const label=hasDaily?longRangeWeatherLabel(code):"超出預報範圍";
-  return '<div class="long-range-day'+(hasDaily?"":" long-range-unavailable")+'"><div class="lr-date">'+date.slice(5).replace("-","/")+'</div><div class="lr-icon" title="'+label+'">'+(hasDaily?longRangeWeatherEmoji(code):"—")+'<small class="lr-desc">'+label+'</small></div><div class="lr-metric"><span>氣溫</span><b>'+(hasDaily?fmt(hi)+'° / '+fmt(lo)+'°':"—")+'</b></div><div class="lr-metric"><span>降雨機率</span><b>'+(prob===undefined?"—":Math.round(prob)+"%")+'</b></div><div class="lr-metric"><span>雨量</span><b>'+(rain===null||rain===undefined?"—":Number(rain).toFixed(1)+" mm")+'</b></div></div>';
+  const label=hasDaily?longRangeWeatherLabel(code):"超出預報範圍",dateObj=new Date(date+"T12:00:00Z"),weekday=dateObj.getUTCDay(),weekend=weekday===0||weekday===6,weekdayText=["星期日","星期一","星期二","星期三","星期四","星期五","星期六"][weekday];
+  return '<div class="long-range-day'+(hasDaily?"":" long-range-unavailable")+(weekend?" weekend":"")+'" data-date="'+date+'" data-weekday="'+weekday+'"><div class="lr-date"><span>'+date.slice(5).replace("-","/")+'</span><span class="lr-weekday">'+weekdayText+'</span></div><div class="lr-icon" title="'+label+'">'+(hasDaily?longRangeWeatherEmoji(code):"—")+'<small class="lr-desc">'+label+'</small></div><div class="lr-metric"><span>氣溫</span><b>'+(hasDaily?fmt(hi)+'° / '+fmt(lo)+'°':"—")+'</b></div><div class="lr-metric"><span>降雨機率</span><b>'+(prob===undefined?"—":Math.round(prob)+"%")+'</b></div><div class="lr-metric"><span>雨量</span><b>'+(rain===null||rain===undefined?"—":Number(rain).toFixed(1)+" mm")+'</b></div></div>';
  }).join("");
  status.textContent="ECMWF EC46｜36 km 系集延伸預報｜顯示 "+available+" 天可用逐日資料"+(limit>available?"；其餘日期保留欄位但標示超出預報範圍，不提供推估數值。":"。")+" 降雨機率僅在有可用資料時顯示。";
  seasonal.hidden=true;seasonal.innerHTML="";
