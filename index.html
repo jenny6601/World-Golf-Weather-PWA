@@ -405,7 +405,7 @@ footer{color:var(--muted);font-size:12px;padding:18px 0}
 </div>
 </div>
 <label for="countrySelect" class="county-field-title">選擇國家</label>
-<select id="countrySelect" style="width:100%;max-width:320px;padding:10px;border:1px solid #cbd5e1;border-radius:10px;background:#fff"><option value="">全部亞洲國家</option></select>
+<select id="countrySelect" style="width:100%;max-width:320px;padding:10px;border:1px solid #cbd5e1;border-radius:10px;background:#fff"><option value="">請先選擇國家</option></select>
 <label for="courseSearchInput" style="margin-top:12px">搜尋球場（英文名稱、別名、城市、地址或郵遞區號）</label>
 <input id="courseSearchInput" type="search" autocomplete="off" placeholder="例如：Kise、Hanoi、Jeju、Tokyo..." style="width:100%;max-width:680px"/>
 <div class="muted" id="courseSearchStatus" aria-live="polite">球場資料庫準備中…</div>
@@ -637,10 +637,9 @@ function renderCourseDatabase(mode="search"){
  const root=$("courseList");
  if(!entries.length){root.innerHTML='<div class="muted">'+(courseDataReady?"目前沒有符合條件的球場資料。":"正在載入球場資料…")+'</div>';return;}
  root.innerHTML=entries.slice(0,100).map(({c,i})=>{
-  const status=c.verification_status==="verified"?"已核實":c.verification_status==="partially_verified"?"部分核實":"尚未核實";
   const favorite=isCourseFavorite(c.course_id);
-  return '<article class="course-item" style="display:grid;grid-template-columns:72px 1fr;gap:12px;align-items:start;padding:12px;border:1px solid var(--line);border-radius:12px;margin:8px 0;background:#fff"><div style="width:72px;height:72px;border-radius:8px;background:#e8f1ed;display:grid;place-items:center;font-size:28px;overflow:hidden">'+(c.photo_url?'<img src="'+esc(c.photo_url)+'" alt="" loading="lazy" style="width:100%;height:100%;object-fit:cover" onerror="this.parentNode.textContent=\'⛳\'"/>':'⛳')+'</div><div><div class="row"><strong>'+esc(c.name)+'</strong><button type="button" class="secondary" style="width:auto;padding:5px 9px" onclick="toggleCourseFavorite(\''+esc(c.course_id)+'\')">'+(favorite?"★":"☆")+'</button></div><div class="muted">'+esc([c.city,c.region,c.country].filter(Boolean).join(" · "))+'｜'+status+'</div><div class="muted">'+esc(c.address||"官方地址尚未核實")+'</div><div class="muted">GPS：'+(Number.isFinite(c.lat)&&Number.isFinite(c.lon)?c.lat.toFixed(5)+", "+c.lon.toFixed(5):"尚未核實")+'｜'+esc(c.timezone||"時區待核實")+'</div><button type="button" data-course="'+i+'" '+(Number.isFinite(c.lat)&&Number.isFinite(c.lon)&&c.timezone?'onclick="window.loadCourseByIndex('+i+',this)"':'disabled title="GPS與時區完成核實後開放載入天氣"')+' style="margin-top:8px">'+(Number.isFinite(c.lat)&&Number.isFinite(c.lon)&&c.timezone?'選擇此球場':'待核實 GPS／時區')+'</button></div></article>';
- }).join("");
+  return '<article class="course-item" role="button" tabindex="0" aria-label="選擇 '+esc(c.name)+'" onclick="window.loadCourseByIndex('+i+',this)" onkeydown="if(event.key===\'Enter\'||event.key===\' \'){event.preventDefault();window.loadCourseByIndex('+i+',this)}" style="display:grid;grid-template-columns:72px minmax(0,1fr);gap:12px;align-items:center;padding:12px;border:1px solid var(--line);border-radius:12px;margin:8px 0;background:#fff;cursor:pointer"><div style="width:72px;height:72px;border-radius:8px;background:#e8f1ed;display:grid;place-items:center;font-size:28px;overflow:hidden">'+(c.photo_url?'<img src="'+esc(c.photo_url)+'" alt="" loading="lazy" style="width:100%;height:100%;object-fit:cover" onerror="this.parentNode.textContent=\'⛳\'"/>':'⛳')+'</div><div style="min-width:0"><div class="row" style="align-items:center;gap:8px"><strong style="font-size:17px;line-height:1.35;overflow-wrap:anywhere">'+esc(c.name)+'</strong><button type="button" class="secondary" aria-label="收藏球場" style="flex:0 0 auto;width:42px;min-width:42px;padding:5px" onclick="event.stopPropagation();toggleCourseFavorite(\''+esc(c.course_id)+'\')">'+(favorite?"★":"☆")+'</button></div><div class="muted">'+esc([c.city,c.region,c.country].filter(Boolean).join(" · "))+'</div></div></article>';
+}).join("");
 }
 window.toggleCourseFavorite=toggleCourseFavorite;
 
