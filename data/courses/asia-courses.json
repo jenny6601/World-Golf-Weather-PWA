@@ -292,9 +292,12 @@
       "official_address": "제주특별자치도 서귀포시 안덕면 한창로 365",
       "local_address": "제주특별자치도 서귀포시 안덕면 한창로 365",
       "official_website": "http://www.teddyvalley.com/",
-      "verification_note": "濟州官方觀光入口確認名稱、地址及網站；尚未取得足以核實球場地點的 GPS 座標。",
+      "verification_note": "Jeju official tourism source confirms club identity/address; OpenStreetMap-derived Mapcarta golf-course feature supplies mapped golf-course coordinates. Kept partially verified pending official club map cross-check.",
       "timezone": "Asia/Seoul",
-      "verified_at": "2026-11-20T00:00:00+09:00"
+      "verified_at": "2026-11-20T00:00:00+09:00",
+      "latitude": 33.28964,
+      "longitude": 126.34324,
+      "coordinate_source": "https://mapcarta.com/W369786684"
     },
     {
       "course_id": "kr-asiad",
@@ -321,9 +324,12 @@
       "official_address": "부산광역시 기장군 일광면 차양길 26",
       "local_address": "부산광역시 기장군 일광면 차양길 26",
       "official_website": "https://www.asiadcc.co.kr/",
-      "verification_note": "球場官方網站確認正式名稱及地址；GPS 尚未從官方地圖取得。",
+      "verification_note": "Official club source confirms identity/address; OpenStreetMap-derived Mapcarta leisure=golf_course feature supplies golf-course coordinates. Kept partially verified pending official club map cross-check.",
       "timezone": "Asia/Seoul",
-      "verified_at": "2026-11-20T00:00:00+09:00"
+      "verified_at": "2026-11-20T00:00:00+09:00",
+      "latitude": 35.28428,
+      "longitude": 129.24278,
+      "coordinate_source": "https://mapcarta.com/34540796"
     },
     {
       "course_id": "kr-woo-jeong-hills",
@@ -954,7 +960,10 @@
       "timezone": "Asia/Singapore",
       "official_website": "https://www.sicc.org.sg/",
       "verified_at": "2026-11-20T00:00:00+08:00",
-      "verification_note": "球場地址與名稱已有官方球場、協會或政府名錄來源支持；尚未取得可靠球場本體 GPS，保持天氣查詢停用。"
+      "verification_note": "SICC official contact page distinguishes Island and Bukit locations; this point maps the Bukit & Sime courses from OpenStreetMap-derived Mapcarta. Existing address identifies Bukit/Sime; kept partial pending official confirmation of exact entrance/pin.",
+      "latitude": 1.34283,
+      "longitude": 103.81111,
+      "coordinate_source": "https://mapcarta.com/W37586157"
     },
     {
       "course_id": "sg-tanah-merah",
@@ -1030,7 +1039,10 @@
       "timezone": "Asia/Singapore",
       "official_website": "https://www.orchidclub.com/",
       "verified_at": "2026-11-20T00:00:00+08:00",
-      "verification_note": "球場地址與名稱已有官方球場、協會或政府名錄來源支持；尚未取得可靠球場本體 GPS，保持天氣查詢停用。"
+      "verification_note": "Orchid Country Club official contact page confirms address; independent golf course guide publishes OpenStreetMap course-view coordinates. Kept partially verified pending official map cross-check.",
+      "latitude": 1.4109,
+      "longitude": 103.8437,
+      "coordinate_source": "https://mbgc.com.sg/where-to-play/orchid-country-club/"
     },
     {
       "course_id": "id-new-kuta",
