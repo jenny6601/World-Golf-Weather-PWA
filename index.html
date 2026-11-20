@@ -415,8 +415,10 @@ footer{color:var(--muted);font-size:12px;padding:18px 0}
 </div>
 </div>
 <label for="countrySelect" class="county-field-title">選擇國家</label>
-<select id="countrySelect" style="width:100%;max-width:320px;padding:10px;border:1px solid #cbd5e1;border-radius:10px;background:#fff"><option value="">請先選擇國家</option></select>
-<label for="courseSearchInput" style="margin-top:12px">搜尋球場（英文名稱、別名、城市、地址或郵遞區號）</label>
+<select id="countrySelect" style="width:100%;max-width:320px;padding:10px;border:1px solid #cbd5e1;border-radius:10px;background:#fff"><option value="">全部國家</option></select>
+<label for="courseRegionSelect" style="margin-top:12px">選擇地區／都道府縣</label>
+<select id="courseRegionSelect" style="width:100%;max-width:320px;padding:10px;border:1px solid #cbd5e1;border-radius:10px;background:#fff"><option value="">全部地區</option></select>
+<label for="courseSearchInput" style="margin-top:12px">搜尋球場（英文名稱、當地名稱、城市或地區）</label>
 <input id="courseSearchInput" type="search" autocomplete="off" placeholder="例如：Kise、Hanoi、Jeju、Tokyo..." style="width:100%;max-width:680px"/>
 <div class="muted" id="courseSearchStatus" aria-live="polite">球場資料庫準備中…</div>
 <div class="row" style="margin:8px 0"><button type="button" class="secondary" id="showFavorites" style="width:auto">★ 我的收藏</button><button type="button" class="secondary" id="showRecent" style="width:auto">最近搜尋</button></div>
@@ -619,14 +621,23 @@ function courseSearchScore(course,query){
 function isCourseFavorite(id){try{return (JSON.parse(localStorage.getItem("wgw:favorites")||"[]")).includes(id);}catch{return false;}}
 function toggleCourseFavorite(id,mode="search"){let a=[];try{a=JSON.parse(localStorage.getItem("wgw:favorites")||"[]");}catch{}a=a.includes(id)?a.filter(x=>x!==id):[...a,id];localStorage.setItem("wgw:favorites",JSON.stringify(a));renderCourseDatabase(mode);}
 function rememberCourseSearch(id){let a=[];try{a=JSON.parse(localStorage.getItem("wgw:recent")||"[]");}catch{}a=[id,...a.filter(x=>x!==id)].slice(0,10);localStorage.setItem("wgw:recent",JSON.stringify(a));}
+function refreshCourseRegions(){
+ const country=$("countrySelect")?.value||"",region=$("courseRegionSelect");
+ if(!region)return;
+ const previous=region.value;
+ const values=[...new Set(asiaCourses.filter(c=>!country||c.country_code===country).map(c=>c.region||c.city).filter(Boolean))].sort((a,b)=>a.localeCompare(b));
+ region.innerHTML='<option value="">全部地區</option>'+values.map(v=>'<option value="'+esc(v)+'">'+esc(v)+'</option>').join("");
+ region.value=values.includes(previous)?previous:"";
+}
 async function initCourseDatabase(){
- const country=$("countrySelect"),search=$("courseSearchInput");
- country.innerHTML='<option value="">請先選擇國家</option>'+ASIA_COUNTRIES.map(c=>'<option value="'+c.code+'">'+c.name+'</option>').join("");
+ const country=$("countrySelect"),region=$("courseRegionSelect"),search=$("courseSearchInput");
+ country.innerHTML='<option value="">全部國家</option>'+ASIA_COUNTRIES.map(c=>'<option value="'+c.code+'">'+c.name+'</option>').join("");
  country.value=localStorage.getItem("wgw:lastCountry")||"";
- country.addEventListener("change",()=>{localStorage.setItem("wgw:lastCountry",country.value);renderCourseDatabase();});
- search.addEventListener("input",()=>{clearTimeout(courseSearchTimer);courseSearchTimer=setTimeout(renderCourseDatabase,250);});
- $("showFavorites").addEventListener("click",()=>{search.value="";renderCourseDatabase("favorites");});
- $("showRecent").addEventListener("click",()=>{search.value="";renderCourseDatabase("recent");});
+ country.addEventListener("change",()=>{localStorage.setItem("wgw:lastCountry",country.value);refreshCourseRegions();renderCourseDatabase();});
+ region.addEventListener("change",()=>renderCourseDatabase());
+ search.addEventListener("input",()=>{clearTimeout(courseSearchTimer);courseSearchTimer=setTimeout(()=>renderCourseDatabase(),250);});
+ $("showFavorites").addEventListener("click",()=>{search.value="";country.value="";region.value="";refreshCourseRegions();renderCourseDatabase("favorites");});
+ $("showRecent").addEventListener("click",()=>{search.value="";country.value="";region.value="";refreshCourseRegions();renderCourseDatabase("recent");});
  $("courseAutoStatus").textContent="亞洲球場資料庫載入中…";
  try{
   const response=await fetch("./data/courses/asia-courses.json",{cache:"no-cache"});
@@ -634,21 +645,22 @@ async function initCourseDatabase(){
   const payload=await response.json();
   asiaCourses=(payload.courses||[]).map(c=>({...c,name:c.name_en||c.name,city:c.city||c.region||c.country,address:c.official_address||c.map_address||"",lat:Number(c.latitude),lon:Number(c.longitude)}));
   courseDataReady=true;
+  refreshCourseRegions();
   $("courseAutoStatus").textContent=asiaCourses.length+" 座亞洲球場已載入。";
   $("courseSearchStatus").textContent=asiaCourses.length?"可搜尋正式名稱、別名、城市、地址及郵遞區號。":"球場資料庫已就緒，目前尚未匯入經核實的亞洲球場資料；不會顯示虛構球場或座標。";
   renderCourseDatabase();
  }catch(e){$("courseSearchStatus").textContent="球場資料庫載入失敗："+e.message;$("courseAutoStatus").textContent="無法讀取亞洲球場資料。";$("courseAutoStatus").classList.add("error");}
 }
 function renderCourseDatabase(mode="search"){
- const country=$("countrySelect")?.value||"",query=$("courseSearchInput")?.value||"";
+ const country=$("countrySelect")?.value||"",region=$("courseRegionSelect")?.value||"",query=$("courseSearchInput")?.value||"";
  let entries=asiaCourses.map((c,i)=>({c,i}));
- if(country&&mode!=="favorites")entries=entries.filter(x=>x.c.country_code===country);
+ if(country&&mode!=="favorites"&&mode!=="recent")entries=entries.filter(x=>x.c.country_code===country);
+ if(region&&mode!=="favorites"&&mode!=="recent")entries=entries.filter(x=>(x.c.region||x.c.city)===region);
  if(mode==="favorites")entries=entries.filter(x=>isCourseFavorite(x.c.course_id));
  else if(mode==="recent"){let recent=[];try{recent=JSON.parse(localStorage.getItem("wgw:recent")||"[]");}catch{}entries=recent.map(id=>entries.find(x=>x.c.course_id===id)).filter(Boolean);}
  else if(query)entries=entries.map(x=>({...x,score:courseSearchScore(x.c,query)})).filter(x=>x.score>0).sort((a,b)=>b.score-a.score);
  else entries=entries;
  const root=$("courseList");
- if(!country&&mode!=="favorites"&&mode!=="recent"){root.innerHTML='<div class="muted">請先選擇國家，再瀏覽該國球場。</div>';return;}
  if(!entries.length){root.innerHTML='<div class="muted">'+(mode==="favorites"?"尚未收藏球場，請在球場名稱右側點選 ☆。":courseDataReady?"目前沒有符合條件的球場資料。":"正在載入球場資料…")+'</div>';return;}
  root.innerHTML=entries.slice(0,100).map(({c,i})=>{
   const favorite=isCourseFavorite(c.course_id);
