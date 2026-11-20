@@ -787,7 +787,8 @@
       "latitude": 7.92234,
       "longitude": 98.33801,
       "coordinate_source": "https://mapcarta.com/N14122109445",
-      "verification_note": "座標取自 OpenStreetMap 球場地標資料（Mapcarta）；仍待官方球場圖資交叉確認。"
+      "verification_note": "座標取自 OpenStreetMap 球場地標資料（Mapcarta）；仍待官方球場圖資交叉確認。",
+      "timezone": "Asia/Bangkok"
     },
     {
       "course_id": "th-nikanti",
@@ -812,7 +813,8 @@
       "latitude": 13.79626,
       "longitude": 100.10862,
       "coordinate_source": "https://mapcarta.com/W1491846622",
-      "verification_note": "座標取自 OpenStreetMap 球場範圍資料（Mapcarta）；仍待官方球場圖資交叉確認。"
+      "verification_note": "座標取自 OpenStreetMap 球場範圍資料（Mapcarta）；仍待官方球場圖資交叉確認。",
+      "timezone": "Asia/Bangkok"
     },
     {
       "course_id": "my-klgcc",
@@ -958,7 +960,8 @@
       "latitude": 6.426397,
       "longitude": 99.683912,
       "coordinate_source": "https://www.where2golf.com/malaysia/the-els-club-teluk-datai/",
-      "verification_note": "座標參考 Where2Golf 球場頁，並以官方 Els Club 地址頁核對球場身分；GPS 仍待官方地圖交叉確認。"
+      "verification_note": "座標參考 Where2Golf 球場頁，並以官方 Els Club 地址頁核對球場身分；GPS 仍待官方地圖交叉確認。",
+      "timezone": "Asia/Kuala_Lumpur"
     },
     {
       "course_id": "sg-sentosa",
@@ -1044,7 +1047,8 @@
       "latitude": 1.33122,
       "longitude": 103.97966,
       "coordinate_source": "https://mapcarta.com/W150880946",
-      "verification_note": "座標取自 OpenStreetMap Garden Course 球場範圍資料（Mapcarta）；代表俱樂部 Garden Course，仍待官方確認。"
+      "verification_note": "座標取自 OpenStreetMap Garden Course 球場範圍資料（Mapcarta）；代表俱樂部 Garden Course，仍待官方確認。",
+      "timezone": "Asia/Singapore"
     },
     {
       "course_id": "sg-laguna-national",
@@ -1159,7 +1163,8 @@
       "latitude": -8.24704,
       "longitude": 115.16163,
       "coordinate_source": "https://id.geoview.info/handara_golf_and_resort_bali%2C20129317885w",
-      "verification_note": "座標取自 OpenStreetMap 球場範圍多邊形中心（GeoView）；仍待官方球場圖資交叉確認。"
+      "verification_note": "座標取自 OpenStreetMap 球場範圍多邊形中心（GeoView）；仍待官方球場圖資交叉確認。",
+      "timezone": "Asia/Makassar"
     },
     {
       "course_id": "id-damai-pik",
