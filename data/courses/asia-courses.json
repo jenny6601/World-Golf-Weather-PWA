@@ -479,8 +479,11 @@
       "official_address": "中国海南省三亚市吉阳区龙海路22号亚龙湾国家旅游度假区内",
       "local_address": "三亚市吉阳区龙海路22号亚龙湾国家旅游度假区内",
       "timezone": "Asia/Shanghai",
-      "verification_note": "高德地圖球場 POI 與匯豐高爾夫球會地址資料可交叉確認球場名稱及地址；尚無球場官方網站或官方 GPS 來源，暫不填入座標。",
-      "verified_at": "2026-11-20T00:00:00+08:00"
+      "verification_note": "座標取自 OpenStreetMap 球場範圍資料（Mapcarta）；仍待官方球場圖資交叉確認。",
+      "verified_at": "2026-11-20T00:00:00+08:00",
+      "latitude": 18.23801,
+      "longitude": 109.63205,
+      "coordinate_source": "https://mapcarta.com/W351738370"
     },
     {
       "course_id": "cn-shanqin-bay",
@@ -498,10 +501,14 @@
       "country_code": "CN",
       "city": "Wanning",
       "region": "Hainan",
-      "verification_status": "unverified",
+      "verification_status": "partially_verified",
       "data_source": [
         "https://gogolfnow.com/"
-      ]
+      ],
+      "latitude": 19.0541,
+      "longitude": 110.56244,
+      "coordinate_source": "https://mapcarta.com/W878237942",
+      "verification_note": "座標取自 OpenStreetMap 球場範圍資料（Mapcarta）；仍待官方球場圖資交叉確認。"
     },
     {
       "course_id": "vn-ba-na-hills",
@@ -772,10 +779,14 @@
       "country_code": "TH",
       "city": "Phuket",
       "region": "Phuket",
-      "verification_status": "unverified",
+      "verification_status": "partially_verified",
       "data_source": [
         "https://gogolfnow.com/"
-      ]
+      ],
+      "latitude": 7.92234,
+      "longitude": 98.33801,
+      "coordinate_source": "https://mapcarta.com/N14122109445",
+      "verification_note": "座標取自 OpenStreetMap 球場地標資料（Mapcarta）；仍待官方球場圖資交叉確認。"
     },
     {
       "course_id": "th-nikanti",
@@ -793,10 +804,14 @@
       "country_code": "TH",
       "city": "Nakhon Pathom",
       "region": "Nakhon Pathom",
-      "verification_status": "unverified",
+      "verification_status": "partially_verified",
       "data_source": [
         "https://gogolfnow.com/"
-      ]
+      ],
+      "latitude": 13.79626,
+      "longitude": 100.10862,
+      "coordinate_source": "https://mapcarta.com/W1491846622",
+      "verification_note": "座標取自 OpenStreetMap 球場範圍資料（Mapcarta）；仍待官方球場圖資交叉確認。"
     },
     {
       "course_id": "my-klgcc",
@@ -935,10 +950,14 @@
       "country_code": "MY",
       "city": "Langkawi",
       "region": "Kedah",
-      "verification_status": "unverified",
+      "verification_status": "partially_verified",
       "data_source": [
         "https://gogolfnow.com/"
-      ]
+      ],
+      "latitude": 6.426397,
+      "longitude": 99.683912,
+      "coordinate_source": "https://www.where2golf.com/malaysia/the-els-club-teluk-datai/",
+      "verification_note": "座標參考 Where2Golf 球場頁，並以官方 Els Club 地址頁核對球場身分；GPS 仍待官方地圖交叉確認。"
     },
     {
       "course_id": "sg-sentosa",
@@ -1017,10 +1036,14 @@
       "country_code": "SG",
       "city": "Singapore",
       "region": "Singapore",
-      "verification_status": "unverified",
+      "verification_status": "partially_verified",
       "data_source": [
         "https://gogolfnow.com/"
-      ]
+      ],
+      "latitude": 1.33122,
+      "longitude": 103.97966,
+      "coordinate_source": "https://mapcarta.com/W150880946",
+      "verification_note": "座標取自 OpenStreetMap Garden Course 球場範圍資料（Mapcarta）；代表俱樂部 Garden Course，仍待官方確認。"
     },
     {
       "course_id": "sg-laguna-national",
@@ -1107,7 +1130,10 @@
       "local_address": "Kawasan Pecatu Indah Resort, Jl. New Kuta Golf, Pecatu, Kuta Selatan, Badung, Bali 80361, Indonesia",
       "timezone": "Asia/Makassar",
       "verified_at": "2026-11-20T00:00:00+08:00",
-      "verification_note": "球場地址與名稱已有官方球場、協會或政府名錄來源支持；尚未取得可靠球場本體 GPS，保持天氣查詢停用。"
+      "verification_note": "座標參考 Parscape 球場頁，並以 New Kuta Golf 官方網站核對球場身分；仍待官方地圖交叉確認。",
+      "latitude": -8.804,
+      "longitude": 115.1281,
+      "coordinate_source": "https://www.parscape.com/location/golf_clubs/newkutagolfcoursebadungbali"
     },
     {
       "course_id": "id-handara",
@@ -1125,10 +1151,14 @@
       "country_code": "ID",
       "city": "Bedugul",
       "region": "Bali",
-      "verification_status": "unverified",
+      "verification_status": "partially_verified",
       "data_source": [
         "https://gogolfnow.com/"
-      ]
+      ],
+      "latitude": -8.24704,
+      "longitude": 115.16163,
+      "coordinate_source": "https://id.geoview.info/handara_golf_and_resort_bali%2C20129317885w",
+      "verification_note": "座標取自 OpenStreetMap 球場範圍多邊形中心（GeoView）；仍待官方球場圖資交叉確認。"
     },
     {
       "course_id": "id-damai-pik",
@@ -1154,7 +1184,10 @@
       "local_address": "Jalan Pantai Indah Barat, Jakarta Utara, DKI Jakarta, Indonesia",
       "timezone": "Asia/Jakarta",
       "verified_at": "2026-11-20T00:00:00+08:00",
-      "verification_note": "球場地址與名稱已有官方球場、協會或政府名錄來源支持；尚未取得可靠球場本體 GPS，保持天氣查詢停用。"
+      "verification_note": "座標取自 Where2Golf PIK Course 專屬頁；已區分 PIK 與 BSD 球場，仍待官方地圖交叉確認。",
+      "latitude": -6.11308,
+      "longitude": 106.744747,
+      "coordinate_source": "https://www.where2golf.com/indonesia/damai-indah-golf-pantai-indah-kapuk-pik-course/"
     },
     {
       "course_id": "id-pondok-indah",
