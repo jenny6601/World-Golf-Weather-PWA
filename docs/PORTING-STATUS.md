@@ -13,7 +13,7 @@
 - Added local favorites and last-10 recent course selections.
 - Added eight country filters: JP, KR, CN, VN, TH, MY, SG, ID.
 - Added a structured course data schema.
-- Added 41 course records across eight countries.
+- Added 44 course records across eight countries.
 - Current verification: 7 fully verified, 27 partially verified, 7 unverified; three partially verified records now also have sourced GPS coordinates.
 - Japan: five courses have official addresses and official-site embedded map pins; Camellia Hills identity/address verified, GPS pending.
 - South Korea: Nine Bridges and Black Stone Jeju have coordinates from the Jeju official tourism portal; Teddy Valley, Asiad CC and Woo Jeong Hills have identity/address verified, GPS pending.
@@ -43,3 +43,7 @@
 - No GitHub Actions from the Taiwan PWA were copied.
 - No Taiwan PWA cache branch is read by the Asia app.
 - The Taiwan source repository has not been modified by this porting work.
+
+
+### Vietnam expansion — 2026-11-20
+Added Long Bien Golf Course, BRG Legend Hill Golf Resort, and BRG Kings Island Golf Resort. Each record includes official website/address, Vietnamese aliases/search terms, Asia/Ho_Chi_Minh timezone, a mapped coordinate and provenance. All three remain partially verified. Kings Island is a 55-hole resort with three layouts; the stored pin is the resort location rather than a specific course entrance.
