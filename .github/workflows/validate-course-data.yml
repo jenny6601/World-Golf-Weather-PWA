@@ -8,6 +8,7 @@ on:
       - "index.html"
       - "manifest.json"
       - "scripts/**"
+      - "functions/**"
       - ".github/workflows/validate-course-data.yml"
   pull_request:
     branches: [main]
@@ -31,3 +32,5 @@ jobs:
           node-version: 22
       - name: Validate course records, search aliases and PWA shell
         run: node scripts/validate-course-data.mjs
+      - name: Check Cloudflare Pages Function JavaScript syntax
+        run: node --check functions/api/provider-compare.js
