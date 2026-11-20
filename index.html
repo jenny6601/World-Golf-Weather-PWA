@@ -77,6 +77,10 @@ footer{color:var(--muted);font-size:12px;padding:18px 0}
 
 .live-observation-grid .metric strong{font-size:20px}
 .live-observation-foot{font-size:12px;color:var(--muted);margin-top:10px;line-height:1.6}
+.live-observation-alert{margin:12px 14px 0;padding:10px 12px;border-radius:10px;font-size:13px;line-height:1.55;font-weight:650;background:#eff6ff;color:#1e40af;border:1px solid #bfdbfe}
+.live-observation-alert.warn{background:#fff7ed;color:#9a3412;border-color:#fed7aa}
+.live-observation-alert.danger{background:#fef2f2;color:#991b1b;border-color:#fecaca}
+.live-observation-alert.info{background:#f1f5f9;color:#475569;border-color:#cbd5e1}
 .live-state-fresh{background:#dcfce7;color:#166534}.live-state-stale{background:#fef3c7;color:#92400e}.live-state-missing{background:#f1f5f9;color:#64748b}
 .live-rain-status{display:inline-block;padding:4px 8px;border-radius:8px;background:#eff6ff;color:#1d4ed8;font-size:13px;font-weight:800}
 @media(max-width:600px){.live-observation-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.live-observation-grid .metric{padding:9px}.live-observation-grid .metric strong{font-size:18px}}
@@ -433,6 +437,7 @@ footer{color:var(--muted);font-size:12px;padding:18px 0}
    <div class="live-observation-foot" id="liveObservationTimes">觀測時間：—｜快照更新時間：—</div>
   </div>
  </details>
+ <div id="liveObservationAlert" class="live-observation-alert" role="status" aria-live="polite" hidden></div>
  <div class="live-observation-grid" id="liveObservationMetrics">
   <div class="metric"><small>目前天氣</small><strong>—</strong></div><div class="metric"><small>氣溫</small><strong>—</strong></div>
   <div class="metric"><small>估算體感</small><strong>—</strong></div><div class="metric"><small>濕度</small><strong>—</strong></div>
@@ -901,6 +906,38 @@ async function loadLiveObservation(course){
   if(metrics){
    metrics.innerHTML=metricRows.map((r,i)=>'<div class="metric"><small></small><strong></strong></div>').join("");
    metrics.querySelectorAll(".metric").forEach((el,i)=>{el.querySelector("small").textContent=metricRows[i][0];el.querySelector("strong").textContent=metricRows[i][1];});
+  }
+  const alertBox=$("liveObservationAlert");
+  if(alertBox){
+   const raw=String(o.raw||"").toUpperCase();
+   const flags=[];
+   let alertLevel="info";
+   const weatherMatch=raw.match(/(?:^|\\s)[+-]?(?:TSRA|SHRA|RA|DZ|SN|SG|PL|GR|GS|TS|FG|BR|HZ)(?=\\s|$)/g)||[];
+   const weatherCodes=[...new Set(weatherMatch.map(x=>x.trim()))];
+   if(weatherCodes.length){
+    const labels=weatherCodes.map(code=>({RA:"降雨", "-RA":"小雨","+RA":"大雨",SHRA:"陣雨","-SHRA":"陣雨","+SHRA":"強陣雨",TS:"雷暴",TSRA:"雷雨", "-TSRA":"雷雨","+TSRA":"強雷雨",FG:"霧",BR:"霧霾／薄霧",HZ:"霾",DZ:"毛毛雨",SN:"降雪"}[code]||code));
+    flags.push("測站天氣現象："+[...new Set(labels)].join("、")+"。");
+    alertLevel=weatherCodes.some(code=>code.includes("TS")||code==="+RA"||code==="+TSRA")?"danger":"warn";
+   }
+   if(Number.isFinite(Number(o.visibilityKm))&&Number(o.visibilityKm)<=5){
+    flags.push("測站能見度偏低（"+fmt(o.visibilityKm)+" km）。");
+    if(alertLevel!=="danger")alertLevel="warn";
+   }
+   if(Number.isFinite(Number(o.gustKmh))&&Number(o.gustKmh)>=40){
+    flags.push("測站陣風達 "+fmt(o.gustKmh)+" km/h，請留意強風。");
+    alertLevel="danger";
+   }else if(Number.isFinite(Number(o.windKmh))&&Number(o.windKmh)>=30){
+    flags.push("測站平均風速達 "+fmt(o.windKmh)+" km/h，請留意風勢。");
+    if(alertLevel!=="danger")alertLevel="warn";
+   }
+   if(Number.isFinite(Number(o.distanceKm))&&Number(o.distanceKm)>80){
+    flags.push("測站距球場超過 80 km，代表性較低，請勿視為球場現場狀況。");
+    if(alertLevel==="info")alertLevel="warn";
+   }
+   if(flags.length===0)flags.push("原始 METAR 未辨識到明顯降水、雷暴、低能見度或強風訊號；不代表球場現場一定無此天氣。");
+   alertBox.className="live-observation-alert "+alertLevel;
+   alertBox.textContent=flags.join(" ");
+   alertBox.hidden=false;
   }
   const timezone=course.timezone||"Asia/Taipei";
   const observed=o.observedAt?new Date(o.observedAt):null;
