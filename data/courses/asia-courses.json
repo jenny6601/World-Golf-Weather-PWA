@@ -1,5 +1,6 @@
 {
   "version": 1,
+  "scope": "Asia",
   "countries": [
     "JP",
     "KR",
@@ -10,6 +11,847 @@
     "SG",
     "ID"
   ],
-  "generated_at": null,
-  "courses": []
+  "generated_at": "2026-11-20",
+  "record_count": 40,
+  "notes": "Discovery-only directory seed. All entries are unverified; no official addresses, GPS coordinates, timezones or photos have been asserted. Do not enable forecast selection until each record is independently verified.",
+  "courses": [
+    {
+      "course_id": "jp-abiko",
+      "name_en": "Abiko Golf Club",
+      "short_name": "Abiko Golf Club",
+      "aliases": [
+        "Abiko GC"
+      ],
+      "search_keywords": [
+        "Abiko",
+        "Chiba",
+        "Japan"
+      ],
+      "country": "Japan",
+      "country_code": "JP",
+      "city": "Abiko",
+      "region": "Chiba",
+      "verification_status": "unverified",
+      "data_source": [
+        "https://gogolfnow.com/"
+      ]
+    },
+    {
+      "course_id": "jp-camellia-hills",
+      "name_en": "Camellia Hills Country Club",
+      "short_name": "Camellia Hills Country Club",
+      "aliases": [
+        "Camellia Hills CC"
+      ],
+      "search_keywords": [
+        "Chiba",
+        "Chiba",
+        "Japan"
+      ],
+      "country": "Japan",
+      "country_code": "JP",
+      "city": "Chiba",
+      "region": "Chiba",
+      "verification_status": "unverified",
+      "data_source": [
+        "https://gogolfnow.com/"
+      ]
+    },
+    {
+      "course_id": "jp-sodegaura",
+      "name_en": "Sodegaura Country Club",
+      "short_name": "Sodegaura Country Club",
+      "aliases": [
+        "Sodegaura CC"
+      ],
+      "search_keywords": [
+        "Sodegaura",
+        "Chiba",
+        "Japan"
+      ],
+      "country": "Japan",
+      "country_code": "JP",
+      "city": "Sodegaura",
+      "region": "Chiba",
+      "verification_status": "unverified",
+      "data_source": [
+        "https://gogolfnow.com/"
+      ]
+    },
+    {
+      "course_id": "jp-kasumigaseki",
+      "name_en": "Kasumigaseki Country Club",
+      "short_name": "Kasumigaseki Country Club",
+      "aliases": [
+        "Kasumigaseki CC"
+      ],
+      "search_keywords": [
+        "Kawagoe",
+        "Saitama",
+        "Japan"
+      ],
+      "country": "Japan",
+      "country_code": "JP",
+      "city": "Kawagoe",
+      "region": "Saitama",
+      "verification_status": "unverified",
+      "data_source": [
+        "https://gogolfnow.com/"
+      ]
+    },
+    {
+      "course_id": "jp-tokyo-golf-club",
+      "name_en": "Tokyo Golf Club",
+      "short_name": "Tokyo Golf Club",
+      "aliases": [],
+      "search_keywords": [
+        "Sayama",
+        "Saitama",
+        "Japan"
+      ],
+      "country": "Japan",
+      "country_code": "JP",
+      "city": "Sayama",
+      "region": "Saitama",
+      "verification_status": "unverified",
+      "data_source": [
+        "https://gogolfnow.com/"
+      ]
+    },
+    {
+      "course_id": "kr-nine-bridges",
+      "name_en": "The Club at Nine Bridges",
+      "short_name": "The Club at Nine Bridges",
+      "aliases": [
+        "Nine Bridges"
+      ],
+      "search_keywords": [
+        "Jeju",
+        "Jeju",
+        "South Korea"
+      ],
+      "country": "South Korea",
+      "country_code": "KR",
+      "city": "Jeju",
+      "region": "Jeju",
+      "verification_status": "unverified",
+      "data_source": [
+        "https://gogolfnow.com/"
+      ]
+    },
+    {
+      "course_id": "kr-blackstone-jeju",
+      "name_en": "Blackstone Golf & Resort Jeju",
+      "short_name": "Blackstone Golf & Resort Jeju",
+      "aliases": [
+        "Blackstone Jeju"
+      ],
+      "search_keywords": [
+        "Jeju",
+        "Jeju",
+        "South Korea"
+      ],
+      "country": "South Korea",
+      "country_code": "KR",
+      "city": "Jeju",
+      "region": "Jeju",
+      "verification_status": "unverified",
+      "data_source": [
+        "https://gogolfnow.com/"
+      ]
+    },
+    {
+      "course_id": "kr-teddy-valley",
+      "name_en": "Teddy Valley Golf & Resort",
+      "short_name": "Teddy Valley Golf & Resort",
+      "aliases": [
+        "Teddy Valley"
+      ],
+      "search_keywords": [
+        "Jeju",
+        "Jeju",
+        "South Korea"
+      ],
+      "country": "South Korea",
+      "country_code": "KR",
+      "city": "Jeju",
+      "region": "Jeju",
+      "verification_status": "unverified",
+      "data_source": [
+        "https://gogolfnow.com/"
+      ]
+    },
+    {
+      "course_id": "kr-asiad",
+      "name_en": "Asiad Country Club",
+      "short_name": "Asiad Country Club",
+      "aliases": [
+        "Asiad CC"
+      ],
+      "search_keywords": [
+        "Busan",
+        "Busan",
+        "South Korea"
+      ],
+      "country": "South Korea",
+      "country_code": "KR",
+      "city": "Busan",
+      "region": "Busan",
+      "verification_status": "unverified",
+      "data_source": [
+        "https://gogolfnow.com/"
+      ]
+    },
+    {
+      "course_id": "kr-woo-jeong-hills",
+      "name_en": "Woo Jeong Hills Country Club",
+      "short_name": "Woo Jeong Hills Country Club",
+      "aliases": [
+        "Woo Jeong Hills"
+      ],
+      "search_keywords": [
+        "Cheonan",
+        "Chungcheong",
+        "South Korea"
+      ],
+      "country": "South Korea",
+      "country_code": "KR",
+      "city": "Cheonan",
+      "region": "Chungcheong",
+      "verification_status": "unverified",
+      "data_source": [
+        "https://gogolfnow.com/"
+      ]
+    },
+    {
+      "course_id": "cn-mission-hills-shenzhen",
+      "name_en": "Mission Hills Golf Club Shenzhen",
+      "short_name": "Mission Hills Golf Club Shenzhen",
+      "aliases": [
+        "Mission Hills Shenzhen"
+      ],
+      "search_keywords": [
+        "Shenzhen",
+        "Guangdong",
+        "China"
+      ],
+      "country": "China",
+      "country_code": "CN",
+      "city": "Shenzhen",
+      "region": "Guangdong",
+      "verification_status": "unverified",
+      "data_source": [
+        "https://gogolfnow.com/"
+      ]
+    },
+    {
+      "course_id": "cn-mission-hills-dongguan",
+      "name_en": "Mission Hills Golf Club Dongguan",
+      "short_name": "Mission Hills Golf Club Dongguan",
+      "aliases": [
+        "Mission Hills Dongguan"
+      ],
+      "search_keywords": [
+        "Dongguan",
+        "Guangdong",
+        "China"
+      ],
+      "country": "China",
+      "country_code": "CN",
+      "city": "Dongguan",
+      "region": "Guangdong",
+      "verification_status": "unverified",
+      "data_source": [
+        "https://gogolfnow.com/"
+      ]
+    },
+    {
+      "course_id": "cn-sheshan",
+      "name_en": "Sheshan International Golf Club",
+      "short_name": "Sheshan International Golf Club",
+      "aliases": [
+        "Sheshan International"
+      ],
+      "search_keywords": [
+        "Shanghai",
+        "Shanghai",
+        "China"
+      ],
+      "country": "China",
+      "country_code": "CN",
+      "city": "Shanghai",
+      "region": "Shanghai",
+      "verification_status": "unverified",
+      "data_source": [
+        "https://gogolfnow.com/"
+      ]
+    },
+    {
+      "course_id": "cn-yalong-bay",
+      "name_en": "Yalong Bay Golf Club",
+      "short_name": "Yalong Bay Golf Club",
+      "aliases": [
+        "Yalong Bay"
+      ],
+      "search_keywords": [
+        "Sanya",
+        "Hainan",
+        "China"
+      ],
+      "country": "China",
+      "country_code": "CN",
+      "city": "Sanya",
+      "region": "Hainan",
+      "verification_status": "unverified",
+      "data_source": [
+        "https://gogolfnow.com/"
+      ]
+    },
+    {
+      "course_id": "cn-shanqin-bay",
+      "name_en": "Shanqin Bay Golf Club",
+      "short_name": "Shanqin Bay Golf Club",
+      "aliases": [
+        "ShanQin Bay"
+      ],
+      "search_keywords": [
+        "Wanning",
+        "Hainan",
+        "China"
+      ],
+      "country": "China",
+      "country_code": "CN",
+      "city": "Wanning",
+      "region": "Hainan",
+      "verification_status": "unverified",
+      "data_source": [
+        "https://gogolfnow.com/"
+      ]
+    },
+    {
+      "course_id": "vn-ba-na-hills",
+      "name_en": "Ba Na Hills Golf Club",
+      "short_name": "Ba Na Hills Golf Club",
+      "aliases": [
+        "Ba Na Hills"
+      ],
+      "search_keywords": [
+        "Da Nang",
+        "Da Nang",
+        "Vietnam"
+      ],
+      "country": "Vietnam",
+      "country_code": "VN",
+      "city": "Da Nang",
+      "region": "Da Nang",
+      "verification_status": "unverified",
+      "data_source": [
+        "https://gogolfnow.com/"
+      ]
+    },
+    {
+      "course_id": "vn-hoiana-shores",
+      "name_en": "Hoiana Shores Golf Club",
+      "short_name": "Hoiana Shores Golf Club",
+      "aliases": [
+        "Hoiana Shores"
+      ],
+      "search_keywords": [
+        "Duy Xuyen",
+        "Quang Nam",
+        "Vietnam"
+      ],
+      "country": "Vietnam",
+      "country_code": "VN",
+      "city": "Duy Xuyen",
+      "region": "Quang Nam",
+      "verification_status": "unverified",
+      "data_source": [
+        "https://gogolfnow.com/"
+      ]
+    },
+    {
+      "course_id": "vn-laguna-lang-co",
+      "name_en": "Laguna Lang Co Golf Club",
+      "short_name": "Laguna Lang Co Golf Club",
+      "aliases": [
+        "Laguna Lang Co"
+      ],
+      "search_keywords": [
+        "Phu Loc",
+        "Thua Thien Hue",
+        "Vietnam"
+      ],
+      "country": "Vietnam",
+      "country_code": "VN",
+      "city": "Phu Loc",
+      "region": "Thua Thien Hue",
+      "verification_status": "unverified",
+      "data_source": [
+        "https://gogolfnow.com/"
+      ]
+    },
+    {
+      "course_id": "vn-legend-da-nang",
+      "name_en": "Legend Da Nang Golf Resort",
+      "short_name": "Legend Da Nang Golf Resort",
+      "aliases": [
+        "Legend Da Nang"
+      ],
+      "search_keywords": [
+        "Da Nang",
+        "Da Nang",
+        "Vietnam"
+      ],
+      "country": "Vietnam",
+      "country_code": "VN",
+      "city": "Da Nang",
+      "region": "Da Nang",
+      "verification_status": "unverified",
+      "data_source": [
+        "https://gogolfnow.com/"
+      ]
+    },
+    {
+      "course_id": "vn-montgomerie-links",
+      "name_en": "Montgomerie Links Vietnam",
+      "short_name": "Montgomerie Links Vietnam",
+      "aliases": [
+        "Montgomerie Links"
+      ],
+      "search_keywords": [
+        "Da Nang",
+        "Quang Nam",
+        "Vietnam"
+      ],
+      "country": "Vietnam",
+      "country_code": "VN",
+      "city": "Da Nang",
+      "region": "Quang Nam",
+      "verification_status": "unverified",
+      "data_source": [
+        "https://gogolfnow.com/"
+      ]
+    },
+    {
+      "course_id": "th-black-mountain",
+      "name_en": "Black Mountain Golf Club",
+      "short_name": "Black Mountain Golf Club",
+      "aliases": [
+        "Black Mountain Hua Hin"
+      ],
+      "search_keywords": [
+        "Hua Hin",
+        "Prachuap Khiri Khan",
+        "Thailand"
+      ],
+      "country": "Thailand",
+      "country_code": "TH",
+      "city": "Hua Hin",
+      "region": "Prachuap Khiri Khan",
+      "verification_status": "unverified",
+      "data_source": [
+        "https://gogolfnow.com/"
+      ]
+    },
+    {
+      "course_id": "th-pineapple-valley",
+      "name_en": "Pineapple Valley Golf Club",
+      "short_name": "Pineapple Valley Golf Club",
+      "aliases": [
+        "Pineapple Valley"
+      ],
+      "search_keywords": [
+        "Hua Hin",
+        "Prachuap Khiri Khan",
+        "Thailand"
+      ],
+      "country": "Thailand",
+      "country_code": "TH",
+      "city": "Hua Hin",
+      "region": "Prachuap Khiri Khan",
+      "verification_status": "unverified",
+      "data_source": [
+        "https://gogolfnow.com/"
+      ]
+    },
+    {
+      "course_id": "th-siam-old",
+      "name_en": "Siam Country Club Old Course",
+      "short_name": "Siam Country Club Old Course",
+      "aliases": [
+        "Siam Old Course"
+      ],
+      "search_keywords": [
+        "Pattaya",
+        "Chonburi",
+        "Thailand"
+      ],
+      "country": "Thailand",
+      "country_code": "TH",
+      "city": "Pattaya",
+      "region": "Chonburi",
+      "verification_status": "unverified",
+      "data_source": [
+        "https://gogolfnow.com/"
+      ]
+    },
+    {
+      "course_id": "th-red-mountain",
+      "name_en": "Red Mountain Golf Club",
+      "short_name": "Red Mountain Golf Club",
+      "aliases": [
+        "Red Mountain Phuket"
+      ],
+      "search_keywords": [
+        "Phuket",
+        "Phuket",
+        "Thailand"
+      ],
+      "country": "Thailand",
+      "country_code": "TH",
+      "city": "Phuket",
+      "region": "Phuket",
+      "verification_status": "unverified",
+      "data_source": [
+        "https://gogolfnow.com/"
+      ]
+    },
+    {
+      "course_id": "th-nikanti",
+      "name_en": "Nikanti Golf Club",
+      "short_name": "Nikanti Golf Club",
+      "aliases": [
+        "Nikanti"
+      ],
+      "search_keywords": [
+        "Nakhon Pathom",
+        "Nakhon Pathom",
+        "Thailand"
+      ],
+      "country": "Thailand",
+      "country_code": "TH",
+      "city": "Nakhon Pathom",
+      "region": "Nakhon Pathom",
+      "verification_status": "unverified",
+      "data_source": [
+        "https://gogolfnow.com/"
+      ]
+    },
+    {
+      "course_id": "my-klgcc",
+      "name_en": "Kuala Lumpur Golf & Country Club",
+      "short_name": "Kuala Lumpur Golf & Country Club",
+      "aliases": [
+        "KLGCC"
+      ],
+      "search_keywords": [
+        "Kuala Lumpur",
+        "Kuala Lumpur",
+        "Malaysia"
+      ],
+      "country": "Malaysia",
+      "country_code": "MY",
+      "city": "Kuala Lumpur",
+      "region": "Kuala Lumpur",
+      "verification_status": "unverified",
+      "data_source": [
+        "https://gogolfnow.com/"
+      ]
+    },
+    {
+      "course_id": "my-royal-selangor",
+      "name_en": "The Royal Selangor Golf Club",
+      "short_name": "The Royal Selangor Golf Club",
+      "aliases": [
+        "RSGC"
+      ],
+      "search_keywords": [
+        "Kuala Lumpur",
+        "Kuala Lumpur",
+        "Malaysia"
+      ],
+      "country": "Malaysia",
+      "country_code": "MY",
+      "city": "Kuala Lumpur",
+      "region": "Kuala Lumpur",
+      "verification_status": "unverified",
+      "data_source": [
+        "https://gogolfnow.com/"
+      ]
+    },
+    {
+      "course_id": "my-saujana",
+      "name_en": "Saujana Golf & Country Club",
+      "short_name": "Saujana Golf & Country Club",
+      "aliases": [
+        "Saujana"
+      ],
+      "search_keywords": [
+        "Shah Alam",
+        "Selangor",
+        "Malaysia"
+      ],
+      "country": "Malaysia",
+      "country_code": "MY",
+      "city": "Shah Alam",
+      "region": "Selangor",
+      "verification_status": "unverified",
+      "data_source": [
+        "https://gogolfnow.com/"
+      ]
+    },
+    {
+      "course_id": "my-kota-permai",
+      "name_en": "Kota Permai Golf & Country Club",
+      "short_name": "Kota Permai Golf & Country Club",
+      "aliases": [
+        "Kota Permai"
+      ],
+      "search_keywords": [
+        "Shah Alam",
+        "Selangor",
+        "Malaysia"
+      ],
+      "country": "Malaysia",
+      "country_code": "MY",
+      "city": "Shah Alam",
+      "region": "Selangor",
+      "verification_status": "unverified",
+      "data_source": [
+        "https://gogolfnow.com/"
+      ]
+    },
+    {
+      "course_id": "my-els-teluk-datai",
+      "name_en": "The Els Club Teluk Datai",
+      "short_name": "The Els Club Teluk Datai",
+      "aliases": [
+        "Els Club Teluk Datai"
+      ],
+      "search_keywords": [
+        "Langkawi",
+        "Kedah",
+        "Malaysia"
+      ],
+      "country": "Malaysia",
+      "country_code": "MY",
+      "city": "Langkawi",
+      "region": "Kedah",
+      "verification_status": "unverified",
+      "data_source": [
+        "https://gogolfnow.com/"
+      ]
+    },
+    {
+      "course_id": "sg-sentosa",
+      "name_en": "Sentosa Golf Club",
+      "short_name": "Sentosa Golf Club",
+      "aliases": [
+        "Sentosa Golf"
+      ],
+      "search_keywords": [
+        "Singapore",
+        "Singapore",
+        "Singapore"
+      ],
+      "country": "Singapore",
+      "country_code": "SG",
+      "city": "Singapore",
+      "region": "Singapore",
+      "verification_status": "unverified",
+      "data_source": [
+        "https://gogolfnow.com/"
+      ]
+    },
+    {
+      "course_id": "sg-sicc",
+      "name_en": "Singapore Island Country Club",
+      "short_name": "Singapore Island Country Club",
+      "aliases": [
+        "SICC"
+      ],
+      "search_keywords": [
+        "Singapore",
+        "Singapore",
+        "Singapore"
+      ],
+      "country": "Singapore",
+      "country_code": "SG",
+      "city": "Singapore",
+      "region": "Singapore",
+      "verification_status": "unverified",
+      "data_source": [
+        "https://gogolfnow.com/"
+      ]
+    },
+    {
+      "course_id": "sg-tanah-merah",
+      "name_en": "Tanah Merah Country Club",
+      "short_name": "Tanah Merah Country Club",
+      "aliases": [
+        "TMCC"
+      ],
+      "search_keywords": [
+        "Singapore",
+        "Singapore",
+        "Singapore"
+      ],
+      "country": "Singapore",
+      "country_code": "SG",
+      "city": "Singapore",
+      "region": "Singapore",
+      "verification_status": "unverified",
+      "data_source": [
+        "https://gogolfnow.com/"
+      ]
+    },
+    {
+      "course_id": "sg-laguna-national",
+      "name_en": "Laguna National Golf Resort Club",
+      "short_name": "Laguna National Golf Resort Club",
+      "aliases": [
+        "Laguna National"
+      ],
+      "search_keywords": [
+        "Singapore",
+        "Singapore",
+        "Singapore"
+      ],
+      "country": "Singapore",
+      "country_code": "SG",
+      "city": "Singapore",
+      "region": "Singapore",
+      "verification_status": "unverified",
+      "data_source": [
+        "https://gogolfnow.com/"
+      ]
+    },
+    {
+      "course_id": "sg-orchid",
+      "name_en": "Orchid Country Club",
+      "short_name": "Orchid Country Club",
+      "aliases": [
+        "Orchid CC"
+      ],
+      "search_keywords": [
+        "Singapore",
+        "Singapore",
+        "Singapore"
+      ],
+      "country": "Singapore",
+      "country_code": "SG",
+      "city": "Singapore",
+      "region": "Singapore",
+      "verification_status": "unverified",
+      "data_source": [
+        "https://gogolfnow.com/"
+      ]
+    },
+    {
+      "course_id": "id-new-kuta",
+      "name_en": "New Kuta Golf",
+      "short_name": "New Kuta Golf",
+      "aliases": [
+        "New Kuta Golf Club"
+      ],
+      "search_keywords": [
+        "Bali",
+        "Bali",
+        "Indonesia"
+      ],
+      "country": "Indonesia",
+      "country_code": "ID",
+      "city": "Bali",
+      "region": "Bali",
+      "verification_status": "unverified",
+      "data_source": [
+        "https://gogolfnow.com/"
+      ]
+    },
+    {
+      "course_id": "id-handara",
+      "name_en": "Handara Golf & Resort Bali",
+      "short_name": "Handara Golf & Resort Bali",
+      "aliases": [
+        "Handara Golf"
+      ],
+      "search_keywords": [
+        "Bedugul",
+        "Bali",
+        "Indonesia"
+      ],
+      "country": "Indonesia",
+      "country_code": "ID",
+      "city": "Bedugul",
+      "region": "Bali",
+      "verification_status": "unverified",
+      "data_source": [
+        "https://gogolfnow.com/"
+      ]
+    },
+    {
+      "course_id": "id-damai-pik",
+      "name_en": "Damai Indah Golf PIK Course",
+      "short_name": "Damai Indah Golf PIK Course",
+      "aliases": [
+        "PIK Course"
+      ],
+      "search_keywords": [
+        "Jakarta",
+        "Jakarta",
+        "Indonesia"
+      ],
+      "country": "Indonesia",
+      "country_code": "ID",
+      "city": "Jakarta",
+      "region": "Jakarta",
+      "verification_status": "unverified",
+      "data_source": [
+        "https://gogolfnow.com/"
+      ]
+    },
+    {
+      "course_id": "id-pondok-indah",
+      "name_en": "Pondok Indah Golf Course",
+      "short_name": "Pondok Indah Golf Course",
+      "aliases": [
+        "Pondok Indah Golf"
+      ],
+      "search_keywords": [
+        "Jakarta",
+        "Jakarta",
+        "Indonesia"
+      ],
+      "country": "Indonesia",
+      "country_code": "ID",
+      "city": "Jakarta",
+      "region": "Jakarta",
+      "verification_status": "unverified",
+      "data_source": [
+        "https://gogolfnow.com/"
+      ]
+    },
+    {
+      "course_id": "id-jagorawi",
+      "name_en": "Jagorawi Golf & Country Club",
+      "short_name": "Jagorawi Golf & Country Club",
+      "aliases": [
+        "Jagorawi Golf"
+      ],
+      "search_keywords": [
+        "Bogor",
+        "West Java",
+        "Indonesia"
+      ],
+      "country": "Indonesia",
+      "country_code": "ID",
+      "city": "Bogor",
+      "region": "West Java",
+      "verification_status": "unverified",
+      "data_source": [
+        "https://gogolfnow.com/"
+      ]
+    }
+  ]
 }
