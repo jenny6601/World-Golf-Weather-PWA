@@ -56,7 +56,7 @@ export async function onRequestGet({ request }) {
   const latPad = 1.25, lonPad = Math.min(2.5, 1.25 / Math.max(0.25, Math.cos(lat * Math.PI / 180)));
   const bbox = [Math.max(-90, lat-latPad), Math.max(-180, lon-lonPad), Math.min(90, lat+latPad), Math.min(180, lon+lonPad)].join(",");
   const metarUrl = new URL("https://aviationweather.gov/api/data/metar");
-  const query = { bbox, zoom: "5", density: "5", format: "json", hours: "3" };
+  const query = { bbox, zoom: "5", density: "all", format: "json", hours: "3" };
   metarUrl.search = new URLSearchParams(query).toString();
   let response;
   try {
