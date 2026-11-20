@@ -1,0 +1,33 @@
+name: Validate course database
+on:
+  push:
+    branches: [development, main]
+    paths:
+      - "data/courses/**"
+      - "data/schemas/**"
+      - "index.html"
+      - "manifest.json"
+      - "scripts/**"
+      - ".github/workflows/validate-course-data.yml"
+  pull_request:
+    branches: [main]
+    paths:
+      - "data/courses/**"
+      - "data/schemas/**"
+      - "index.html"
+      - "manifest.json"
+      - "scripts/**"
+      - ".github/workflows/validate-course-data.yml"
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Validate course records, search aliases and PWA shell
+        run: node scripts/validate-course-data.mjs
