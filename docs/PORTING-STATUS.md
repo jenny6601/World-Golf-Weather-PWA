@@ -111,3 +111,15 @@ Added Long Bien Golf Course, BRG Legend Hill Golf Resort, and BRG Kings Island G
 - All nine remain partially_verified. Coordinate source URLs and provenance notes are stored per record; no record was upgraded to verified. Tanah Merah uses the Garden Course location as the club reference; course-specific routing may need a later check.
 - GPS + timezone coverage is now 39/44 (88.6%). Five courses still lack GPS: Mission Hills Shenzhen, Mission Hills Dongguan, Sheshan International (CN), Pondok Indah and Jagorawi (ID).
 - Sources include OpenStreetMap-derived Mapcarta/GeoView and golf-course directories (Where2Golf and Parscape). These are course-area reference points, not official survey-grade tee/clubhouse coordinates.
+
+
+### Course GPS enrichment — third batch — 2026-11-20
+- Added course-area GPS coordinates and IANA timezones for the final five previously incomplete records: Mission Hills Shenzhen, Mission Hills Dongguan, Sheshan International, Jagorawi, and Pondok Indah.
+- All five remain partially_verified; no record was promoted to verified. The coordinates are reference points from golf-course directories and OpenStreetMap-derived course features, not official survey-grade pins.
+- GPS + timezone coverage is now 44/44 (100%). This is field completeness only; it does not mean all 44 coordinates have been independently confirmed by each club.
+- Mission Hills Shenzhen and Dongguan use FullGolf resort/course location points, with official Mission Hills contact pages confirming each venue's address. Because each is a multi-course complex, exact representative pin placement remains subject to official course-map confirmation.
+- Sheshan uses Where2Golf coordinates, cross-checked against the OpenStreetMap-derived She Shan Golf Club course feature. A materially divergent FullGolf pin was not used.
+- Jagorawi uses the Where2Golf Old Course coordinate; the club's official directions page independently confirms the Karanggan entrance and its relationship to the clubhouse.
+- Pondok Indah uses Where2Golf coordinates, cross-checked against the OpenStreetMap-derived golf-course polygon. All Indonesia locations use Asia/Jakarta for these Jakarta/West Java venues.
+- Sources: https://www.fullgolf.com/en/golf-club/china/guangdong/shenzhen/mission-hills-golf-club-shenzhen ; https://fullgolf.com/en/golf-club/china/guangdong/dongguan/mission-hills-golf-club-dongguan ; https://www.missionhillschina.com/en/others/about-us/contact-us/ ; https://www.where2golf.com/china/sheshan-golf-club/ ; https://mapcarta.com/W414295341 ; https://www.where2golf.com/indonesia/jagorawi-golf-country-club-old-course/ ; https://jagorawi.com/map-directions/ ; https://www.where2golf.com/indonesia/pondok-indah-golf-course/ ; https://mapcarta.com/W28420725
+- Next validation: rerun the course-data validator and extend the long-range API smoke test to the full 44-course dataset. Browser/mobile acceptance remains pending.
