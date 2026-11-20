@@ -52,30 +52,64 @@ export async function onRequestGet({ request }) {
   const lat = numberOrNull(course.latitude), lon = numberOrNull(course.longitude);
   if (lat === null || lon === null) return json({ error: "course_location_incomplete" }, 422);
 
-  // AWC METAR API is server-side only (CORS is disabled). Keep the query geographically narrow.
-  const latPad = 1.25, lonPad = Math.min(2.5, 1.25 / Math.max(0.25, Math.cos(lat * Math.PI / 180)));
-  const bbox = [Math.max(-90, lat-latPad), Math.max(-180, lon-lonPad), Math.min(90, lat+latPad), Math.min(180, lon+lonPad)].join(",");
-  const metarUrl = new URL("https://aviationweather.gov/api/data/metar");
-  const query = { bbox, zoom: "5", density: "all", format: "json", hours: "3" };
-  metarUrl.search = new URLSearchParams(query).toString();
-  let response;
+  // Use AWC's official worldwide METAR cache. It is refreshed about once per minute
+  // and avoids the undocumented/strict bbox density parameters of the map-oriented query.
+  const cacheUrl = "https://aviationweather.gov/data/cache/metars.cache.csv.gz";
+  let cacheResponse;
   try {
-    response = await fetch(metarUrl, { headers: { "accept": "application/json", "user-agent": "World-Golf-Weather-PWA/1.0 (global golf course observation)" } });
+    cacheResponse = await fetch(cacheUrl, {
+      headers: { "accept": "text/csv", "user-agent": "World-Golf-Weather-PWA/1.0 (global golf course observation)" },
+      cf: { cacheTtl: 60, cacheEverything: true }
+    });
   } catch (error) {
     return json({ courseId, status: "provider_unreachable", message: String(error) }, 502);
   }
-  if (response.status === 204) return json({ courseId, status: "no_recent_observation", generatedAt: new Date().toISOString() });
-  if (!response.ok) {
-    const providerBody = (await response.text()).slice(0, 1200);
-    return json({
-      courseId, status: "provider_error", providerStatus: response.status,
-      providerMessage: providerBody,
-      diagnostic: { bbox, endpoint: metarUrl.origin + metarUrl.pathname, query }
-    }, 502);
+  if (!cacheResponse.ok) {
+    const providerBody = (await cacheResponse.text()).slice(0, 1200);
+    return json({ courseId, status: "provider_error", providerStatus: cacheResponse.status, providerMessage: providerBody,
+      diagnostic: { endpoint: cacheUrl, source: "AWC worldwide METAR CSV cache" } }, 502);
   }
-  let reports;
-  try { reports = await response.json(); } catch { return json({ courseId, status: "invalid_provider_response" }, 502); }
-  if (!Array.isArray(reports)) reports = reports?.data || reports?.metars || reports?.results || [];
+  const csvText = await cacheResponse.text();
+  const parseCsvLine = line => {
+    const values = [];
+    let value = "", quoted = false;
+    for (let i = 0; i < line.length; i++) {
+      const ch = line[i];
+      if (ch === '"') {
+        if (quoted && line[i + 1] === '"') { value += '"'; i++; }
+        else quoted = !quoted;
+      } else if (ch === "," && !quoted) {
+        values.push(value); value = "";
+      } else value += ch;
+    }
+    values.push(value);
+    return values;
+  };
+  const lines = csvText.replace(/^\\uFEFF/, "").split(/\\r?\\n/);
+  const headerIndex = lines.findIndex(line => line.startsWith("raw_text,station_id,") || line.startsWith('"raw_text","station_id",'));
+  if (headerIndex < 0) return json({ courseId, status: "invalid_provider_response", message: "AWC METAR cache CSV header not found" }, 502);
+  const headers = parseCsvLine(lines[headerIndex]).map(value => value.trim());
+  const reports = [];
+  for (const line of lines.slice(headerIndex + 1)) {
+    if (!line.trim()) continue;
+    const values = parseCsvLine(line);
+    const row = Object.fromEntries(headers.map((key, index) => [key, values[index] ?? ""]));
+    reports.push({
+      icaoId: row.station_id,
+      name: row.station_id,
+      lat: row.latitude,
+      lon: row.longitude,
+      obsTime: row.observation_time,
+      temp: row.temp_c,
+      dewp: row.dewpoint_c,
+      wdir: row.wind_dir_degrees ?? row.winddir,
+      wspd: row.wind_speed_kt,
+      wgst: row.wind_gust_kt ?? row.wind_gust,
+      visib: row.visibility_statute_mi ?? row.visibility,
+      altim: row.altim_in_hg,
+      rawOb: row.raw_text
+    });
+  }
 
   const now = Date.now();
   const candidates = reports.map(report => {
