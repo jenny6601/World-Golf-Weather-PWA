@@ -69,7 +69,20 @@ export async function onRequestGet({ request }) {
     return json({ courseId, status: "provider_error", providerStatus: cacheResponse.status, providerMessage: providerBody,
       diagnostic: { endpoint: cacheUrl, source: "AWC worldwide METAR CSV cache" } }, 502);
   }
-  const csvText = await cacheResponse.text();
+  // Cloudflare normally transparently decodes HTTP gzip. Some upstream/cache
+  // paths may still expose the gzip payload, so detect the magic bytes and decode
+  // explicitly before parsing the CSV.
+  let csvBytes = new Uint8Array(await cacheResponse.arrayBuffer());
+  if (csvBytes.length >= 2 && csvBytes[0] === 0x1f && csvBytes[1] === 0x8b) {
+    try {
+      const decompressed = new Response(new Blob([csvBytes]).stream().pipeThrough(new DecompressionStream("gzip")));
+      csvBytes = new Uint8Array(await decompressed.arrayBuffer());
+    } catch (error) {
+      return json({ courseId, status: "invalid_provider_response", message: "Unable to decompress AWC METAR cache",
+        diagnostic: { contentType: cacheResponse.headers.get("content-type"), contentEncoding: cacheResponse.headers.get("content-encoding"), error: String(error) } }, 502);
+    }
+  }
+  const csvText = new TextDecoder("utf-8").decode(csvBytes).replace(/^\\uFEFF/, "");
   const parseCsvLine = line => {
     const values = [];
     let value = "", quoted = false;
@@ -85,10 +98,16 @@ export async function onRequestGet({ request }) {
     values.push(value);
     return values;
   };
-  const lines = csvText.replace(/^\\uFEFF/, "").split(/\\r?\\n/);
-  const headerIndex = lines.findIndex(line => line.startsWith("raw_text,station_id,") || line.startsWith('"raw_text","station_id",'));
-  if (headerIndex < 0) return json({ courseId, status: "invalid_provider_response", message: "AWC METAR cache CSV header not found" }, 502);
-  const headers = parseCsvLine(lines[headerIndex]).map(value => value.trim());
+  const lines = csvText.split(/\\r?\\n/);
+  const headerIndex = lines.findIndex(line => {
+    const cells = parseCsvLine(line).map(value => value.trim().replace(/^"|"$/g, "").toLowerCase());
+    return cells.includes("station_id") && cells.includes("latitude") && cells.includes("longitude") &&
+      (cells.includes("raw_text") || cells.includes("raw_ob"));
+  });
+  if (headerIndex < 0) return json({ courseId, status: "invalid_provider_response", message: "AWC METAR cache CSV header not found",
+    diagnostic: { contentType: cacheResponse.headers.get("content-type"), contentEncoding: cacheResponse.headers.get("content-encoding"),
+      bytes: csvBytes.length, preview: csvText.slice(0, 500) } }, 502);
+  const headers = parseCsvLine(lines[headerIndex]).map(value => value.trim().replace(/^"|"$/g, ""));
   const reports = [];
   for (const line of lines.slice(headerIndex + 1)) {
     if (!line.trim()) continue;
