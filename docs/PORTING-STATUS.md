@@ -62,3 +62,11 @@ Added Long Bien Golf Course, BRG Legend Hill Golf Resort, and BRG Kings Island G
 - Added `.github/workflows/validate-course-data.yml` for development/main pushes, main-targeted PRs and manual dispatch.
 - Files are committed to development. Pull-request CI run #44712504749 completed successfully. Runner output: PASS — 44 courses; 24 GPS+timezone; 8 Vietnam courses; 7 alias/name search cases; 1 inline script syntax; manifest checks. The parallel push-triggered run was still in progress at the last status check.
 - This automated check is static/data validation; it does not replace browser/mobile end-to-end tests or live Open-Meteo API checks.
+
+
+### Ensemble precipitation timezone correction — 2026-11-20
+- Found a global-course defect: ensemble rain-probability requests and their Best Match fallback were hard-coded to `Asia/Taipei`, which could shift hourly precipitation timestamps for Vietnam, Japan, Korea and other time zones.
+- Updated `getRainProbability` to receive the selected course's `currentCourseTimezone` and URL-encode it for both the ensemble endpoints and fallback forecast endpoint.
+- Updated ensemble model identifiers to the currently documented Open-Meteo API names: `ecmwf_ifs025_ensemble`, `ncep_gefs_seamless`, and `dwd_icon_seamless_eps`.
+- Open-Meteo's official Ensemble API documentation lists IANA timezone support and these model identifiers. A direct live endpoint request could not be verified through the available web fetch environment; the new GitHub Actions run for commit `73c2d8f` is in progress at the time of this update.
+- This fixes the rain-probability timestamp timezone path only. The separate six deterministic model endpoints still require live API/browser verification.
