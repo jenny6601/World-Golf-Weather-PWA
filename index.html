@@ -421,7 +421,7 @@ footer{color:var(--muted);font-size:12px;padding:18px 0}
 <label for="courseSearchInput" style="margin-top:12px">搜尋球場（英文名稱、當地名稱、城市或地區）</label>
 <input id="courseSearchInput" type="search" autocomplete="off" placeholder="例如：Kise、Hanoi、Jeju、Tokyo..." style="width:100%;max-width:680px"/>
 <div class="muted" id="courseSearchStatus" aria-live="polite">球場資料庫準備中…</div>
-<div class="row" style="margin:8px 0"><button type="button" class="secondary" id="showFavorites" style="width:auto">★ 我的收藏</button><button type="button" class="secondary" id="showRecent" style="width:auto">最近搜尋</button></div>
+<div class="row" style="margin:8px 0;flex-wrap:wrap"><button type="button" class="secondary" id="showFavorites" style="width:auto">★ 我的收藏</button><button type="button" class="secondary" id="exportFavorites" style="width:auto">匯出收藏檔</button><button type="button" class="secondary" id="importFavorites" style="width:auto">匯入收藏檔</button><button type="button" class="secondary" id="showRecent" style="width:auto">最近搜尋</button><input type="file" id="favoritesFileInput" accept="application/json,.json" hidden/></div><div class="muted" id="favoritesSaveStatus" aria-live="polite">收藏會自動儲存在此瀏覽器；可匯出檔案備份或轉移。</div>
 <div class="tee-time-picker"><label for="teeTimeSelect">⛳ 開球時間（選填）</label><select id="teeTimeSelect"><option value="">不指定｜顯示完整 06:00–18:00</option><option value="06:00">06:00</option><option value="07:00">07:00</option><option value="08:00">08:00</option><option value="09:00">09:00</option><option value="10:00">10:00</option><option value="11:00">11:00</option><option value="12:00">12:00</option><option value="13:00">13:00</option></select><div class="muted">選擇後，①～④僅顯示開球起算連續6小時</div></div>
 <div class="muted" id="status" style="margin:8px 0 4px">尚未載入氣象資料。</div>
 <div class="muted" id="courseAutoStatus" style="margin:4px 0 12px">選擇國家並搜尋球場，確認球場資料後載入天氣預報。</div>
@@ -619,8 +619,31 @@ function courseSearchScore(course,query){
  return best<=2?500-best*50:0;
 }
 function isCourseFavorite(id){try{return (JSON.parse(localStorage.getItem("wgw:favorites")||"[]")).includes(id);}catch{return false;}}
-function toggleCourseFavorite(id,mode="search"){let a=[];try{a=JSON.parse(localStorage.getItem("wgw:favorites")||"[]");}catch{}a=a.includes(id)?a.filter(x=>x!==id):[...a,id];localStorage.setItem("wgw:favorites",JSON.stringify(a));renderCourseDatabase(mode);}
+function toggleCourseFavorite(id,mode="search"){let a=[];try{a=JSON.parse(localStorage.getItem("wgw:favorites")||"[]");}catch{}a=a.includes(id)?a.filter(x=>x!==id):[...a,id];localStorage.setItem("wgw:favorites",JSON.stringify(a));const status=$("favoritesSaveStatus");if(status)status.textContent="已自動儲存收藏，共 "+a.length+" 座球場；可匯出收藏檔備份。";renderCourseDatabase(mode);}
 function rememberCourseSearch(id){let a=[];try{a=JSON.parse(localStorage.getItem("wgw:recent")||"[]");}catch{}a=[id,...a.filter(x=>x!==id)].slice(0,10);localStorage.setItem("wgw:recent",JSON.stringify(a));}
+function exportCourseFavorites(){
+ const ids=(()=>{try{return JSON.parse(localStorage.getItem("wgw:favorites")||"[]");}catch{return [];}})();
+ const payload={format:"world-golf-weather-favorites",version:1,exportedAt:new Date().toISOString(),favorites:ids};
+ const blob=new Blob([JSON.stringify(payload,null,2)],{type:"application/json"});
+ const url=URL.createObjectURL(blob),a=document.createElement("a");
+ a.href=url;a.download="world-golf-weather-favorites-"+new Date().toISOString().slice(0,10)+".json";
+ document.body.appendChild(a);a.click();a.remove();URL.revokeObjectURL(url);
+ const status=$("favoritesSaveStatus");if(status)status.textContent="已建立收藏備份檔（"+ids.length+" 座球場）。";
+}
+async function importCourseFavorites(file){
+ const status=$("favoritesSaveStatus");if(!file)return;
+ try{
+  const payload=JSON.parse(await file.text());
+  if(payload?.format!=="world-golf-weather-favorites"||!Array.isArray(payload.favorites))throw Error("檔案格式不正確，請選擇本 App 匯出的收藏 JSON 檔。");
+  const validIds=new Set(asiaCourses.map(c=>c.course_id));
+  const imported=[...new Set(payload.favorites.filter(id=>typeof id==="string"&&validIds.has(id)))];
+  let current=[];try{current=JSON.parse(localStorage.getItem("wgw:favorites")||"[]");}catch{}
+  const merged=[...new Set([...current.filter(id=>validIds.has(id)),...imported])];
+  localStorage.setItem("wgw:favorites",JSON.stringify(merged));
+  if(status)status.textContent="匯入完成：新增 "+merged.length-current.length+" 座，有效收藏共 "+merged.length+" 座。";
+  renderCourseDatabase("favorites");
+ }catch(e){if(status)status.textContent="匯入失敗："+e.message;}
+}
 function refreshCourseRegions(){
  const country=$("countrySelect")?.value||"",region=$("courseRegionSelect");
  if(!region)return;
@@ -637,6 +660,9 @@ async function initCourseDatabase(){
  region.addEventListener("change",()=>renderCourseDatabase());
  search.addEventListener("input",()=>{clearTimeout(courseSearchTimer);courseSearchTimer=setTimeout(()=>renderCourseDatabase(),250);});
  $("showFavorites").addEventListener("click",()=>{search.value="";country.value="";region.value="";refreshCourseRegions();renderCourseDatabase("favorites");});
+ $("exportFavorites").addEventListener("click",exportCourseFavorites);
+ $("importFavorites").addEventListener("click",()=>$("favoritesFileInput").click());
+ $("favoritesFileInput").addEventListener("change",e=>{const file=e.target.files?.[0];if(file)importCourseFavorites(file);e.target.value="";});
  $("showRecent").addEventListener("click",()=>{search.value="";country.value="";region.value="";refreshCourseRegions();renderCourseDatabase("recent");});
  $("courseAutoStatus").textContent="亞洲球場資料庫載入中…";
  try{
