@@ -14,13 +14,13 @@
 - Added eight country filters: JP, KR, CN, VN, TH, MY, SG, ID.
 - Added a structured course data schema.
 - Added 41 course records across eight countries.
-- Current verification: 7 GPS-verified, 27 partially verified, 7 unverified.
+- Current verification: 7 fully verified, 27 partially verified, 7 unverified; three partially verified records now also have sourced GPS coordinates.
 - Japan: five courses have official addresses and official-site embedded map pins; Camellia Hills identity/address verified, GPS pending.
 - South Korea: Nine Bridges and Black Stone Jeju have coordinates from the Jeju official tourism portal; Teddy Valley, Asiad CC and Woo Jeong Hills have identity/address verified, GPS pending.
 - China: Mission Hills Shenzhen and Dongguan, Sheshan and Yalong Bay have identity/address sources recorded; GPS pending.
 - Vietnam: Ba Na Hills, Hoiana Shores, Laguna Lang Co, Legend Da Nang and Montgomerie Links have official club identity/address sources recorded; GPS pending.
 - Thailand: three identity/address records partially verified; Malaysia: four; Singapore: four; Indonesia: three, with Bali and Jakarta timezones assigned individually. Seven remaining candidates across China, Thailand, Malaysia, Singapore and Indonesia are unverified.
-- Candidates without GPS coordinates do not have fabricated coordinates; forecast selection remains disabled until coordinates are available.
+- Candidates without GPS coordinates do not have fabricated coordinates; forecast selection remains disabled until coordinates are available. Three partial records (Black Mountain, Saujana and Kota Permai) now have traceable GPS points from a specialist golf directory or Selangor Tourism publication; these remain partially verified pending official-map cross-check.
 - Disabled the inherited Taiwan live-observation snapshot lookup. The UI states that global observation/METAR integration is not yet available.
 - Disabled inherited Taiwan course-cache lookup; forecast requests fall back to the Open-Meteo model API.
 - Replaced inherited Taiwan repository cache URLs with this World Golf Weather repository namespace.
