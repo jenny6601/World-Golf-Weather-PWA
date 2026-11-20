@@ -610,7 +610,7 @@ function courseSearchScore(course,query){
  return best<=2?500-best*50:0;
 }
 function isCourseFavorite(id){try{return (JSON.parse(localStorage.getItem("wgw:favorites")||"[]")).includes(id);}catch{return false;}}
-function toggleCourseFavorite(id){let a=[];try{a=JSON.parse(localStorage.getItem("wgw:favorites")||"[]");}catch{}a=a.includes(id)?a.filter(x=>x!==id):[...a,id];localStorage.setItem("wgw:favorites",JSON.stringify(a));renderCourseDatabase();}
+function toggleCourseFavorite(id,mode="search"){let a=[];try{a=JSON.parse(localStorage.getItem("wgw:favorites")||"[]");}catch{}a=a.includes(id)?a.filter(x=>x!==id):[...a,id];localStorage.setItem("wgw:favorites",JSON.stringify(a));renderCourseDatabase(mode);}
 function rememberCourseSearch(id){let a=[];try{a=JSON.parse(localStorage.getItem("wgw:recent")||"[]");}catch{}a=[id,...a.filter(x=>x!==id)].slice(0,10);localStorage.setItem("wgw:recent",JSON.stringify(a));}
 async function initCourseDatabase(){
  const country=$("countrySelect"),search=$("courseSearchInput");
