@@ -3,35 +3,33 @@
 亞洲高爾夫球場天氣資訊 Progressive Web App。
 
 ## 專案原則
-
 - 本 Repository 與 Taiwan Golf Weather PWA 完全獨立。
-- 以 Taiwan Golf Weather PWA 完整版的介面與呈現邏輯作為設計母版；不採用 compact 版本。
-- 不連結或寫入台灣版的快取分支、資料儲存或 GitHub Actions。
+- 以 Taiwan Golf Weather PWA **完整版**作為天氣介面與呈現邏輯母版；不採用 compact 版本。
+- 不連結或寫入台灣版的資料快取、資料分支或 GitHub Actions。
 - 初期涵蓋日本、南韓、中國、越南、泰國、馬來西亞、新加坡、印尼。
-- 每座球場以 GPS 座標對應 IANA 時區；印尼等跨時區國家不可只用國家名稱推定時區。
-- 球場官方地址、地圖定位地址及資料驗證狀態分欄保存；未驗證資料不得偽裝成官方資料。
-- 搜尋以本地索引優先，支援正式名稱、別名、拼寫容錯、城市、行政區、國家、地址及當地語言。
+- 每座球場以球場座標對應 IANA 時區；印尼等跨時區國家不可只用國家名稱推定時區。
+- 官方地址、地圖地址、座標及驗證狀態分欄保存；未驗證資料不得偽裝成官方資料。
+- 搜尋支援正式名稱、別名、拼寫容錯、城市、行政區、國家及地址；本地索引優先。
 - 天氣觀測、預報與模型估算必須標示來源及資料時間，不得混為同一種資料。
 
-## 目錄規劃
+## 目前開發狀態（development branch）
+- 已移植完整版本的主要天氣介面及預報運算程式。
+- 已建立亞洲國家篩選、文字搜尋、模糊比對、收藏及最近搜尋介面。
+- 已建立 40 筆亞洲球場「待核實名錄」，每國 5 筆。這些是搜尋候選，不代表已驗證球場資料。
+- 所有候選球場目前均標記為 `unverified`，尚未填入 GPS、官方地址、時區或照片；因此「選擇此球場」會保持停用，避免以猜測座標查詢天氣。
+- 全球即時觀測／METAR 尚未接入；介面明確顯示未接入，不以預報冒充實測。
+- 亞洲獨立預報快取尚未啟用；目前天氣預報查詢改走 Open-Meteo 即時 API。
+- PWA manifest、獨立 Service Worker 快取名稱、離線頁及圖示已建立。
+- 尚未部署 Cloudflare Pages，也尚未合併至 main。
 
-- `index.html`：PWA 入口與主要介面（從完整版母版移植後再改造）。
-- `manifest.json`：獨立 PWA 安裝資訊。
-- `sw.js`：獨立 Service Worker 與快取命名空間。
-- `pwa/`：安裝及 PWA 啟動程式。
-- `icons/`：World Golf Weather 圖示。
-- `data/courses/`：亞洲球場資料集。
-- `src/search/`：球場搜尋、排序及索引。
-- `docs/`：資料規格、來源及驗證政策。
-
-## 初期國家
-
-Japan, South Korea, China, Vietnam, Thailand, Malaysia, Singapore, Indonesia.
-
-## 目前狀態
-
-Repository 已建立。正在建立與台灣版隔離的前端母版、球場資料模型及搜尋系統。尚未部署，也尚未啟用全球天氣資料收集流程。
+## 目錄
+- `index.html`：完整版天氣介面及亞洲球場搜尋。
+- `manifest.json`、`sw.js`、`offline.html`、`pwa/`：獨立 PWA。
+- `icons/`：App 圖示。
+- `data/courses/asia-courses.json`：亞洲球場候選名錄。
+- `data/schemas/course.schema.json`：球場資料 schema。
+- `docs/COURSE-SEARCH-SPEC.md`：搜尋規格。
+- `docs/PORTING-STATUS.md`：母版移植狀態及驗收清單。
 
 ## 安全邊界
-
-不得將台灣版的自動化 workflow 原樣複製到本專案。所有新 workflow 必須使用本 Repository 專屬的資料來源、快取分支、Secrets 及部署設定。
+不得將台灣版自動化 workflow 原樣複製到本專案。所有新 workflow 必須使用本 Repository 專屬資料來源、快取分支、Secrets 及部署設定。
