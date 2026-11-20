@@ -287,7 +287,7 @@ footer{color:var(--muted);font-size:12px;padding:18px 0}
 .long-range-grid{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:7px}
 .long-range-day{min-width:0;text-align:center;background:#f1f5f9;border:1px solid #dbe4ed;border-radius:10px;padding:8px 3px}
 .long-range-day .lr-date{font-size:11px;color:#526477;font-weight:800;display:flex;flex-direction:column;gap:2px;line-height:1.25}.long-range-day .lr-weekday{font-size:10px;color:#64748b;font-weight:700}.long-range-day.weekend .lr-date,.long-range-day.weekend .lr-weekday{color:#d32f2f!important}
-.long-range-day .lr-icon{font-size:23px;line-height:1.5}
+.long-range-day .lr-icon{font-size:23px;line-height:1.5;display:flex;flex-direction:column;align-items:center;gap:2px}.long-range-day .lr-icon .daily-weather-svg{width:42px;height:42px;display:block;flex:none}
 .long-range-day .lr-temp{font-size:12px;font-weight:800;color:#172536}
 .long-range-day .lr-rain{font-size:11px;color:#1769aa;margin-top:3px}
 .long-range-unavailable{background:#f8fafc!important;border-style:dashed!important;opacity:.72}
@@ -309,7 +309,7 @@ footer{color:var(--muted);font-size:12px;padding:18px 0}
 .daily-forecast-inner{--daily-col:clamp(42px,calc((100vw - 40px)/7),112px);width:max-content;min-width:100%;color:#263b4b}.daily-forecast-placeholder{padding:24px 10px;text-align:center;color:#64748b}
 .daily-grid{display:grid;grid-template-columns:repeat(16,minmax(0,var(--daily-col)));width:calc(var(--daily-col)*16);min-width:calc(var(--daily-col)*16);max-width:none;box-sizing:border-box}.daily-date-cell,.daily-weather-cell,.daily-rain-cell{box-sizing:border-box;min-width:0;text-align:center;padding:7px 2px;border-right:1px solid #d8e2e9}
 .daily-date-cell{background:#edf4f8;border-bottom:1px solid #cbd8e1;font-size:11px;font-weight:800;line-height:1.35}.daily-date-cell .date{display:block;font-size:10px;font-weight:600;color:#60798b;margin-top:3px}
-.daily-temp-chart{display:block;width:calc(var(--daily-col)*16)!important;min-width:calc(var(--daily-col)*16)!important;max-width:none!important;height:190px;background:linear-gradient(180deg,#f8fbfd,#eef4f8);overflow:hidden!important;flex:0 0 auto}.daily-weather-cell{min-height:112px;background:#f8fbfd}
+.daily-weather-detail-frame{border:1.5px solid #cbd8e3;border-radius:12px;overflow:hidden;background:#f8fbfd;margin-top:8px;box-shadow:0 1px 3px rgba(31,55,75,.06)}.daily-weather-detail-frame .daily-grid:first-child{border-bottom:1px solid #cbd8e3}.daily-weather-detail-frame .daily-weather-cell,.daily-weather-detail-frame .daily-rain-cell{background:transparent}.daily-temp-chart{display:block;width:calc(var(--daily-col)*16)!important;min-width:calc(var(--daily-col)*16)!important;max-width:none!important;height:190px;background:linear-gradient(180deg,#f8fbfd,#eef4f8);overflow:hidden!important;flex:0 0 auto}.daily-weather-cell{min-height:112px;background:#f8fbfd}
 /* Highlight the selected date consistently in the weather and rainfall rows. */
 .daily-weather-cell.is-selected,.daily-rain-cell.is-selected{background:#dceef9!important;box-shadow:inset 2px 0 #1682bd,inset -2px 0 #1682bd;position:relative;z-index:1}
 .daily-weather-cell.is-selected{border-top:2px solid #1682bd}
@@ -1677,7 +1677,7 @@ function renderDailyForecast(rows,courseName){
  const weather=display.map(r=>{const w=dailyWx(r.code);return '<div class="daily-weather-cell"><div class="daily-icon">'+w.icon+'</div><div class="daily-desc">'+w.desc+'</div></div>';}).join("");
  const rain=display.map(r=>'<div class="daily-rain-cell"><small>降雨機率</small><div class="rain-prob">'+(r.prob===null?"—":Math.round(r.prob)+"%")+'</div><small>累積雨量</small><div class="rain-mm">'+(r.rain===null?"—":r.rain.toFixed(1))+'</div><small>mm</small></div>').join("");
  const bands=display.map((r,i)=>'<rect x="'+(i*col)+'" y="0" width="'+col+'" height="'+height+'" fill="'+(selected===r.date?"#b8def4":i%2===0?"#f3f6f9":"#d5e2ed")+'" fill-opacity=".72"/>').join("");
- target.innerHTML='<div class="daily-grid">'+dates+'</div><svg class="daily-temp-chart" width="'+width+'" height="'+height+'" viewBox="0 0 '+width+' '+height+'" role="img" aria-label="16天白天最高溫、最低溫與體感溫度曲線"><g>'+bands+grid+paths+points+'</g></svg><div class="daily-grid">'+weather+'</div><div class="daily-grid">'+rain+'</div>';
+ target.innerHTML='<div class="daily-grid">'+dates+'</div><svg class="daily-temp-chart" width="'+width+'" height="'+height+'" viewBox="0 0 '+width+' '+height+'" role="img" aria-label="16天白天最高溫、最低溫與體感溫度曲線"><g>'+bands+grid+paths+points+'</g></svg><div class="daily-weather-detail-frame"><div class="daily-grid">'+weather+'</div><div class="daily-grid">'+rain+'</div></div>';
  if(heading)heading.textContent="⓪ 16天白天高爾夫天氣預報｜"+courseName;
  if(status)status.textContent="每日06:00–18:00｜六模型可用資料中位數｜顯示白天最高／最低溫、平均體感、降雨機率及累積雨量。";
  syncDailyForecastToSelectedDate();
@@ -1835,7 +1835,7 @@ let amountWeights=null,probabilityWeights=null,weightingLabel="等權中位數�
 // Long-range forecast: EC46 daily outlook (up to 46 days) plus SEAS5 monthly tendency.
 let longRangeDays=30,longRangeCache=new Map(),longRangeSelectedCourse="";
 const longRangeWeatherLabel=code=>{const n=Number(code);if(n===0)return "晴";if(n===1||n===2)return "晴時多雲";if(n===3)return "多雲";if(n===45||n===48)return "霧";if([51,53,55,56,57].includes(n))return "毛毛雨";if([61,63,65,66,67,80,81,82].includes(n))return "降雨";if([95,96,99].includes(n))return "雷雨";return "—";};
-const longRangeWeatherEmoji=code=>{const n=Number(code);if(n===0)return "☀️";if(n===1||n===2)return "🌤️";if(n===3)return "☁️";if(n===45||n===48)return "🌫️";if([51,53,55,56,57].includes(n))return "🌦️";if([61,63,65,66,67,80,81,82].includes(n))return "🌧️";if([95,96,99].includes(n))return "⛈️";return "—";};
+const longRangeWeatherEmoji=code=>{const item=dailyWx(code);return item.icon||"—";};
 document.querySelectorAll(".long-range-range").forEach(btn=>btn.addEventListener("click",()=>{longRangeDays=Number(btn.dataset.days);const content=$("longRangeContent");if(content)content.hidden=false;document.querySelectorAll(".long-range-range").forEach(b=>{const on=b===btn;b.classList.toggle("active",on);b.setAttribute("aria-pressed",String(on));});renderLongRangeForecast();}));
 async function loadLongRangeForecast(course){
  const status=$("longRangeStatus"),daily=$("longRangeDaily"),seasonal=$("longRangeSeasonal");
