@@ -1,0 +1,15 @@
+{
+  "version": 1,
+  "countries": [
+    "JP",
+    "KR",
+    "CN",
+    "VN",
+    "TH",
+    "MY",
+    "SG",
+    "ID"
+  ],
+  "generated_at": null,
+  "courses": []
+}
