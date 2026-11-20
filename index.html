@@ -274,7 +274,7 @@ footer{color:var(--muted);font-size:12px;padding:18px 0}
 .forecast-calendar-legend .chosen i{background:#1769aa}
 @media(max-width:600px){.forecast-calendar{width:min(100%,340px)}.forecast-calendar-day{height:40px}}
 
-.course-item{min-width:0}.course-item img{display:block}.course-item button{min-height:40px}.course-item .row{align-items:center}
+.course-item{min-width:0}.course-item.course-selected{background:#e5f4ec!important;border-color:#168653!important;box-shadow:0 0 0 2px #b8e3cc}.course-item.course-selected>div[role="button"] strong{color:#126b4c}.course-item img{display:block}.course-item button{min-height:40px}.course-item .row{align-items:center}
 
 /* Long-range outlook: separate from the 16-day operational forecast. */
 .long-range-controls{display:flex;gap:8px;margin:10px 0 14px}
@@ -448,10 +448,12 @@ footer{color:var(--muted);font-size:12px;padding:18px 0}
   <button type="button" class="secondary long-range-range active" data-days="30" aria-pressed="true">30 天</button>
   <button type="button" class="secondary long-range-range" data-days="60" aria-pressed="false">60 天</button>
  </div>
+ <div id="longRangeContent" hidden>
  <div id="longRangeStatus" class="muted" aria-live="polite">選擇球場後載入長期預報。</div>
  <div id="longRangeDaily" class="long-range-grid"></div>
  <div id="longRangeSeasonal" class="long-range-seasonal" hidden></div>
  <p class="muted long-range-disclaimer">注意：EC46／SEAS5 為 36 km 區域尺度、未偏差校正的系集預報，僅供趨勢參考，不代表球場微氣候或精確開球時段。長期資料不顯示每日降雨機率。</p>
+ </div>
 </section>
 <section class="card"><h3 id="hourlyForecastHeading" class="forecast-heading forecast-heading-1">① 逐時天氣預報｜—（06:00–18:00）</h3><button type="button" class="secondary forecast-legend-toggle" id="forecastLegendToggle" aria-expanded="false">顯示圖示說明</button><div class="forecast-legend-panel" id="forecastLegendPanel" hidden><div class="rain-level-guide"><img src="./assets/rain-levels-original.webp?v=2" alt="五級降雨判讀圖示" loading="lazy"/></div><div class="rain-level-description" style="display:block!important;visibility:visible!important"><div class="rain-level-description-heading"><b>等級</b><b>名稱</b><b>打球建議</b></div><div class="rain-level-description-row"><b class="rain-lv lv1">1</b><strong>晴朗乾燥</strong><span>正常打球，不需雨傘</span></div><div class="rain-level-description-row"><b class="rain-lv lv2">2</b><strong>低降雨風險</strong><span>備妥輕便雨傘</span></div><div class="rain-level-description-row"><b class="rain-lv lv3">3</b><strong>零星小雨</strong><span>建議雨傘／雨衣</span></div><div class="rain-level-description-row"><b class="rain-lv lv4">4</b><strong>持續降雨</strong><span>雨衣及防水鞋</span></div><div class="rain-level-description-row"><b class="rain-lv lv5">5</b><strong>大雨／雷雨</strong><span>不建議打球</span></div></div><div class="forecast-weather-legend" id="forecastWeatherLegend"></div><div class="forecast-rainprob-legend" id="forecastRainProbLegend"></div></div><div class="muted" id="tableNote">固定列出06:00至18:00共13個時段。手機版同一畫面顯示前7項：時間、天氣、降雨機率、雨量、氣溫、體感及降雨判讀；圖示在上、數字文字在下，縮小欄距。其他風速、陣風、風向、濕度、雲量、UV及打球參考分數可在較寬螢幕查看。降雨判讀綜合降雨機率與逐時預估雨量，不以機率單獨代表雨勢。已過去但API沒有回傳的時段會標示「無資料」，不會以推測值補齊。</div><div class="tablewrap hourly-table-wrap"><table id="hourlyForecastTable"><thead><tr><th>🕒 時間</th><th>🌤️ 天氣</th><th>☔ 機率<br>%</th><th>🌧️ 雨量<br>mm</th><th>☔ 降雨判讀</th><th>🌡️ 氣溫<br>°C</th><th>🥵 體感<br>°C</th><th>風速 km/h</th><th>陣風 km/h</th><th>風向</th><th>濕度</th><th>雲量</th><th>UV</th><th>打球參考分數</th></tr></thead><tbody id="hourRows"><tr><td colspan="14">尚無資料</td></tr></tbody></table></div></section><section class="card rain-chart-card"><h3 id="rainProbabilityHeading" class="forecast-heading forecast-heading-2">② 每小時降雨機率圖（%）｜—</h3><canvas height="240" id="rainChart" width="600"></canvas><p class="muted">以系集成員逐時降雨量大於 0.1 mm 的比例估算；這是模式機率，尚非當地球場歷史校準後的真實機率。</p></section><section class="card rain-chart-card"><h3 id="rainAmountHeading" class="forecast-heading forecast-heading-3">③ 每小時預報雨量圖（mm）｜—</h3><canvas height="240" id="rainAmountChart" width="600"></canvas><p class="muted">顯示六模型逐時雨量；歷史回測權重啟用後採加權融合；模式範圍另作不確定性參考。</p></section>
 <section class="card">
@@ -876,6 +878,7 @@ async function autoLoadDatabaseCourse(c,button){
  if(!selectedDate){$("courseAutoStatus").textContent="日期尚未設定，請重新選擇預報日期。";return;}
  if(databaseAutoBusy)return;
  selectedCourseForReload=c;selectedCourseButton=button;
+ $("courseList").querySelectorAll(".course-item").forEach(row=>row.classList.toggle("course-selected",!!button&&row.contains(button)));
  databaseAutoBusy=true;
  // 日期欄位保持可操作；載入期間的新選擇會排入下一次載入。
  $("courseList").querySelectorAll("button[data-course]").forEach(x=>{x.disabled=true;x.classList.toggle("course-selected",x===button);});
@@ -1689,7 +1692,7 @@ let amountWeights=null,probabilityWeights=null,weightingLabel="等權中位數�
 let longRangeDays=30,longRangeCache=new Map(),longRangeSelectedCourse="";
 const longRangeWeatherLabel=code=>{const n=Number(code);if(n===0)return "晴";if(n===1||n===2)return "晴時多雲";if(n===3)return "多雲";if(n===45||n===48)return "霧";if([51,53,55,56,57].includes(n))return "毛毛雨";if([61,63,65,66,67,80,81,82].includes(n))return "降雨";if([95,96,99].includes(n))return "雷雨";return "—";};
 const longRangeWeatherEmoji=code=>{const n=Number(code);if(n===0)return "☀️";if(n===1||n===2)return "🌤️";if(n===3)return "☁️";if(n===45||n===48)return "🌫️";if([51,53,55,56,57].includes(n))return "🌦️";if([61,63,65,66,67,80,81,82].includes(n))return "🌧️";if([95,96,99].includes(n))return "⛈️";return "—";};
-document.querySelectorAll(".long-range-range").forEach(btn=>btn.addEventListener("click",()=>{longRangeDays=Number(btn.dataset.days);document.querySelectorAll(".long-range-range").forEach(b=>{const on=b===btn;b.classList.toggle("active",on);b.setAttribute("aria-pressed",String(on));});renderLongRangeForecast();}));
+document.querySelectorAll(".long-range-range").forEach(btn=>btn.addEventListener("click",()=>{longRangeDays=Number(btn.dataset.days);const content=$("longRangeContent");if(content)content.hidden=false;document.querySelectorAll(".long-range-range").forEach(b=>{const on=b===btn;b.classList.toggle("active",on);b.setAttribute("aria-pressed",String(on));});renderLongRangeForecast();}));
 async function loadLongRangeForecast(course){
  const status=$("longRangeStatus"),daily=$("longRangeDaily"),seasonal=$("longRangeSeasonal");
  if(!course||!Number.isFinite(Number(course.lat))||!Number.isFinite(Number(course.lon))||!currentCourseTimezone){status.textContent="球場座標或時區尚未核實，無法載入長期預報。";return;}
