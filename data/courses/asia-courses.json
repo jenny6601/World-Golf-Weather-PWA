@@ -524,8 +524,11 @@
       "local_address": "An Sơn, Hòa Ninh, Hòa Vang, Đà Nẵng, Việt Nam",
       "timezone": "Asia/Ho_Chi_Minh",
       "official_website": "https://banahillsgolf.com/",
-      "verification_note": "球場官方網站確認球場名稱及地址；峴港市觀光入口可交叉核對地址。尚未取得官方地圖 GPS。",
-      "verified_at": "2026-11-20T00:00:00+08:00"
+      "verification_note": "Golf-course specialist directory provides explicit course coordinates; official club page confirms course identity and address. Partial pending official map/pin cross-check.",
+      "verified_at": "2026-11-20T00:00:00+08:00",
+      "latitude": 16.017261,
+      "longitude": 108.049971,
+      "coordinate_source": "https://www.where2golf.com/vietnam/ba-na-hills-golf-club/"
     },
     {
       "course_id": "vn-hoiana-shores",
@@ -552,8 +555,11 @@
       "local_address": "Thôn Tây Sơn Tây, xã Duy Nghĩa, thành phố Đà Nẵng, Việt Nam",
       "timezone": "Asia/Ho_Chi_Minh",
       "official_website": "https://www.hoiana.com/golf/home",
-      "verification_note": "Hoiana 官方高爾夫網站確認球場名稱、度假區位置及地址；尚未取得可核實球場本體的官方 GPS 座標。",
-      "verified_at": "2026-11-20T00:00:00+08:00"
+      "verification_note": "Golf-course specialist directory provides explicit course coordinates; Hoiana official site confirms course identity and location within Hoiana Resort & Golf. Partial pending official map/pin cross-check.",
+      "verified_at": "2026-11-20T00:00:00+08:00",
+      "latitude": 15.821549,
+      "longitude": 108.404053,
+      "coordinate_source": "https://www.where2golf.com/vietnam/hoiana-shores-golf-club/"
     },
     {
       "course_id": "vn-laguna-lang-co",
@@ -581,8 +587,11 @@
       "local_address": "Thôn Cảnh Dương, xã Chân Mây – Lăng Cô, thành phố Huế, Việt Nam",
       "timezone": "Asia/Ho_Chi_Minh",
       "official_website": "https://www.lagunalangco.com/",
-      "verification_note": "Laguna 官方聯絡頁確認球場名稱、地址及聯絡資訊；頁面提供 Google Maps 導航連結，但尚未核實地圖 pin 的球場 GPS。",
-      "verified_at": "2026-11-20T00:00:00+08:00"
+      "verification_note": "Golf-course specialist directory provides explicit course coordinates; Laguna official page confirms golf facility and address. Partial pending official map/pin cross-check.",
+      "verified_at": "2026-11-20T00:00:00+08:00",
+      "latitude": 16.324958,
+      "longitude": 107.959213,
+      "coordinate_source": "https://www.where2golf.com/vietnam/laguna-lang-co-golf-club/"
     },
     {
       "course_id": "vn-legend-da-nang",
@@ -611,8 +620,11 @@
       "local_address": "726 đường Trường Sa, phường Ngũ Hành Sơn, thành phố Đà Nẵng, Việt Nam",
       "timezone": "Asia/Ho_Chi_Minh",
       "official_website": "https://www.dananggolfclub.com/",
-      "verification_note": "球場官方網站及峴港市觀光入口均確認球場名稱與地址；尚未取得官方地圖 GPS。",
-      "verified_at": "2026-11-20T00:00:00+08:00"
+      "verification_note": "Specialist golf course directory identifies the BRG/Legend Da Nang course and provides coordinates; official club website confirms 726 Truong Sa address. Partial pending official map/pin cross-check.",
+      "verified_at": "2026-11-20T00:00:00+08:00",
+      "latitude": 16.0208,
+      "longitude": 108.2602,
+      "coordinate_source": "https://playgolfvietnam.com/courses/brg-da-nang-golf-resort"
     },
     {
       "course_id": "vn-montgomerie-links",
@@ -641,8 +653,11 @@
       "local_address": "Đường ven biển, phường Điện Bàn Đông, thành phố Đà Nẵng, Việt Nam",
       "timezone": "Asia/Ho_Chi_Minh",
       "official_website": "https://www.montgomerielinks.com/",
-      "verification_note": "球場官方網站及峴港市觀光入口確認球場名稱與所在地；尚未取得官方地圖 GPS。",
-      "verified_at": "2026-11-20T00:00:00+08:00"
+      "verification_note": "Golf-course specialist directory provides explicit course coordinates; Golf Coast Vietnam directory corroborates course identity and Dien Ngoc location. Partial pending official map/pin cross-check.",
+      "verified_at": "2026-11-20T00:00:00+08:00",
+      "latitude": 15.964434,
+      "longitude": 108.286453,
+      "coordinate_source": "https://www.where2golf.com/vietnam/montgomerie-links-vietnam/"
     },
     {
       "course_id": "th-black-mountain",
