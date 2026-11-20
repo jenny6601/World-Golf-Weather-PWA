@@ -21,7 +21,7 @@
 - Added a separate manifest, service worker cache namespace, offline page, installation script and app icons.
 
 ## Not yet complete
-- Verify every course's official name, official website, local-language name/address, exact GPS point and IANA timezone.
+- Complete Camellia Hills GPS verification and continue official identity/address/GPS/timezone verification for South Korea, China, Vietnam, Thailand, Malaysia, Singapore and Indonesia.
 - Add licensed/official course photos and attribution.
 - Add external map/GPS discovery and geocoder policy.
 - Implement global current observations using a validated source hierarchy (station/METAR where available, commercial observations where licensed, and clearly labelled model estimates).
