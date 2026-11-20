@@ -1,0 +1,37 @@
+# Porting and validation status
+
+## Source baseline
+- Source repository: `jenny6601/Taiwan-Golf-Weather-PWA`
+- Source branch: `main`
+- Source app entry: root `index.html` (full version, not `compact/index.html`)
+- Port target: `jenny6601/World-Golf-Weather-PWA`, branch `development`
+
+## Completed in development
+- Copied the full-version weather interface and forecast calculation code as the starting point.
+- Replaced Taiwan course list UI with Asia country filter and local course search.
+- Added Unicode normalization, case/punctuation/space normalization, token matching and basic edit-distance typo tolerance.
+- Added local favorites and last-10 recent course selections.
+- Added eight country filters: JP, KR, CN, VN, TH, MY, SG, ID.
+- Added a structured course data schema.
+- Added 40 discovery candidates (five per country), all explicitly marked `unverified`.
+- Unverified candidates have no fabricated coordinates, official addresses, timezones or photos; forecast selection remains disabled until these fields are checked.
+- Disabled the inherited Taiwan live-observation snapshot lookup. The UI states that global observation/METAR integration is not yet available.
+- Disabled inherited Taiwan course-cache lookup; forecast requests fall back to the Open-Meteo model API.
+- Replaced inherited Taiwan repository cache URLs with this World Golf Weather repository namespace.
+- Added a separate manifest, service worker cache namespace, offline page, installation script and app icons.
+
+## Not yet complete
+- Verify every course's official name, official website, local-language name/address, exact GPS point and IANA timezone.
+- Add licensed/official course photos and attribution.
+- Add external map/GPS discovery and geocoder policy.
+- Implement global current observations using a validated source hierarchy (station/METAR where available, commercial observations where licensed, and clearly labelled model estimates).
+- Create independent forecast cache workflows and provider secrets.
+- Review China coverage/access and country-specific provider limitations.
+- Run browser/mobile functional tests and verify PWA install/offline behavior.
+- Configure Cloudflare Pages independently and test production deployment.
+- Promote development to main only after acceptance.
+
+## Isolation verification
+- No GitHub Actions from the Taiwan PWA were copied.
+- No Taiwan PWA cache branch is read by the Asia app.
+- The Taiwan source repository has not been modified by this porting work.
