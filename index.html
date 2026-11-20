@@ -562,7 +562,7 @@ function editDistance(a,b){
 }
 function courseSearchScore(course,query){
  const q=normalizeCourseText(query);if(!q)return 1;
- const fields=[course.name,course.name_en,course.short_name,...(course.aliases||[]),...(course.search_keywords||[]),course.city,course.region,course.country,course.address,course.local_address,course.postal_code];
+ const fields=[course.name,course.name_en,course.local_name,course.short_name,...(course.aliases||[]),...(course.search_keywords||[]),course.city,course.region,course.country,course.address,course.official_address,course.local_address,course.postal_code];
  const normalized=fields.filter(Boolean).map(normalizeCourseText);
  if(normalized.includes(q))return 1000;
  if(normalized.some(x=>x.startsWith(q)))return 850;
