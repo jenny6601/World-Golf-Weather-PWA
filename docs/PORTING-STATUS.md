@@ -47,3 +47,10 @@
 
 ### Vietnam expansion — 2026-11-20
 Added Long Bien Golf Course, BRG Legend Hill Golf Resort, and BRG Kings Island Golf Resort. Each record includes official website/address, Vietnamese aliases/search terms, Asia/Ho_Chi_Minh timezone, a mapped coordinate and provenance. All three remain partially verified. Kings Island is a 55-hole resort with three layouts; the stored pin is the resort location rather than a specific course entrance.
+
+
+### Hanoi course search smoke test — 2026-11-20
+- Confirmed the production local-index search fields include official name, local name, short name, aliases, search keywords, city, region, country and address.
+- Exercised the same normalization/ranking rules against the current 44-record course JSON. Exact-match results resolve correctly for: Long Bien / Long Biên / Long Bien Golf Course; Legend Hill / BRG Legend Hill; Kings Island / King's Island / Đảo Vua.
+- All three newly added Hanoi records have GPS + Asia/Ho_Chi_Minh and therefore satisfy the UI's current selection gate (finite latitude + longitude + timezone).
+- This is a data/search-logic smoke test, not a real browser/mobile or live weather API test. Kings Island's point is the resort-level pin, not an individual 18-hole layout entrance.
