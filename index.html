@@ -548,7 +548,7 @@ let asiaCourses = [];
 let currentCourseTimezone = "Asia/Tokyo";
 let courseSearchTimer = null;
 let courseDataReady = false;
-const ASIA_COUNTRIES = [{code:"JP",name:"日本"},{code:"KR",name:"南韓"},{code:"CN",name:"中國"},{code:"VN",name:"越南"},{code:"TH",name:"泰國"},{code:"MY",name:"馬來西亞"},{code:"SG",name:"新加坡"},{code:"ID",name:"印尼"}];
+let COURSE_COUNTRIES = [];
 function courseLocalYmd(offsetDays=0){
  const d=new Date(Date.now()+offsetDays*86400000);
  const p=Object.fromEntries(new Intl.DateTimeFormat("en-US",{timeZone:currentCourseTimezone,year:"numeric",month:"2-digit",day:"2-digit"}).formatToParts(d).map(x=>[x.type,x.value]));
@@ -655,7 +655,7 @@ function refreshCourseRegions(){
 }
 async function initCourseDatabase(){
  const country=$("countrySelect"),region=$("courseRegionSelect"),search=$("courseSearchInput");
- country.innerHTML='<option value="">全部國家</option>'+ASIA_COUNTRIES.map(c=>'<option value="'+c.code+'">'+c.name+'</option>').join("");
+ country.innerHTML='<option value="">全部國家</option>'+COURSE_COUNTRIES.map(c=>'<option value="'+esc(c.code)+'">'+esc(c.name)+'</option>').join("");
  country.value=localStorage.getItem("wgw:lastCountry")||"";
  country.addEventListener("change",()=>{localStorage.setItem("wgw:lastCountry",country.value);refreshCourseRegions();renderCourseDatabase();});
  region.addEventListener("change",()=>renderCourseDatabase());
@@ -667,6 +667,12 @@ async function initCourseDatabase(){
  $("showRecent").addEventListener("click",()=>{search.value="";country.value="";region.value="";refreshCourseRegions();renderCourseDatabase("recent");});
  $("courseAutoStatus").textContent="亞洲球場資料庫載入中…";
  try{
+  const countriesResponse=await fetch("./data/courses/countries.json",{cache:"no-cache"});
+  if(!countriesResponse.ok)throw Error("國家清單 HTTP "+countriesResponse.status);
+  const countriesPayload=await countriesResponse.json();
+  COURSE_COUNTRIES=Array.isArray(countriesPayload.countries)?countriesPayload.countries:[];
+  if(!COURSE_COUNTRIES.length)throw Error("國家清單沒有可用資料");
+  country.innerHTML='<option value="">全部國家</option>'+COURSE_COUNTRIES.map(c=>'<option value="'+esc(c.code)+'">'+esc(c.name)+'</option>').join("");
   const response=await fetch("./data/courses/asia-courses.json",{cache:"no-cache"});
   if(!response.ok)throw Error("HTTP "+response.status);
   const payload=await response.json();
