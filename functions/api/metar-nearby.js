@@ -143,14 +143,23 @@ export async function onRequestGet({ request }) {
     const windKnots = numberOrNull(report.wspd ?? report.windSpeed);
     const gustKnots = numberOrNull(report.wgst ?? report.windGust);
     const raw = report.rawOb ?? report.raw_text ?? report.raw ?? null;
-    let visibility = numberOrNull(report.visib ?? report.visibility);
-    if (visibility === null && raw) {
-      const visibilityMatch = raw.match(/(?:KT|MPS|KMH)\s+(9999|P?\d+(?:\.\d+)?)/);
-      if (visibilityMatch) {
-        const token = visibilityMatch[1];
-        visibility = token === "9999" ? 10 : Number(token.replace(/^P/, "")) * 1.609344;
+    // AWC CSV visibility_statute_mi is in statute miles; raw METAR
+    // metric visibility groups (e.g. 8000/9000/9999) are in metres.
+    const visibilityMiles = numberOrNull(report.visib ?? report.visibility);
+    let visibility = null;
+    if (raw) {
+      const metricMatch = raw.match(/\b(9999|\d{4})\b/);
+      const statuteMatch = raw.match(/\b(P?\d+(?:\.\d+)?)SM\b/);
+      if (metricMatch) {
+        visibility = metricMatch[1] === "9999" ? 10 : Number(metricMatch[1]) / 1000;
+      } else if (statuteMatch) {
+        visibility = Number(statuteMatch[1].replace(/^P/, "")) * 1.609344;
       }
     }
+    if (visibility === null && visibilityMiles !== null) {
+      visibility = visibilityMiles * 1.609344;
+    }
+    if (visibility !== null) visibility = Math.round(visibility * 100) / 100;
     const altimeterInHg = numberOrNull(report.altim ?? report.altimeter);
     const pressureHpa = altimeterInHg === null ? null :
       (altimeterInHg >= 20 && altimeterInHg <= 35
