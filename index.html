@@ -884,11 +884,15 @@ async function loadLiveObservation(course){
   if(!response.ok||!data.observation){showUnavailable(data.status==="no_recent_observation"?"附近測站目前沒有最近3小時內的觀測資料。":data.status==="no_nearby_recent_station"?"搜尋範圍內沒有150公里內、最近3小時的有效測站觀測。":"即時觀測服務暫時無法取得資料；請稍後重試。");return;}
   const o=data.observation;
   const fmt=(v,d=1)=>v===null||v===undefined||!Number.isFinite(Number(v))?"—":Number(v).toFixed(d);
+  const compass16=["北","北北東","東北","東北東","東","東南東","東南","南南東","南","南南西","西南","西南西","西","西北西","西北","北北西"];
+  const windDirectionLabel=o.windDirection===null||o.windDirection===undefined||!Number.isFinite(Number(o.windDirection))
+   ?"未提供":fmt(((Number(o.windDirection)%360)+360)%360,0)+"°（"+compass16[Math.round((((Number(o.windDirection)%360)+360)%360)/22.5)%16]+"）";
   const metricRows=[
    ["測站",o.stationId||o.stationName||"—"],
    ["氣溫",o.temperatureC===null?"—":fmt(o.temperatureC)+" °C"],
    ["估算體感",o.apparentTemperatureC===null?"—":fmt(o.apparentTemperatureC)+" °C"],
    ["相對濕度",o.humidityPercent===null?"未提供":fmt(o.humidityPercent,0)+" %"],
+   ["風向",windDirectionLabel],
    ["風速",o.windKmh===null?"未提供":fmt(o.windKmh)+" km/h"],
    ["陣風",o.gustKmh===null?"未提供":fmt(o.gustKmh)+" km/h"],
    ["能見度",o.visibilityKm===null?"未提供":fmt(o.visibilityKm)+" km"],
