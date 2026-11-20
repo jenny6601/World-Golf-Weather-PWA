@@ -608,7 +608,7 @@ function toggleCourseFavorite(id){let a=[];try{a=JSON.parse(localStorage.getItem
 function rememberCourseSearch(id){let a=[];try{a=JSON.parse(localStorage.getItem("wgw:recent")||"[]");}catch{}a=[id,...a.filter(x=>x!==id)].slice(0,10);localStorage.setItem("wgw:recent",JSON.stringify(a));}
 async function initCourseDatabase(){
  const country=$("countrySelect"),search=$("courseSearchInput");
- country.innerHTML='<option value="">全部亞洲國家</option>'+ASIA_COUNTRIES.map(c=>'<option value="'+c.code+'">'+c.name+'</option>').join("");
+ country.innerHTML='<option value="">請先選擇國家</option>'+ASIA_COUNTRIES.map(c=>'<option value="'+c.code+'">'+c.name+'</option>').join("");
  country.value=localStorage.getItem("wgw:lastCountry")||"";
  country.addEventListener("change",()=>{localStorage.setItem("wgw:lastCountry",country.value);renderCourseDatabase();});
  search.addEventListener("input",()=>{clearTimeout(courseSearchTimer);courseSearchTimer=setTimeout(renderCourseDatabase,250);});
@@ -635,6 +635,7 @@ function renderCourseDatabase(mode="search"){
  else if(query)entries=entries.map(x=>({...x,score:courseSearchScore(x.c,query)})).filter(x=>x.score>0).sort((a,b)=>b.score-a.score);
  else entries=entries;
  const root=$("courseList");
+ if(!country&&mode!=="favorites"&&mode!=="recent"){root.innerHTML='<div class="muted">請先選擇國家，再瀏覽該國球場。</div>';return;}
  if(!entries.length){root.innerHTML='<div class="muted">'+(courseDataReady?"目前沒有符合條件的球場資料。":"正在載入球場資料…")+'</div>';return;}
  root.innerHTML=entries.slice(0,100).map(({c,i})=>{
   return '<article class="course-item" role="button" tabindex="0" aria-label="選擇 '+esc(c.name)+'" onclick="window.loadCourseByIndex('+i+',this)" onkeydown="if(event.key===\'Enter\'||event.key===\' \'){event.preventDefault();window.loadCourseByIndex('+i+',this)}" style="display:block;padding:14px 16px;border:1px solid var(--line);border-radius:12px;margin:8px 0;background:#fff;cursor:pointer;min-width:0"><strong style="display:block;font-size:17px;line-height:1.45;font-weight:600;overflow-wrap:anywhere;text-align:left">'+esc(c.name)+'</strong></article>';
