@@ -118,14 +118,14 @@ export async function onRequestGet({ request }) {
       name: row.station_id,
       lat: row.latitude,
       lon: row.longitude,
-      obsTime: row.observation_time,
-      temp: row.temp_c,
-      dewp: row.dewpoint_c,
-      wdir: row.wind_dir_degrees ?? row.winddir,
-      wspd: row.wind_speed_kt,
-      wgst: row.wind_gust_kt ?? row.wind_gust,
-      visib: row.visibility_statute_mi ?? row.visibility,
-      altim: row.altim_in_hg,
+      obsTime: row.observation_time ?? row.observation ?? row.obs_time,
+      temp: row.temp_c ?? row.temperature ?? row.temp,
+      dewp: row.dewpoint_c ?? row.dewpoint ?? row.dewp,
+      wdir: row.wind_dir_degrees ?? row.wind_dir ?? row.winddir ?? row.wdir,
+      wspd: row.wind_speed_kt ?? row.wind_speed ?? row.wspd,
+      wgst: row.wind_gust_kt ?? row.wind_gust ?? row.wgst,
+      visib: row.visibility_statute_mi ?? row.visibility ?? row.visib,
+      altim: row.altim_in_hg ?? row.altimeter ?? row.altim,
       rawOb: row.raw_text
     });
   }
