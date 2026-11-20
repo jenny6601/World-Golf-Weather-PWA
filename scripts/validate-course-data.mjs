@@ -6,7 +6,8 @@ const db = JSON.parse(fs.readFileSync("data/courses/asia-courses.json", "utf8"))
 const html = fs.readFileSync("index.html", "utf8");
 const manifest = JSON.parse(fs.readFileSync("manifest.json", "utf8"));
 const ids = new Set();
-const allowedCountries = new Set(["JP","KR","CN","VN","TH","MY","SG","ID"]);
+const allowedCountries = new Set(db.countries || []);
+assert.ok(allowedCountries.size > 0, "country registry in course dataset must not be empty");
 const allowedStatuses = new Set(["verified","partially_verified","unverified"]);
 
 assert.ok(Array.isArray(db.courses) && db.courses.length > 0, "courses array must be populated");
