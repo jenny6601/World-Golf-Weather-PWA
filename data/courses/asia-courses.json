@@ -1762,7 +1762,7 @@
       ],
       "coordinate_source": "OpenStreetMap/Mapcarta nearby golf-course coordinate; needs exact PGM entrance confirmation.",
       "verification_status": "partially_verified",
-      "verification_note": "官方 PGM 網站及 JNTO 核實球場名稱、地址與 27 洞資訊；座標以附近 OpenStreetMap 球場地標作初始定位，尚待精確核實。"
+      "verification_note": "官方 PGM 球場資料確認球場地址為 〒904-0413 沖縄県国頭郡恩納村字冨着1043。現有座標與附近 Okinawa Kokusai Golf Club 地標可能混淆；暫不將其升級 verified，需取得球場本身地圖座標後再修正。"
     },
     {
       "course_id": "jp-palm-hills",
@@ -1787,17 +1787,17 @@
       "region": "Okinawa",
       "official_address": "〒901-0323 沖縄県糸満市字新垣762",
       "local_address": "〒901-0323 沖縄県糸満市字新垣762",
-      "latitude": 26.1265,
-      "longitude": 127.7008,
+      "latitude": 26.11934,
+      "longitude": 127.701172,
       "timezone": "Asia/Tokyo",
       "official_website": "https://reserve.accordiagolf.com/en/global/golfcourse/okinawa/palmhills/",
       "data_source": [
         "https://reserve.accordiagolf.com/en/global/golfcourse/okinawa/palmhills/",
         "https://reserve.accordiagolf.com/en/global/golfcourse/okinawa/palmhills/access/"
       ],
-      "coordinate_source": "Approximate course-area coordinate; requires confirmation against official course map.",
+      "coordinate_source": "https://www.fullgolf.com/en/golf-club/japan/okinawa/itoman/palm-hills-golf-resort",
       "verification_status": "partially_verified",
-      "verification_note": "Accordia 官方球場頁核實名稱及地址；座標為球場區域近似定位，尚未完成官方地圖交叉核實。"
+      "verification_note": "Accordia 官方頁核實地址；FullGolf 公開球場地圖提供 26.119340, 127.701172。座標已更新，仍保留部分核實狀態。"
     },
     {
       "course_id": "jp-chura-orchard",
@@ -1822,8 +1822,8 @@
       "region": "Okinawa",
       "official_address": "〒904-0402 沖縄県国頭郡恩納村字安富祖1577",
       "local_address": "〒904-0402 沖縄県国頭郡恩納村字安富祖1577",
-      "latitude": 26.496499,
-      "longitude": 127.891015,
+      "latitude": 26.50626,
+      "longitude": 127.89572,
       "timezone": "Asia/Tokyo",
       "official_website": "https://www.churaorchard.jp/",
       "data_source": [
@@ -1832,7 +1832,7 @@
       ],
       "coordinate_source": "https://mapcarta.com/W189138982",
       "verification_status": "partially_verified",
-      "verification_note": "球場名稱、地址及 OpenStreetMap 座標由 FullGolf/Mapcarta 資料核對；官方網站網址仍待確認。"
+      "verification_note": "Mapcarta/OpenStreetMap 球場地標提供 26.506260, 127.895720；FullGolf 另有球場資料及地址。已更新座標，官方入口位置仍待確認。"
     }
   ]
 }
