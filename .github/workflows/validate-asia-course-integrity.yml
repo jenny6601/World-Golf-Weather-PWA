@@ -1,0 +1,25 @@
+name: Validate Asia course database integrity
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [development]
+    paths:
+      - 'data/courses/asia-courses.json'
+      - 'scripts/validate-asia-course-integrity.mjs'
+      - '.github/workflows/validate-asia-course-integrity.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  validate-course-database:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Validate all 44 course records
+        run: node scripts/validate-asia-course-integrity.mjs
