@@ -15,12 +15,12 @@
 ## 目前開發狀態（development branch）
 - 已移植完整版本的主要天氣介面及預報運算程式。
 - 已建立亞洲國家篩選、文字搜尋、模糊比對、收藏及最近搜尋介面。
-- 已建立 41 筆亞洲球場名錄：7 筆完整核實、27 筆部分核實、7 筆尚未核實；其中 3 筆部分核實紀錄已補入有來源的 GPS，具備座標與時區的可進入天氣查詢。
+- 已建立 44 筆亞洲球場名錄：7 筆完整核實、27 筆部分核實、7 筆尚未核實；其中 3 筆部分核實紀錄已補入有來源的 GPS，具備座標與時區的可進入天氣查詢。
 - 日本：5 座 GPS 已核實；Camellia Hills 已核實名稱及地址，GPS 待補。
 - 南韓：Nine Bridges、Black Stone Jeju 已核實 GPS；其他 3 座已核實名稱及地址，GPS 待補。
 - 中國：觀瀾湖深圳、觀瀾湖東莞、佘山、亞龍灣已建立名稱／地址來源，GPS 待補；山欽灣仍待核實。
 - 越南：Ba Na Hills、Hoiana Shores、Laguna Lang Co、Legend Da Nang、Montgomerie Links 已核實官方名稱及地址，GPS 待補。
-- 泰國 3 座、馬來西亞 4 座、新加坡 4 座、印尼 3 座已核實名稱及地址；剩餘 6 座與中國山欽灣仍待核實。印尼峇里島與雅加達已分別設定 Asia\/Makassar、Asia\/Jakarta。沒有座標的球場不會使用推測座標，天氣查詢保持停用。現有 21 座具備 GPS 與時區，其中 7 座仍屬部分核實、座標待官方地圖交叉驗證。
+- 泰國 3 座、馬來西亞 4 座、新加坡 4 座、印尼 3 座已核實名稱及地址；剩餘 6 座與中國山欽灣仍待核實。印尼峇里島與雅加達已分別設定 Asia\/Makassar、Asia\/Jakarta。沒有座標的球場不會使用推測座標，天氣查詢保持停用。現有 24 座具備 GPS 與時區，其中 7 座仍屬部分核實、座標待官方地圖交叉驗證。
 - 全球即時觀測／METAR 尚未接入；介面明確顯示未接入，不以預報冒充實測。
 - 亞洲獨立預報快取尚未啟用；目前天氣預報查詢改走 Open-Meteo 即時 API。
 - PWA manifest、獨立 Service Worker 快取名稱、離線頁及圖示已建立。
@@ -37,3 +37,8 @@
 
 ## 安全邊界
 不得將台灣版自動化 workflow 原樣複製到本專案。所有新 workflow 必須使用本 Repository 專屬資料來源、快取分支、Secrets 及部署設定。
+
+
+### Vietnam course additions (2026-11-20)
+- Added Long Bien Golf Course, BRG Legend Hill Golf Resort, and BRG Kings Island Golf Resort (Hanoi area).
+- All three have GPS + Asia/Ho_Chi_Minh timezone; kept partially verified pending official map-pin confirmation.
