@@ -123,3 +123,12 @@ Added Long Bien Golf Course, BRG Legend Hill Golf Resort, and BRG Kings Island G
 - Pondok Indah uses Where2Golf coordinates, cross-checked against the OpenStreetMap-derived golf-course polygon. All Indonesia locations use Asia/Jakarta for these Jakarta/West Java venues.
 - Sources: https://www.fullgolf.com/en/golf-club/china/guangdong/shenzhen/mission-hills-golf-club-shenzhen ; https://fullgolf.com/en/golf-club/china/guangdong/dongguan/mission-hills-golf-club-dongguan ; https://www.missionhillschina.com/en/others/about-us/contact-us/ ; https://www.where2golf.com/china/sheshan-golf-club/ ; https://mapcarta.com/W414295341 ; https://www.where2golf.com/indonesia/jagorawi-golf-country-club-old-course/ ; https://jagorawi.com/map-directions/ ; https://www.where2golf.com/indonesia/pondok-indah-golf-course/ ; https://mapcarta.com/W28420725
 - Next validation: rerun the course-data validator and extend the long-range API smoke test to the full 44-course dataset. Browser/mobile acceptance remains pending.
+
+
+### Full-course seasonal API verification — 2026-11-20
+- Corrected the course database metadata count from 41 to 44; the actual course array contained 44 records and all 44 now have numeric latitude/longitude plus an IANA timezone.
+- Added `scripts/test-all-course-seasonal-api.mjs` and `.github/workflows/full-course-seasonal-api.yml` to test every course coordinate against the live Open-Meteo Seasonal API.
+- GitHub Actions run #44731566692 passed: 44/44 courses returned 46 EC46 daily rows and 3 SEAS5 monthly rows; every response timezone matched the course database; zero failures.
+- Course database validation also passed in run #44731566695.
+- This is an API connectivity, response-schema and timezone check at all 44 stored coordinate points. It does not prove coordinate pins are official/survey-grade, forecast accuracy, or visual correctness in a browser.
+- Browser/mobile end-to-end testing remains pending. No Cloudflare deployment or PR merge has been performed.
