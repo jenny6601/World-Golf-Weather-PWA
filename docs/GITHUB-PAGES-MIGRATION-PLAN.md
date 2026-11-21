@@ -49,6 +49,7 @@ Explicit scope decisions:
 - Do not deploy the `development` branch directly to the repository's configured Pages environment.
 - The current `development-pages-preview.yml` uses `actions/deploy-pages@v4` and is not an isolated preview deployment. Do not run it for testing.
 - Use a separate preview target/repository or a downloadable workflow artifact until an isolated preview URL is established.
+- The repository default branch is currently `main`. Scheduled workflows run from the default branch, so the provider-cache schedule will not become active until the workflow is present on `main`; keep it manual/dry-run during development and do not merge it to `main` until the migration is accepted.
 
 ## PWA / offline decision
 
