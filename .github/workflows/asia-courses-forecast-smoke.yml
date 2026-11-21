@@ -1,0 +1,25 @@
+name: Asia eight-country hourly forecast smoke test
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [development]
+    paths:
+      - 'data/courses/asia-courses.json'
+      - 'scripts/test-asia-courses-forecast.mjs'
+      - '.github/workflows/asia-courses-forecast-smoke.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  asia-hourly-forecast:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Test eight Asian country course coordinates against hourly forecast API
+        run: node scripts/test-asia-courses-forecast.mjs

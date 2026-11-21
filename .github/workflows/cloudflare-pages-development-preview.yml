@@ -1,0 +1,50 @@
+name: Cloudflare Pages development preview
+# Re-run preview deployment after GitHub Actions secrets setup
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - development
+    paths:
+      - 'index.html'
+      - 'manifest.json'
+      - 'data/**'
+      - 'icons/**'
+      - 'functions/**'
+      - '.github/workflows/cloudflare-pages-development-preview.yml'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: cloudflare-pages-development-preview
+  cancel-in-progress: true
+
+jobs:
+  deploy-preview:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout development branch
+        uses: actions/checkout@v4
+
+      - name: Prepare Pages static assets
+        run: |
+          rm -rf _site
+          mkdir -p _site
+          cp index.html manifest.json _site/
+          cp -R data icons _site/
+          touch _site/.nojekyll
+
+      - name: Deploy development preview only
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: |
+          if [ -z "$CLOUDFLARE_API_TOKEN" ] || [ -z "$CLOUDFLARE_ACCOUNT_ID" ]; then
+            echo "::error::Add CLOUDFLARE_API_TOKEN and CLOUDFLARE_ACCOUNT_ID in GitHub Actions secrets."
+            exit 1
+          fi
+          npx --yes wrangler@4 pages deploy _site \
+            --project-name world-golf-weather-pwa \
+            --branch development

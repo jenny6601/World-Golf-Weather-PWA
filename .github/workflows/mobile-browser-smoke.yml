@@ -1,0 +1,30 @@
+name: Mobile browser smoke test
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [development]
+    paths:
+      - 'index.html'
+      - 'data/courses/asia-courses.json'
+      - 'scripts/test-browser-smoke.mjs'
+      - '.github/workflows/mobile-browser-smoke.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  mobile-browser:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install Playwright
+        run: npm install --no-save playwright
+      - name: Install Chromium
+        run: npx playwright install --with-deps chromium
+      - name: Run mobile browser smoke tests
+        run: node scripts/test-browser-smoke.mjs
