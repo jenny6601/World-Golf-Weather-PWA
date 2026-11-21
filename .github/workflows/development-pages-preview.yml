@@ -11,6 +11,15 @@ on:
       - 'icons/**'
       - 'assets/**'
       - '.github/workflows/development-pages-preview.yml'
+  pull_request:
+    branches: [development]
+    paths:
+      - 'index.html'
+      - 'manifest.json'
+      - 'data/**'
+      - 'icons/**'
+      - 'assets/**'
+      - '.github/workflows/development-pages-preview.yml'
 
 permissions:
   contents: read
@@ -23,7 +32,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout development branch
+      - name: Checkout tested commit
         uses: actions/checkout@v5
 
       - name: Prepare static preview
