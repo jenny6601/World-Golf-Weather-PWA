@@ -22,12 +22,6 @@
       "sizes": "any",
       "type": "image/svg+xml",
       "purpose": "any"
-    },
-    {
-      "src": "./icons/asia-golf-weather-256.png",
-      "sizes": "256x256",
-      "type": "image/png",
-      "purpose": "any"
     }
   ]
 }
