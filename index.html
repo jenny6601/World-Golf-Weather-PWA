@@ -1873,7 +1873,6 @@ let amountWeights=null,probabilityWeights=null,weightingLabel="等權中位數�
  $("courseAutoStatus").textContent=`${p.name}｜${date}｜座標 ${p.lat.toFixed(5)}, ${p.lon.toFixed(5)}｜${forecastSource}${modelErrors.length?"；部分模型失敗，詳見 API 診斷":""}`;
  loadAndRenderDailyForecast(p);
  loadLongRangeForecast(p);
- loadRadar(p.lat,p.lon);
  loadV28ProviderCache(p.name,date);
  if(!forceRefresh&&cacheAgeMinutes!==null&&cacheAgeMinutes>180&&cacheAgeMinutes<=720&&Object.keys(cachedCourseModels(cacheCandidate,p.name,date)).length){
   $("status").textContent="舊快取已先顯示｜正在背景更新六組即時模型…";
@@ -1893,7 +1892,7 @@ function renderLongRangeMonthButtons(){
  const root=$("longRangeMonthControls");if(!root)return;
  const months=longRangeMonthDates();
  root.innerHTML=months.map((m,i)=>'<button type="button" class="secondary long-range-range'+(i===longRangeSelectedMonth?" active":"")+'" data-month-index="'+i+'" aria-pressed="'+(i===longRangeSelectedMonth)+'">'+m.label+'</button>').join("");
- root.querySelectorAll("button").forEach(btn=>btn.addEventListener("click",()=>{longRangeSelectedMonth=Number(btn.dataset.monthIndex);renderLongRangeMonthButtons();renderLongRangeForecast();}));
+ root.querySelectorAll("button").forEach(btn=>btn.addEventListener("click",()=>{longRangeSelectedMonth=Number(btn.dataset.monthIndex);renderLongRangeMonthButtons();renderLongRangeForecast();const climate=longTermCache.get(longRangeSelectedCourse);if(climate)renderLongTermObservation(climate);}));
 }
 async function loadLongRangeForecast(course){
  const status=$("longRangeStatus"),daily=$("longRangeDaily");
