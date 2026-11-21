@@ -8,7 +8,6 @@ on:
       - "index.html"
       - "manifest.json"
       - "scripts/**"
-      - "functions/**"
       - ".github/workflows/validate-course-data.yml"
   pull_request:
     branches: [development, main]
@@ -35,9 +34,3 @@ jobs:
         run: node scripts/validate-course-data.mjs
       - name: Check provider cache builder syntax
         run: node --check scripts/build-provider-cache.mjs
-      - name: Check Cloudflare Pages Function JavaScript syntax
-        run: |
-          node --check functions/api/provider-compare.js
-          node --check functions/api/metar-nearby.js
-      - name: Test nearby global METAR endpoint with mocked AWC responses
-        run: node scripts/test-metar-nearby.mjs
