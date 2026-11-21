@@ -647,7 +647,7 @@ function exportCourseFavorites(){
  const url=URL.createObjectURL(blob),a=document.createElement("a");
  a.href=url;a.download="world-golf-weather-favorites-"+new Date().toISOString().slice(0,10)+".json";
  document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1000);
- const status=$("favoritesSaveStatus");if(status)status.textContent="已建立收藏備份檔（"+ids.length+" 座球場）。";
+ const status=$("favoritesSaveStatus");if(status)status.textContent="已匯出 "+ids.length+" 座球場的收藏備份。";
 }
 async function importCourseFavorites(file){
  const status=$("favoritesSaveStatus");if(!file)return;
@@ -662,7 +662,7 @@ async function importCourseFavorites(file){
   const newIds=imported.filter(id=>!cleanCurrent.includes(id));
   const duplicateCount=imported.length-newIds.length;
   if(!newIds.length){if(status)status.textContent="沒有需要新增的收藏；重複 "+duplicateCount+" 座，未知 ID "+unknown.length+" 筆。";return;}
-  const preview="備份檔共 "+payload.favorites.length+" 筆。\\n\\n將新增："+newIds.length+" 座\\n已存在、略過："+duplicateCount+" 座\\n資料庫未識別、略過："+unknown.length+" 筆\\n\\n確認合併？現有收藏不會被覆蓋。";
+  const preview="備份檔共 "+payload.favorites.length+" 筆。\n\\n將新增："+newIds.length+" 座\\n已存在、略過："+duplicateCount+" 座\\n資料庫未識別、略過："+unknown.length+" 筆\\n\\n確認合併？現有收藏不會被覆蓋。";
   if(!window.confirm(preview)){if(status)status.textContent="已取消匯入，原有收藏未變更。";return;}
   const merged=[...cleanCurrent,...newIds];
   localStorage.setItem("wgw:favorites",JSON.stringify(merged));
@@ -686,8 +686,6 @@ async function initCourseDatabase(){
  region.addEventListener("change",()=>renderCourseDatabase());
  search.addEventListener("input",()=>{clearTimeout(courseSearchTimer);courseSearchTimer=setTimeout(()=>renderCourseDatabase(),250);});
  $("showFavorites").addEventListener("click",()=>{search.value="";country.value="";region.value="";refreshCourseRegions();renderCourseDatabase("favorites");});
- $("exportFavorites").addEventListener("click",exportCourseFavorites);
- $("importFavorites").addEventListener("click",()=>$("favoritesFileInput").click());
  $("favoritesFileInput").addEventListener("change",e=>{const file=e.target.files?.[0];if(file)importCourseFavorites(file);e.target.value="";});
  $("showRecent").addEventListener("click",()=>{search.value="";country.value="";region.value="";refreshCourseRegions();renderCourseDatabase("recent");});
  $("courseAutoStatus").textContent="亞洲球場資料庫載入中…";
