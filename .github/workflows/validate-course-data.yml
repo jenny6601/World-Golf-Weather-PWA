@@ -11,7 +11,7 @@ on:
       - "functions/**"
       - ".github/workflows/validate-course-data.yml"
   pull_request:
-    branches: [main]
+    branches: [development, main]
     paths:
       - "data/courses/**"
       - "data/schemas/**"
