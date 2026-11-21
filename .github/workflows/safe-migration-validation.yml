@@ -1,0 +1,58 @@
+name: Safe migration validation
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - ".github/workflows/safe-migration-validation.yml"
+  workflow_dispatch:
+    inputs:
+      run_provider_api_test:
+        description: "Run a real Visual Crossing + Foreca cache build (requires repository secrets)"
+        required: false
+        type: boolean
+        default: false
+
+permissions:
+  contents: read
+
+jobs:
+  static-validation:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout migration candidate
+        uses: actions/checkout@v4
+        with:
+          ref: codex/github-pages-migration
+          path: migration
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Validate course data and application shell
+        working-directory: migration
+        run: node scripts/validate-course-data.mjs
+      - name: Check migration scripts
+        working-directory: migration
+        run: |
+          node --check scripts/build-provider-cache.mjs
+          node --check scripts/validate-provider-cache.mjs
+      - name: Run provider API build only when explicitly requested
+        if: ${{ github.event_name == 'workflow_dispatch' && inputs.run_provider_api_test }}
+        working-directory: migration
+        env:
+          VC_API_KEY: ${{ secrets.VC_API_KEY }}
+          FORECA_API_KEY: ${{ secrets.FORECA_API_KEY }}
+        run: |
+          test -n "$VC_API_KEY"
+          test -n "$FORECA_API_KEY"
+          node scripts/build-provider-cache.mjs
+          node scripts/validate-provider-cache.mjs
+      - name: Upload provider cache test artifact
+        if: ${{ github.event_name == 'workflow_dispatch' && inputs.run_provider_api_test }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: provider-cache-dry-run
+          path: /tmp/provider-cache-output
+          if-no-files-found: error
+          retention-days: 3
