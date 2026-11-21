@@ -21,14 +21,15 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout migration candidate
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
           ref: codex/github-pages-migration
           path: migration
       - name: Set up Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v5
         with:
           node-version: 22
+          package-manager-cache: false
       - name: Validate course data and application shell
         working-directory: migration
         run: node scripts/validate-course-data.mjs
@@ -50,7 +51,7 @@ jobs:
           node scripts/validate-provider-cache.mjs
       - name: Upload provider cache test artifact
         if: ${{ github.event_name == 'workflow_dispatch' && inputs.run_provider_api_test }}
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
           name: provider-cache-dry-run
           path: /tmp/provider-cache-output
