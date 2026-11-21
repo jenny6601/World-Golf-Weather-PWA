@@ -170,7 +170,7 @@ footer{color:var(--muted);font-size:12px;padding:18px 0}
  .hourly-table-wrap #hourlyForecastTable th:nth-child(n+8),
  .hourly-table-wrap #hourlyForecastTable td:nth-child(n+8){display:none!important}
  .hourly-table-wrap #hourlyForecastTable th:nth-child(1),
- .hourly-table-wrap #hourlyForecastTable td:nth-child(1){width:11%;font-size:10px!important;font-weight:800}
+ .hourly-table-wrap #hourlyForecastTable td:nth-child(1){width:10%;font-size:11px!important;font-weight:850}
  .hourly-table-wrap #hourlyForecastTable th:nth-child(2),
  .hourly-table-wrap #hourlyForecastTable td:nth-child(2){width:17%}
  .hourly-table-wrap #hourlyForecastTable th:nth-child(3),
@@ -196,10 +196,10 @@ footer{color:var(--muted);font-size:12px;padding:18px 0}
  .hourly-table-wrap #hourlyForecastTable td:nth-child(3) .rainpill svg{width:24px!important;height:24px!important}
  .hourly-table-wrap #hourlyForecastTable td:nth-child(4) .rainamount{gap:1px!important;font-size:10px!important}
  .hourly-table-wrap #hourlyForecastTable td:nth-child(4) .rainamount svg{width:19px!important;height:17px!important;margin:0!important}
- .hourly-table-wrap #hourlyForecastTable td:nth-child(5) .temp-value{font-size:11px!important}
- .hourly-table-wrap #hourlyForecastTable td:nth-child(5) svg{width:13px!important;height:18px!important;margin:0!important}
- .hourly-table-wrap #hourlyForecastTable td:nth-child(6) .hourly-feel-icon{gap:1px!important;font-size:10px!important}
- .hourly-table-wrap #hourlyForecastTable td:nth-child(6) .hourly-feel-icon svg{width:24px!important;height:22px!important;min-width:24px!important;flex:0 0 22px!important}
+ .hourly-table-wrap #hourlyForecastTable td:nth-child(5) .temp-value{font-size:14px!important;line-height:1.15!important;font-weight:850!important}
+ .hourly-table-wrap #hourlyForecastTable td:nth-child(5) svg{width:10px!important;height:14px!important;margin:0 0 1px!important}
+ .hourly-table-wrap #hourlyForecastTable td:nth-child(6) .hourly-feel-icon{gap:1px!important;font-size:14px!important;line-height:1.15!important;font-weight:850!important}
+ .hourly-table-wrap #hourlyForecastTable td:nth-child(6) .hourly-feel-icon svg{width:19px!important;height:19px!important;min-width:19px!important;flex:0 0 19px!important}
  .hourly-table-wrap #hourlyForecastTable td:nth-child(7) .rain-interpretation{display:block!important;min-width:0!important;width:100%!important;padding:3px 1px!important;font-size:9px!important;line-height:1.2!important;white-space:normal!important;overflow-wrap:anywhere}
  .hourly-table-wrap #hourlyForecastTable tbody tr{height:68px}
  #tableNote{font-size:11px;line-height:1.45}
@@ -829,7 +829,7 @@ function selectedTeeTimeRows(rows){
 function renderSelectedHourlySections(rows){
  const shown=selectedTeeTimeRows(rows||[]);
  const fmt=(v,d=1)=>v===null||v===undefined?"—":Number(v).toFixed(d);
- $("hourRows").innerHTML=shown.map(x=>`<tr><td><b>${x.time}</b></td><td><span class="wxcell"><span class="wxemoji">${wxIcon(x.code)}</span>${wx(x.code)}</span></td><td>${rainProbHTML(x.rain)}</td><td>${amountRangeHTML(x)}</td><td>${rainInterpretation(x.rain,x.mm,x.code)}</td><td>${thermometerHTML(x.temp)}</td><td>${apparentFeelHTML(x.feel)}</td><td>${fmt(x.wind)}</td><td>${fmt(x.gust)}</td><td>${x.dir===null||x.dir===undefined?"—":`${dir(x.dir)} ${Math.round(x.dir)}°`}</td><td>${x.rh??"—"}%</td><td>${x.cloud??"—"}%</td><td>${fmt(x.uv)}</td><td class="${cls(score(x.rain,x.wind,x.gust,x.feel))}">${score(x.rain,x.wind,x.gust,x.feel)}/100</td></tr>`).join("");
+ $("hourRows").innerHTML=shown.map(x=>`<tr><td><b>${String(x.time||"").replace(/:00$/,"")}</b></td><td><span class="wxcell"><span class="wxemoji">${wxIcon(x.code)}</span>${wx(x.code)}</span></td><td>${rainProbHTML(x.rain)}</td><td>${amountRangeHTML(x)}</td><td>${rainInterpretation(x.rain,x.mm,x.code)}</td><td>${thermometerHTML(x.temp)}</td><td>${apparentFeelHTML(x.feel)}</td><td>${fmt(x.wind)}</td><td>${fmt(x.gust)}</td><td>${x.dir===null||x.dir===undefined?"—":`${dir(x.dir)} ${Math.round(x.dir)}°`}</td><td>${x.rh??"—"}%</td><td>${x.cloud??"—"}%</td><td>${fmt(x.uv)}</td><td class="${cls(score(x.rain,x.wind,x.gust,x.feel))}">${score(x.rain,x.wind,x.gust,x.feel)}/100</td></tr>`).join("");
  const times=shown.map(x=>x.time);
  const maxOf=k=>{const a=shown.map(x=>x[k]).filter(v=>v!==null&&v!==undefined&&Number.isFinite(Number(v)));return a.length?Math.max(...a.map(Number)):null;};
  chart("rainChart",[shown.map(x=>x.rain)],100,["#15966a"],times,"%","rainProbability");
