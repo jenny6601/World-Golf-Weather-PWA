@@ -1882,7 +1882,12 @@ async function loadLongRangeForecast(course){
   const response=await fetchWithRetry("https://seasonal-api.open-meteo.com/v1/forecast?"+q.toString(),{}, "ECMWF EC46 長期預報",20000);
   const data=await response.json();
   if(!data.daily||!Array.isArray(data.daily.time)||!data.daily.time.length)throw Error("EC46 未回傳逐日資料");
-  const record={daily:data.daily,probability:{},timezone:currentCourseTimezone,lat:Number(course.lat),lon:Number(course.lon),courseName:course.name,loadedAt:Date.now()};
+  const record={daily:data.daily,probability:{},shortRange:{},timezone:currentCourseTimezone,lat:Number(course.lat),lon:Number(course.lon),courseName:course.name,loadedAt:Date.now()};
+  // 第1–15天降雨機率與雨量沿用主畫面的六模型白天模組：每個模型先統計球場當地06:00–18:00，再對模型結果取中位數。
+  try{
+   const shortRows=await fetchDailyForecast(course.lat,course.lon,currentCourseTimezone);
+   record.shortRange=Object.fromEntries(shortRows.slice(0,15).map(row=>[row.date,{prob:row.prob,rain:row.rain,modelCount:row.modelCount,probModelCount:row.probModelCount}]));
+  }catch(shortRangeError){console.warn("Short-range rain alignment unavailable; retaining EC46/standard fallback:",shortRangeError);}
   longRangeCache.set(key,record);
   // Open-Meteo 標準預報提供逐日降雨機率；其有效天數依 API 可用預報範圍，不延伸假造至 46/60 天。
   try{
@@ -1904,11 +1909,11 @@ function renderLongRangeForecast(){
  const dates=d.time.slice(0,available);
  if(limit>available){const last=dates.length?new Date(dates[dates.length-1]+"T12:00:00Z"):new Date();for(let i=available;i<limit;i++){const next=new Date(last.getTime()+(i-available+1)*86400000);dates.push(next.toISOString().slice(0,10));}}
  daily.innerHTML=dates.map((date,i)=>{
-  const hasDaily=i<available,code=hasDaily?d.weather_code?.[i]:null,rain=hasDaily?d.precipitation_sum?.[i]:null,hi=hasDaily?d.temperature_2m_max?.[i]:null,lo=hasDaily?d.temperature_2m_min?.[i]:null,prob=hasDaily?record.probability?.[date]:undefined;
+  const hasDaily=i<available,code=hasDaily?d.weather_code?.[i]:null,shortRain=hasDaily?record.shortRange?.[date]:null,rain=hasDaily?(shortRain?.rain??d.precipitation_sum?.[i]??null):null,hi=hasDaily?d.temperature_2m_max?.[i]:null,lo=hasDaily?d.temperature_2m_min?.[i]:null,prob=hasDaily?(shortRain?.prob??record.probability?.[date]):undefined;
   const label=hasDaily?longRangeWeatherLabel(code):"超出預報範圍",dateObj=new Date(date+"T12:00:00Z"),weekday=dateObj.getUTCDay(),weekend=weekday===0||weekday===6,weekdayText=["星期日","星期一","星期二","星期三","星期四","星期五","星期六"][weekday];
   return '<div class="long-range-day'+(hasDaily?"":" long-range-unavailable")+(weekend?" weekend":"")+'" data-date="'+date+'" data-weekday="'+weekday+'"><div class="lr-date"><span>'+date.slice(5).replace("-","/")+'</span><span class="lr-weekday">'+weekdayText+'</span></div><div class="lr-icon" title="'+label+'">'+(hasDaily?longRangeWeatherEmoji(code):"—")+'<small class="lr-desc">'+label+'</small></div><div class="lr-metric"><span>氣溫</span><b>'+(hasDaily?fmt(hi)+'° / '+fmt(lo)+'°':"—")+'</b></div><div class="lr-metric"><span>降雨機率</span><b>'+(prob===undefined?"—":Math.round(prob)+"%")+'</b></div><div class="lr-metric"><span>雨量</span><b>'+(rain===null||rain===undefined?"—":Number(rain).toFixed(1)+" mm")+'</b></div></div>';
  }).join("");
- status.textContent="ECMWF EC46｜36 km 系集延伸預報｜顯示 "+available+" 天可用逐日資料"+(limit>available?"；其餘日期保留欄位但標示超出預報範圍，不提供推估數值。":"。")+" 降雨機率僅在有可用資料時顯示。";
+ const shortCount=Object.keys(record.shortRange||{}).length;status.textContent="ECMWF EC46｜36 km 系集延伸預報｜顯示 "+available+" 天可用逐日資料"+(limit>available?"；其餘日期保留欄位但標示超出預報範圍，不提供推估數值。":"。")+(shortCount?" 前15天降雨機率與06–18時雨量沿用六模型白天預報中位數（"+shortCount+"天有資料）；其餘日期採EC46雨量及有來源的機率資料。":" 前15天六模型白天降雨資料暫不可用，顯示EC46雨量及有來源的機率資料。")+"。";
  seasonal.hidden=true;seasonal.innerHTML="";
 }
 
