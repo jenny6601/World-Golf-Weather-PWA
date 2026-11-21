@@ -415,7 +415,7 @@ footer{color:var(--muted);font-size:12px;padding:18px 0}
  .hourly-table-wrap #hourlyForecastTable tbody tr{height:70px}
 }
 </style>
-</head>
+<style id="favorites-management-style">.favorites-management{margin:16px 0 4px;padding:14px;border:1px solid #cfe0d7;border-radius:12px;background:#f6faf7}.favorites-management h3{margin:0 0 5px;color:#174b38;font-size:17px}.favorites-management p{margin:0 0 11px;color:#64748b;font-size:13px}.favorites-management-actions{display:grid;grid-template-columns:1fr 1fr;gap:9px}.favorites-management-actions button{min-height:46px;padding:10px 12px;border-radius:9px;font-weight:800}.favorites-management-actions button.secondary{background:#fff;color:#155b43;border:1px solid #b9d2c5}.favorites-management-status{margin-top:9px;font-size:12px;line-height:1.5;color:#526b5d;overflow-wrap:anywhere}@media(max-width:600px){.favorites-management{padding:12px}.favorites-management-actions{gap:8px}.favorites-management-actions button{min-height:48px;font-size:14px}}</style></head>
 <body>
 <header><div class="wrap"><h1>⛳ World Golf Weather｜亞洲高爾夫球場天氣</h1><p>亞洲球場搜尋・國家篩選・球場當地時區・逐時天氣分析</p></div></header>
 <main class="wrap">
@@ -440,7 +440,7 @@ footer{color:var(--muted);font-size:12px;padding:18px 0}
 <div class="muted" style="margin:-3px 0 8px">可輸入英文名稱、當地名稱、城市或地區</div>
 <input id="courseSearchInput" type="search" autocomplete="off" placeholder="例如：Kise、Hanoi、Jeju、Tokyo..." style="width:100%;max-width:680px"/>
 <div class="muted" id="courseSearchStatus" aria-live="polite">球場資料庫準備中…</div>
-<div class="course-action-grid" aria-label="收藏與搜尋工具"><button type="button" class="secondary" id="showFavorites">★ 我的收藏</button><button type="button" class="secondary" id="exportFavorites">匯出收藏檔</button><button type="button" class="secondary" id="importFavorites">匯入收藏檔</button><button type="button" class="secondary" id="showRecent">最近搜尋</button><input type="file" id="favoritesFileInput" accept="application/json,.json" hidden/></div><div class="muted" id="favoritesSaveStatus" aria-live="polite">收藏會自動儲存在此瀏覽器；可匯出檔案備份或轉移。</div>
+<div class="course-action-grid" aria-label="收藏與搜尋工具"><button type="button" class="secondary" id="showFavorites">★ 我的收藏</button><button type="button" class="secondary" id="showRecent">最近搜尋</button></div><input type="file" id="favoritesFileInput" accept="application/json,.json" hidden/>
 <div class="tee-time-picker"><label for="teeTimeSelect">⛳ 開球時間（選填）</label><select id="teeTimeSelect"><option value="">不指定｜顯示完整 06:00–18:00</option><option value="06:00">06:00</option><option value="07:00">07:00</option><option value="08:00">08:00</option><option value="09:00">09:00</option><option value="10:00">10:00</option><option value="11:00">11:00</option><option value="12:00">12:00</option><option value="13:00">13:00</option></select><div class="muted">選擇後，①～④僅顯示開球起算連續6小時</div></div>
 <div class="muted" id="status" style="margin:8px 0 4px">尚未載入氣象資料。</div>
 <div class="muted" id="courseAutoStatus" style="margin:4px 0 12px">選擇國家並搜尋球場，確認球場資料後載入天氣預報。</div>
@@ -646,20 +646,27 @@ function exportCourseFavorites(){
  const blob=new Blob([JSON.stringify(payload,null,2)],{type:"application/json"});
  const url=URL.createObjectURL(blob),a=document.createElement("a");
  a.href=url;a.download="world-golf-weather-favorites-"+new Date().toISOString().slice(0,10)+".json";
- document.body.appendChild(a);a.click();a.remove();URL.revokeObjectURL(url);
+ document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1000);
  const status=$("favoritesSaveStatus");if(status)status.textContent="已建立收藏備份檔（"+ids.length+" 座球場）。";
 }
 async function importCourseFavorites(file){
  const status=$("favoritesSaveStatus");if(!file)return;
  try{
   const payload=JSON.parse(await file.text());
-  if(payload?.format!=="world-golf-weather-favorites"||!Array.isArray(payload.favorites))throw Error("檔案格式不正確，請選擇本 App 匯出的收藏 JSON 檔。");
+  if(payload?.format!=="world-golf-weather-favorites"||payload?.version!==1||!Array.isArray(payload.favorites)||!payload.favorites.every(id=>typeof id==="string"))throw Error("檔案格式或版本不支援，請選擇本 App 匯出的 JSON 備份檔。");
   const validIds=new Set(asiaCourses.map(c=>c.course_id));
-  const imported=[...new Set(payload.favorites.filter(id=>typeof id==="string"&&validIds.has(id)))];
+  const imported=[...new Set(payload.favorites.filter(id=>validIds.has(id)))];
+  const unknown=[...new Set(payload.favorites.filter(id=>!validIds.has(id)))];
   let current=[];try{current=JSON.parse(localStorage.getItem("wgw:favorites")||"[]");}catch{}
-  const merged=[...new Set([...current.filter(id=>validIds.has(id)),...imported])];
+  const cleanCurrent=[...new Set(current.filter(id=>validIds.has(id)))];
+  const newIds=imported.filter(id=>!cleanCurrent.includes(id));
+  const duplicateCount=imported.length-newIds.length;
+  if(!newIds.length){if(status)status.textContent="沒有需要新增的收藏；重複 "+duplicateCount+" 座，未知 ID "+unknown.length+" 筆。";return;}
+  const preview="備份檔共 "+payload.favorites.length+" 筆。\\n\\n將新增："+newIds.length+" 座\\n已存在、略過："+duplicateCount+" 座\\n資料庫未識別、略過："+unknown.length+" 筆\\n\\n確認合併？現有收藏不會被覆蓋。";
+  if(!window.confirm(preview)){if(status)status.textContent="已取消匯入，原有收藏未變更。";return;}
+  const merged=[...cleanCurrent,...newIds];
   localStorage.setItem("wgw:favorites",JSON.stringify(merged));
-  if(status)status.textContent="匯入完成：新增 "+merged.length-current.length+" 座，有效收藏共 "+merged.length+" 座。";
+  if(status)status.textContent="匯入完成：新增 "+newIds.length+" 座、重複略過 "+duplicateCount+" 座、未知 ID 略過 "+unknown.length+" 筆；目前共 "+merged.length+" 座。";
   renderCourseDatabase("favorites");
  }catch(e){if(status)status.textContent="匯入失敗："+e.message;}
 }
@@ -713,13 +720,16 @@ function renderCourseDatabase(mode="search"){
  else entries=entries;
  const root=$("courseList");
  if(!country&&mode==="search"&&!query){root.innerHTML='<div class="muted">請選擇國家或輸入球場名稱搜尋。</div>';return;}
- if(!entries.length){root.innerHTML='<div class="muted">'+(mode==="favorites"?"尚未收藏球場，請在球場名稱右側點選 ☆。":courseDataReady?"目前沒有符合條件的球場資料。":"正在載入球場資料…")+'</div>';return;}
+ if(!entries.length&&mode!=="favorites"){root.innerHTML='<div class="muted">'+(mode==="recent"?"尚無最近搜尋紀錄。":courseDataReady?"目前沒有符合條件的球場資料。":"正在載入球場資料…")+'</div>';return;}
  root.innerHTML=entries.slice(0,100).map(({c,i})=>{
   const favorite=isCourseFavorite(c.course_id);
   return '<article class="course-item" style="display:flex;align-items:center;gap:10px;padding:12px 12px;border:1px solid var(--line);border-radius:12px;margin:8px 0;background:#fff;min-width:0"><div role="button" tabindex="0" aria-label="選擇 '+esc(c.name)+'" onclick="window.loadCourseByIndex('+i+',this)" onkeydown="if(event.key===\'Enter\'||event.key===\' \'){event.preventDefault();window.loadCourseByIndex('+i+',this)}" style="flex:1;min-width:0;cursor:pointer"><strong style="display:block;font-size:16px;line-height:1.4;font-weight:650;overflow-wrap:anywhere;text-align:left">'+esc(c.name)+'</strong></div><button type="button" aria-label="'+(favorite?"取消收藏 ":"收藏 ")+esc(c.name)+'" aria-pressed="'+favorite+'" onclick="event.stopPropagation();window.toggleCourseFavorite(\''+esc(c.course_id)+'\',\''+mode+'\')" style="flex:0 0 44px;width:44px;height:44px;padding:0;border:1px solid '+(favorite?"#d8e8dc":"#d9e1e8")+';border-radius:10px;background:'+(favorite?"#e8f5ec":"#f8fafc")+';color:'+(favorite?"#16734b":"#64748b")+';font-size:25px;line-height:1">'+(favorite?"★":"☆")+'</button></article>';
 }).join("");
+ if(mode==="favorites"){root.insertAdjacentHTML("beforeend",'<section class="favorites-management" aria-label="收藏資料管理"><h3>收藏資料管理</h3><p>收藏已自動儲存在此裝置。匯出 JSON 可備份或轉移；匯入會先預覽新增與重複項目，再與現有收藏合併，不會覆蓋原資料。</p><div class="favorites-management-actions"><button type="button" class="secondary" onclick="window.exportCourseFavorites()">↓ 匯出收藏</button><button type="button" class="secondary" onclick="window.openFavoritesImport()">↑ 匯入收藏</button></div><div class="favorites-management-status" id="favoritesSaveStatus" aria-live="polite">目前收藏共 '+JSON.parse(localStorage.getItem("wgw:favorites")||"[]").length+' 座。</div></section>');}
 }
 window.toggleCourseFavorite=toggleCourseFavorite;
+window.exportCourseFavorites=exportCourseFavorites;
+window.openFavoritesImport=()=> $("favoritesFileInput").click();
 
 function esc(value){
  return String(value??"").replace(/[&<>"']/g,ch=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[ch]));
