@@ -1340,7 +1340,11 @@ async function loadVisualCrossingRainRows(courseName,date){
  const cache=await fetchJsonBounded(base+rel+"?v="+encodeURIComponent(index.generated_at||"latest"),6000,"no-cache");
  const key=(cache.courses||{})[courseName]||Object.entries(cache.courses||{}).find(([n])=>String(n).trim().normalize("NFC")===String(courseName).trim().normalize("NFC"))?.[1];
  const hours=key?.[date]?.providers?.["Visual Crossing"]?.hourly||[];
- return hours.filter(x=>{const h=Number(String(x.time||"").slice(11,13));return h>=5&&h<=17;}).map(x=>({
+ const localNow=new Intl.DateTimeFormat("en-CA",{timeZone:currentCourseTimezone||"Asia/Tokyo",year:"numeric",month:"2-digit",day:"2-digit",hour:"2-digit",hourCycle:"h23"}).formatToParts(new Date());
+ const nowParts=Object.fromEntries(localNow.map(x=>[x.type,x.value]));
+ const today=nowParts.year+"-"+nowParts.month+"-"+nowParts.day;
+ const firstHour=date===today?Math.max(5,Number(nowParts.hour)):5;
+ return hours.filter(x=>{const stamp=String(x.time||"");const h=Number(stamp.slice(11,13));return stamp.slice(0,10)===date&&h>=firstHour&&h<=17;}).map(x=>({
   time:String(Number(String(x.time||"").slice(11,13))+1).padStart(2,"0")+":00",mm:x.precipitation??null,rain:x.precipitation_probability??null,
   temp:x.temperature_2m??null,feel:x.apparent_temperature??null,wind:x.wind_speed_10m??null,
   gust:x.wind_gusts_10m??null,dir:x.wind_direction_10m??null,rh:x.relative_humidity_2m??null,
@@ -1430,11 +1434,19 @@ async function loadV28ProviderCache(courseName,date){
   const item=key?.[date]||key;
   if(!item||!item.providers)throw Error("Visual Crossing 尚未提供所選日期的逐時資料（最長15天）");
   const rows=[];
+  const localNow=new Intl.DateTimeFormat("en-CA",{timeZone:currentCourseTimezone||"Asia/Tokyo",year:"numeric",month:"2-digit",day:"2-digit",hour:"2-digit",hourCycle:"h23"}).formatToParts(new Date());
+  const nowParts=Object.fromEntries(localNow.map(x=>[x.type,x.value]));
+  const localToday=nowParts.year+"-"+nowParts.month+"-"+nowParts.day;
+  const currentLocalHour=Number(nowParts.hour);
+  const isSelectedToday=date===localToday;
+  const firstForecastHour=isSelectedToday?Math.max(6,currentLocalHour):6;
+  const firstRainHour=isSelectedToday?Math.max(5,currentLocalHour):5;
+  const expectedHours=Math.max(0,19-firstForecastHour);
   for(const [provider,p] of Object.entries(item.providers)){
    const hs=p.hourly||[];
    if(p.status!=="ok"||!hs.length)continue;
-   const wanted=hs.filter(x=>{const h=Number(String(x.time||"").slice(11,13));return h>=6&&h<=18;});
-   const rainWanted=hs.filter(x=>{const h=Number(String(x.time||"").slice(11,13));return h>=5&&h<=17;});
+   const wanted=hs.filter(x=>{const stamp=String(x.time||"");const h=Number(stamp.slice(11,13));return stamp.slice(0,10)===date&&h>=firstForecastHour&&h<=18;});
+   const rainWanted=hs.filter(x=>{const stamp=String(x.time||"");const h=Number(stamp.slice(11,13));return stamp.slice(0,10)===date&&h>=firstRainHour&&h<=17;});
    if(!wanted.length)continue;
    const values=(k,arr=wanted)=>arr.map(x=>x[k]).filter(v=>v!==null&&v!==undefined&&v!==""&&Number.isFinite(Number(v))).map(Number);
    const avg=(k,arr=wanted)=>{const a=values(k,arr);return a.length?(a.reduce((z,v)=>z+v,0)/a.length).toFixed(1):"—";};
@@ -1442,7 +1454,7 @@ async function loadV28ProviderCache(courseName,date){
    rows.push({provider:p.display_name||provider,temp:avg("temperature_2m"),feel:avg("apparent_temperature"),rain:max("precipitation_probability",rainWanted),mm:avg("precipitation",rainWanted),wind:avg("wind_speed_10m"),gust:max("wind_gusts_10m"),count:wanted.length});
   }
   if(!rows.length)throw Error("快取已存在，但所選日期沒有有效逐時資料");
-  target.innerHTML='<table class="provider-table"><thead><tr><th>外部來源</th><th>平均氣溫</th><th>平均體感</th><th>最高降雨機率</th><th>平均雨量</th><th>平均風速</th><th>最大陣風</th><th>時數</th></tr></thead><tbody>'+rows.map(x=>'<tr><td>'+esc(x.provider)+'</td><td>'+x.temp+'</td><td>'+x.feel+'</td><td>'+x.rain+'%</td><td>'+x.mm+' mm</td><td>'+x.wind+'</td><td>'+x.gust+'</td><td>'+x.count+'/13</td></tr>').join("")+'</tbody></table>';
+  target.innerHTML='<table class="provider-table"><thead><tr><th>外部來源</th><th>平均氣溫</th><th>平均體感</th><th>最高降雨機率</th><th>平均雨量</th><th>平均風速</th><th>最大陣風</th><th>時數</th></tr></thead><tbody>'+rows.map(x=>'<tr><td>'+esc(x.provider)+'</td><td>'+x.temp+'</td><td>'+x.feel+'</td><td>'+x.rain+'%</td><td>'+x.mm+' mm</td><td>'+x.wind+'</td><td>'+x.gust+'</td><td>'+x.count+'/'+expectedHours+'</td></tr>').join("")+'</tbody></table>';
   const stamp=index.generated_at||d.generated_at||"未提供";
   status.textContent="Visual Crossing 獨立快取已載入｜全台 "+(index.course_count||57)+" 座｜更新："+stamp+"。不列入六模型等權中位數；達標時另依歷史權重參與雨量融合。";
   if(vcStatus)vcStatus.textContent="已啟用｜全台 "+(index.course_count||57)+" 座球場｜15天逐時｜更新 "+stamp;
