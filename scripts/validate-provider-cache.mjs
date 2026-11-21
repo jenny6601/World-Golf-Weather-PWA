@@ -37,7 +37,7 @@ for (const course of expectedCourses) {
     providerTotals[providerName].hours += hours.length;
     if (hours.length) courseHasUsableProvider = true;
     for (const hour of hours) {
-      assert.ok(/^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}$/.test(hour.time), name + " " + providerName + " invalid local timestamp: " + hour.time);
+      assert.ok(/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}$/.test(hour.time), name + " " + providerName + " invalid local timestamp: " + hour.time);
       for (const key of ["temperature_2m","apparent_temperature","relative_humidity_2m","precipitation","precipitation_probability","wind_speed_10m","wind_direction_10m","wind_gusts_10m"]) {
         const value = hour[key];
         assert.ok(value === null || (typeof value === "number" && Number.isFinite(value)), name + " " + providerName + " invalid " + key);
