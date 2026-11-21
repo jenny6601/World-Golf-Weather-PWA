@@ -1333,7 +1333,7 @@ function consensusRows(modelRows,amountWeights=null,probabilityWeights=null,exte
  });
 }
 async function loadVisualCrossingRainRows(courseName,date){
- const base="https://raw.githubusercontent.com/jenny6601/World-Golf-Weather-PWA/visual-crossing-cache/";
+ const base="https://raw.githubusercontent.com/jenny6601/World-Golf-Weather-PWA/provider-forecast-cache/";
  const index=await fetchJsonBounded(base+"index.json?ts="+Date.now(),6000,"no-store");
  const rel=index.courses?.[courseName];
  if(!rel)return [];
@@ -1421,7 +1421,7 @@ async function loadV28ProviderCache(courseName,date){
  if(!status||!target)return;
  status.textContent="正在讀取 Visual Crossing 15天逐時快取…";target.innerHTML="";
  try{
-  const base="https://raw.githubusercontent.com/jenny6601/World-Golf-Weather-PWA/visual-crossing-cache/";
+  const base="https://raw.githubusercontent.com/jenny6601/World-Golf-Weather-PWA/provider-forecast-cache/";
   const index=await fetchJsonBounded(base+"index.json?ts="+Date.now(),9000,"no-store");
   const rel=index.courses?.[courseName];
   if(!rel)throw Error("亞洲快取尚未包含此球場："+courseName);
