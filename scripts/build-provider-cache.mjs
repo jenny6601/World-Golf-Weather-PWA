@@ -205,16 +205,8 @@ const worker = async () => {
       const relativePath = "courses/" + course.course_id + ".json";
       index.courses[course.name_en || course.name || course.course_id] = relativePath;
       await writeFile(path.join(outputDir, relativePath), JSON.stringify({
-        course: {
-          course_id: course.course_id,
-          name: course.name_en || course.name || course.course_id,
-          country_code: course.country_code,
-          timezone: course.timezone,
-          latitude: course.latitude,
-          longitude: course.longitude
-        },
         generated_at: record.generated_at,
-        dates: daily
+        courses: { [course.name_en || course.name || course.course_id]: daily }
       }));
       const states = Object.fromEntries(Object.entries(record.providers).map(([name, p]) => [name, p.status]));
       completed++;
