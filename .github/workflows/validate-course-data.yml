@@ -32,6 +32,8 @@ jobs:
           node-version: 22
       - name: Validate course records, search aliases and PWA shell
         run: node scripts/validate-course-data.mjs
+      - name: Check provider cache builder syntax
+        run: node --check scripts/build-provider-cache.mjs
       - name: Check Cloudflare Pages Function JavaScript syntax
         run: |
           node --check functions/api/provider-compare.js
