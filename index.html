@@ -18,7 +18,8 @@
 <meta name="apple-mobile-web-app-title" content="World Golf Weather"/>
 
 <!-- iPhone App Icon -->
-<link rel="apple-touch-icon" href="./icons/apple-touch-icon.png"/>
+<link rel="apple-touch-icon" sizes="192x192" href="./icons/asia-golf-weather-original-192.png"/>
+<link rel="icon" type="image/png" sizes="192x192" href="./icons/asia-golf-weather-original-192.png"/>
 <style>
 :root{--bg:#f2f5f7;--card:#fff;--ink:#17212b;--muted:#64748b;--line:#dfe6ec;--green:#126b4c;--blue:#1769aa;--amber:#b7791f;--red:#b42318}
 *{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.5 system-ui,-apple-system,"Noto Sans TC",sans-serif}
@@ -169,7 +170,7 @@ footer{color:var(--muted);font-size:12px;padding:18px 0}
  .hourly-table-wrap #hourlyForecastTable th:nth-child(n+8),
  .hourly-table-wrap #hourlyForecastTable td:nth-child(n+8){display:none!important}
  .hourly-table-wrap #hourlyForecastTable th:nth-child(1),
- .hourly-table-wrap #hourlyForecastTable td:nth-child(1){width:11%;font-size:10px!important;font-weight:800}
+ .hourly-table-wrap #hourlyForecastTable td:nth-child(1){width:10%;font-size:11px!important;font-weight:850}
  .hourly-table-wrap #hourlyForecastTable th:nth-child(2),
  .hourly-table-wrap #hourlyForecastTable td:nth-child(2){width:17%}
  .hourly-table-wrap #hourlyForecastTable th:nth-child(3),
@@ -185,20 +186,20 @@ footer{color:var(--muted);font-size:12px;padding:18px 0}
  .hourly-table-wrap #hourlyForecastTable td:nth-child(2) .wxcell,
  .hourly-table-wrap #hourlyForecastTable td:nth-child(3) .rainpill,
  .hourly-table-wrap #hourlyForecastTable td:nth-child(4) .rainamount,
- .hourly-table-wrap #hourlyForecastTable td:nth-child(5) .temp-value,
- .hourly-table-wrap #hourlyForecastTable td:nth-child(6) .hourly-feel-icon{
+ .hourly-table-wrap #hourlyForecastTable td:nth-child(6) .temp-value,
+ .hourly-table-wrap #hourlyForecastTable td:nth-child(7) .hourly-feel-icon{
   display:flex!important;flex-direction:column!important;align-items:center!important;justify-content:center!important;gap:2px!important;white-space:normal!important;margin:0 auto!important
  }
  .hourly-table-wrap #hourlyForecastTable td:nth-child(2) .wxemoji{width:100%!important;height:26px!important;justify-content:center!important}
  .hourly-table-wrap #hourlyForecastTable td:nth-child(2) .wxemoji svg{width:27px!important;height:25px!important}
- .hourly-table-wrap #hourlyForecastTable td:nth-child(3) .rainpill{padding:2px 2px!important;gap:1px!important;font-size:10px!important}
- .hourly-table-wrap #hourlyForecastTable td:nth-child(3) .rainpill svg{width:24px!important;height:24px!important}
+ .hourly-table-wrap #hourlyForecastTable td:nth-child(3) .rainpill{padding:2px 1px!important;gap:1px!important;font-size:13px!important;line-height:1.1!important;font-weight:850!important}
+ .hourly-table-wrap #hourlyForecastTable td:nth-child(3) .rainpill svg{width:20px!important;height:18px!important}
  .hourly-table-wrap #hourlyForecastTable td:nth-child(4) .rainamount{gap:1px!important;font-size:10px!important}
  .hourly-table-wrap #hourlyForecastTable td:nth-child(4) .rainamount svg{width:19px!important;height:17px!important;margin:0!important}
- .hourly-table-wrap #hourlyForecastTable td:nth-child(5) .temp-value{font-size:11px!important}
- .hourly-table-wrap #hourlyForecastTable td:nth-child(5) svg{width:13px!important;height:18px!important;margin:0!important}
- .hourly-table-wrap #hourlyForecastTable td:nth-child(6) .hourly-feel-icon{gap:1px!important;font-size:10px!important}
- .hourly-table-wrap #hourlyForecastTable td:nth-child(6) .hourly-feel-icon svg{width:24px!important;height:22px!important;min-width:24px!important;flex:0 0 22px!important}
+ .hourly-table-wrap #hourlyForecastTable td:nth-child(6) .temp-value{font-size:17px!important;line-height:1.1!important;font-weight:900!important}
+ .hourly-table-wrap #hourlyForecastTable td:nth-child(6) .temp-value svg{width:10px!important;height:14px!important;margin:0 0 1px!important}
+ .hourly-table-wrap #hourlyForecastTable td:nth-child(7) .hourly-feel-icon{gap:1px!important;font-size:17px!important;line-height:1.1!important;font-weight:900!important}
+ .hourly-table-wrap #hourlyForecastTable td:nth-child(7) .hourly-feel-icon svg{width:17px!important;height:17px!important;min-width:17px!important;flex:0 0 17px!important}
  .hourly-table-wrap #hourlyForecastTable td:nth-child(7) .rain-interpretation{display:block!important;min-width:0!important;width:100%!important;padding:3px 1px!important;font-size:9px!important;line-height:1.2!important;white-space:normal!important;overflow-wrap:anywhere}
  .hourly-table-wrap #hourlyForecastTable tbody tr{height:68px}
  #tableNote{font-size:11px;line-height:1.45}
@@ -397,7 +398,24 @@ footer{color:var(--muted);font-size:12px;padding:18px 0}
 <style>.rain-level-description{display:block!important;visibility:visible!important;width:100%;margin:8px 0 12px;padding:0}.rain-level-description-table{display:table!important;visibility:visible!important;width:100%;border-collapse:collapse;table-layout:fixed;background:#fff;font-size:13px}.rain-level-description-table th{background:#eaf1f4;font-weight:800;text-align:left;padding:8px 6px;border-bottom:1px solid #d7e0e5}.rain-level-description-table td{padding:8px 6px;border-bottom:1px solid #e3e9ed;vertical-align:middle;line-height:1.3}.rain-level-description-table th:first-child,.rain-level-description-table td:first-child{width:48px;text-align:center}.rain-level-description-table th:nth-child(2),.rain-level-description-table td:nth-child(2){width:31%}.rain-lv{display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;border-radius:50%;color:#fff;font-size:13px}.rain-lv.lv1{background:#168044}.rain-lv.lv2{background:#1673c7}.rain-lv.lv3{background:#b77900}.rain-lv.lv4{background:#e45a13}.rain-lv.lv5{background:#c91f2c}@media(max-width:600px){.rain-level-description-table{font-size:12px}.rain-level-description-table th,.rain-level-description-table td{padding:7px 4px}.rain-level-description-table th:first-child,.rain-level-description-table td:first-child{width:38px}.rain-level-description-table th:nth-child(2),.rain-level-description-table td:nth-child(2){width:29%}}</style>
 <style>.rain-level-description{display:block!important;visibility:visible!important;opacity:1!important;width:100%;margin:8px 0 12px;padding:7px;border:1px solid #dce5eb;border-radius:12px;background:#fff;box-sizing:border-box}.rain-level-description-heading,.rain-level-description-row{display:grid!important;grid-template-columns:42px minmax(88px,0.9fr) minmax(0,1.5fr);align-items:center;column-gap:7px;width:100%;box-sizing:border-box}.rain-level-description-heading{padding:5px 4px;background:#edf3f5;border-radius:7px;font-size:12px;font-weight:800}.rain-level-description-row{min-height:39px;padding:5px 4px;border-bottom:1px solid #e5ebef;font-size:12px;line-height:1.3}.rain-level-description-row:last-child{border-bottom:0}.rain-level-description-row strong{font-weight:800}.rain-level-description-row span{display:block;white-space:normal}.rain-lv{display:inline-flex!important;align-items:center;justify-content:center;width:25px;height:25px;border-radius:50%;color:#fff;font-size:13px}.rain-lv.lv1{background:#168044}.rain-lv.lv2{background:#1673c7}.rain-lv.lv3{background:#b77900}.rain-lv.lv4{background:#e45a13}.rain-lv.lv5{background:#c91f2c}@media(max-width:600px){.rain-level-description{padding:5px}.rain-level-description-heading,.rain-level-description-row{grid-template-columns:32px minmax(82px,.9fr) minmax(0,1.5fr);column-gap:5px}.rain-level-description-heading{font-size:11px}.rain-level-description-row{font-size:11px;min-height:36px;padding:5px 2px}.rain-level-description-row span{font-size:10px}.rain-lv{width:23px;height:23px;font-size:12px}}</style>
 <style id="forecast-heading-colors">.forecast-heading{display:block;font-weight:850;letter-spacing:.01em;color:#fff!important;padding:11px 13px;margin:0 0 10px;border:0;border-radius:10px;line-height:1.4}.forecast-heading-1{background:#6D45A8!important}.forecast-heading-2{background:#B86A16!important}.forecast-heading-3{background:#16796F!important}.forecast-heading-4{background:#B93636!important}@media(max-width:600px){.forecast-heading{font-size:18px;line-height:1.4;padding:10px 11px;margin-bottom:9px}}</style>
-</head>
+<style id="hourly-readable-values-v1">
+/* Mobile hourly forecast: modestly enlarge numeric labels without changing the seven-column layout. */
+@media(max-width:600px){
+ .hourly-table-wrap #hourlyForecastTable td:first-child b{font-size:12px!important;line-height:1.2!important}
+ .hourly-table-wrap #hourlyForecastTable td:nth-child(2) .wxcell{font-size:10px!important;line-height:1.2!important}
+ .hourly-table-wrap #hourlyForecastTable td:nth-child(3) .rainpill{font-size:12px!important;line-height:1.2!important}
+ .hourly-table-wrap #hourlyForecastTable td:nth-child(3) .rainpill b{display:inline!important;font-size:12px!important;font-weight:800!important}
+ .hourly-table-wrap #hourlyForecastTable td:nth-child(4) .rainamount{font-size:11px!important;line-height:1.2!important}
+ .hourly-table-wrap #hourlyForecastTable td:nth-child(4) .rainamount b{font-size:11px!important;font-weight:800!important}
+ .hourly-table-wrap #hourlyForecastTable td:nth-child(4) .rainamount small{font-size:10px!important;line-height:1.15!important}
+ .hourly-table-wrap #hourlyForecastTable td:nth-child(5) .temp-value{font-size:13px!important;line-height:1.2!important;font-weight:800!important}
+ .hourly-table-wrap #hourlyForecastTable td:nth-child(6) .hourly-feel-icon{font-size:12px!important;line-height:1.2!important;font-weight:800!important}
+ .hourly-table-wrap #hourlyForecastTable td:nth-child(7) .rain-interpretation{font-size:10px!important;line-height:1.25!important;padding:4px 2px!important}
+ .hourly-table-wrap #hourlyForecastTable td:nth-child(7) .rain-interpretation b{font-size:11px!important;line-height:1.2!important}
+ .hourly-table-wrap #hourlyForecastTable tbody tr{height:70px}
+}
+</style>
+<style id="favorites-management-style">.favorites-management{margin:16px 0 4px;padding:14px;border:1px solid #cfe0d7;border-radius:12px;background:#f6faf7}.favorites-management h3{margin:0 0 5px;color:#174b38;font-size:17px}.favorites-management p{margin:0 0 11px;color:#64748b;font-size:13px}.favorites-management-actions{display:grid;grid-template-columns:1fr 1fr;gap:9px}.favorites-management-actions button{min-height:46px;padding:10px 12px;border-radius:9px;font-weight:800}.favorites-management-actions button.secondary{background:#fff;color:#155b43;border:1px solid #b9d2c5}.favorites-management-status{margin-top:9px;font-size:12px;line-height:1.5;color:#526b5d;overflow-wrap:anywhere}@media(max-width:600px){.favorites-management{padding:12px}.favorites-management-actions{gap:8px}.favorites-management-actions button{min-height:48px;font-size:14px}}</style></head>
 <body>
 <header><div class="wrap"><h1>⛳ World Golf Weather｜亞洲高爾夫球場天氣</h1><p>亞洲球場搜尋・國家篩選・球場當地時區・逐時天氣分析</p></div></header>
 <main class="wrap">
@@ -422,7 +440,7 @@ footer{color:var(--muted);font-size:12px;padding:18px 0}
 <div class="muted" style="margin:-3px 0 8px">可輸入英文名稱、當地名稱、城市或地區</div>
 <input id="courseSearchInput" type="search" autocomplete="off" placeholder="例如：Kise、Hanoi、Jeju、Tokyo..." style="width:100%;max-width:680px"/>
 <div class="muted" id="courseSearchStatus" aria-live="polite">球場資料庫準備中…</div>
-<div class="course-action-grid" aria-label="收藏與搜尋工具"><button type="button" class="secondary" id="showFavorites">★ 我的收藏</button><button type="button" class="secondary" id="exportFavorites">匯出收藏檔</button><button type="button" class="secondary" id="importFavorites">匯入收藏檔</button><button type="button" class="secondary" id="showRecent">最近搜尋</button><input type="file" id="favoritesFileInput" accept="application/json,.json" hidden/></div><div class="muted" id="favoritesSaveStatus" aria-live="polite">收藏會自動儲存在此瀏覽器；可匯出檔案備份或轉移。</div>
+<div class="course-action-grid" aria-label="收藏與搜尋工具"><button type="button" class="secondary" id="showFavorites">★ 我的收藏</button><button type="button" class="secondary" id="showRecent">最近搜尋</button></div><input type="file" id="favoritesFileInput" accept="application/json,.json" hidden/>
 <div class="tee-time-picker"><label for="teeTimeSelect">⛳ 開球時間（選填）</label><select id="teeTimeSelect"><option value="">不指定｜顯示完整 06:00–18:00</option><option value="06:00">06:00</option><option value="07:00">07:00</option><option value="08:00">08:00</option><option value="09:00">09:00</option><option value="10:00">10:00</option><option value="11:00">11:00</option><option value="12:00">12:00</option><option value="13:00">13:00</option></select><div class="muted">選擇後，①～④僅顯示開球起算連續6小時</div></div>
 <div class="muted" id="status" style="margin:8px 0 4px">尚未載入氣象資料。</div>
 <div class="muted" id="courseAutoStatus" style="margin:4px 0 12px">選擇國家並搜尋球場，確認球場資料後載入天氣預報。</div>
@@ -549,6 +567,8 @@ let currentCourseTimezone = "Asia/Tokyo";
 let courseSearchTimer = null;
 let courseDataReady = false;
 let COURSE_COUNTRIES = [];
+let courseDatabaseView = "search";
+function readCourseIdList(key){try{const value=JSON.parse(localStorage.getItem(key)||"[]");if(!Array.isArray(value))return [];return [...new Set(value.map(x=>typeof x==="string"?x:(x?.course_id||x?.id||"")).filter(x=>typeof x==="string"&&x.trim()).map(x=>x.trim()))];}catch{return [];}}
 function courseLocalYmd(offsetDays=0){
  const d=new Date(Date.now()+offsetDays*86400000);
  const p=Object.fromEntries(new Intl.DateTimeFormat("en-US",{timeZone:currentCourseTimezone,year:"numeric",month:"2-digit",day:"2-digit"}).formatToParts(d).map(x=>[x.type,x.value]));
@@ -619,29 +639,36 @@ function courseSearchScore(course,query){
  const best=Math.min(...normalized.map(x=>editDistance(q,x.slice(0,Math.max(q.length,Math.min(x.length,q.length+3))))));
  return best<=2?500-best*50:0;
 }
-function isCourseFavorite(id){try{return (JSON.parse(localStorage.getItem("wgw:favorites")||"[]")).includes(id);}catch{return false;}}
-function toggleCourseFavorite(id,mode="search"){let a=[];try{a=JSON.parse(localStorage.getItem("wgw:favorites")||"[]");}catch{}a=a.includes(id)?a.filter(x=>x!==id):[...a,id];localStorage.setItem("wgw:favorites",JSON.stringify(a));const status=$("favoritesSaveStatus");if(status)status.textContent="已自動儲存收藏，共 "+a.length+" 座球場；可匯出收藏檔備份。";renderCourseDatabase(mode);}
-function rememberCourseSearch(id){let a=[];try{a=JSON.parse(localStorage.getItem("wgw:recent")||"[]");}catch{}a=[id,...a.filter(x=>x!==id)].slice(0,10);localStorage.setItem("wgw:recent",JSON.stringify(a));}
+function isCourseFavorite(id){return readCourseIdList("wgw:favorites").includes(id);}
+function toggleCourseFavorite(id,mode=courseDatabaseView){let a=readCourseIdList("wgw:favorites");a=a.includes(id)?a.filter(x=>x!==id):[...a,id];localStorage.setItem("wgw:favorites",JSON.stringify(a));renderCourseDatabase(mode);}
+function rememberCourseSearch(id){let a=readCourseIdList("wgw:recent");a=[id,...a.filter(x=>x!==id)].slice(0,10);localStorage.setItem("wgw:recent",JSON.stringify(a));}
 function exportCourseFavorites(){
- const ids=(()=>{try{return JSON.parse(localStorage.getItem("wgw:favorites")||"[]");}catch{return [];}})();
+ const ids=readCourseIdList("wgw:favorites");
  const payload={format:"world-golf-weather-favorites",version:1,exportedAt:new Date().toISOString(),favorites:ids};
  const blob=new Blob([JSON.stringify(payload,null,2)],{type:"application/json"});
  const url=URL.createObjectURL(blob),a=document.createElement("a");
  a.href=url;a.download="world-golf-weather-favorites-"+new Date().toISOString().slice(0,10)+".json";
- document.body.appendChild(a);a.click();a.remove();URL.revokeObjectURL(url);
- const status=$("favoritesSaveStatus");if(status)status.textContent="已建立收藏備份檔（"+ids.length+" 座球場）。";
+ document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1000);
+ const status=$("favoritesSaveStatus");if(status)status.textContent="已匯出 "+ids.length+" 座球場的收藏備份。";
 }
 async function importCourseFavorites(file){
  const status=$("favoritesSaveStatus");if(!file)return;
  try{
   const payload=JSON.parse(await file.text());
-  if(payload?.format!=="world-golf-weather-favorites"||!Array.isArray(payload.favorites))throw Error("檔案格式不正確，請選擇本 App 匯出的收藏 JSON 檔。");
+  if(payload?.format!=="world-golf-weather-favorites"||payload?.version!==1||!Array.isArray(payload.favorites)||!payload.favorites.every(id=>typeof id==="string"))throw Error("檔案格式或版本不支援，請選擇本 App 匯出的 JSON 備份檔。");
   const validIds=new Set(asiaCourses.map(c=>c.course_id));
-  const imported=[...new Set(payload.favorites.filter(id=>typeof id==="string"&&validIds.has(id)))];
-  let current=[];try{current=JSON.parse(localStorage.getItem("wgw:favorites")||"[]");}catch{}
-  const merged=[...new Set([...current.filter(id=>validIds.has(id)),...imported])];
+  const imported=[...new Set(payload.favorites.filter(id=>validIds.has(id)))];
+  const unknown=[...new Set(payload.favorites.filter(id=>!validIds.has(id)))];
+  let current=readCourseIdList("wgw:favorites");
+  const cleanCurrent=[...new Set(current.filter(id=>validIds.has(id)))];
+  const newIds=imported.filter(id=>!cleanCurrent.includes(id));
+  const duplicateCount=imported.length-newIds.length;
+  if(!newIds.length){if(status)status.textContent="沒有需要新增的收藏；重複 "+duplicateCount+" 座，未知 ID "+unknown.length+" 筆。";return;}
+  const preview=["備份檔共 "+payload.favorites.length+" 筆。","","將新增："+newIds.length+" 座","已存在、略過："+duplicateCount+" 座","資料庫未識別、略過："+unknown.length+" 筆","","確認合併？現有收藏不會被覆蓋。"].join("\n");
+  if(!window.confirm(preview)){if(status)status.textContent="已取消匯入，原有收藏未變更。";return;}
+  const merged=[...cleanCurrent,...newIds];
   localStorage.setItem("wgw:favorites",JSON.stringify(merged));
-  if(status)status.textContent="匯入完成：新增 "+merged.length-current.length+" 座，有效收藏共 "+merged.length+" 座。";
+  if(status)status.textContent="匯入完成：新增 "+newIds.length+" 座、重複略過 "+duplicateCount+" 座、未知 ID 略過 "+unknown.length+" 筆；目前共 "+merged.length+" 座。";
   renderCourseDatabase("favorites");
  }catch(e){if(status)status.textContent="匯入失敗："+e.message;}
 }
@@ -657,12 +684,10 @@ async function initCourseDatabase(){
  const country=$("countrySelect"),region=$("courseRegionSelect"),search=$("courseSearchInput");
  country.innerHTML='<option value="">全部國家</option>'+COURSE_COUNTRIES.map(c=>'<option value="'+esc(c.code)+'">'+esc(c.name)+'</option>').join("");
  country.value=localStorage.getItem("wgw:lastCountry")||"";
- country.addEventListener("change",()=>{localStorage.setItem("wgw:lastCountry",country.value);refreshCourseRegions();renderCourseDatabase();});
- region.addEventListener("change",()=>renderCourseDatabase());
- search.addEventListener("input",()=>{clearTimeout(courseSearchTimer);courseSearchTimer=setTimeout(()=>renderCourseDatabase(),250);});
+ country.addEventListener("change",()=>{localStorage.setItem("wgw:lastCountry",country.value);refreshCourseRegions();renderCourseDatabase("search");});
+ region.addEventListener("change",()=>renderCourseDatabase("search"));
+ search.addEventListener("input",()=>{clearTimeout(courseSearchTimer);courseSearchTimer=setTimeout(()=>renderCourseDatabase("search"),250);});
  $("showFavorites").addEventListener("click",()=>{search.value="";country.value="";region.value="";refreshCourseRegions();renderCourseDatabase("favorites");});
- $("exportFavorites").addEventListener("click",exportCourseFavorites);
- $("importFavorites").addEventListener("click",()=>$("favoritesFileInput").click());
  $("favoritesFileInput").addEventListener("change",e=>{const file=e.target.files?.[0];if(file)importCourseFavorites(file);e.target.value="";});
  $("showRecent").addEventListener("click",()=>{search.value="";country.value="";region.value="";refreshCourseRegions();renderCourseDatabase("recent");});
  $("courseAutoStatus").textContent="亞洲球場資料庫載入中…";
@@ -681,27 +706,31 @@ async function initCourseDatabase(){
   refreshCourseRegions();
   $("courseAutoStatus").textContent=asiaCourses.length+" 座亞洲球場已載入。";
   $("courseSearchStatus").textContent=asiaCourses.length?"可搜尋正式名稱、別名、城市、地址及郵遞區號。":"球場資料庫已就緒，目前尚未匯入經核實的亞洲球場資料；不會顯示虛構球場或座標。";
-  renderCourseDatabase();
+  renderCourseDatabase(courseDatabaseView);
  }catch(e){$("courseSearchStatus").textContent="球場資料庫載入失敗："+e.message;$("courseAutoStatus").textContent="無法讀取亞洲球場資料。";$("courseAutoStatus").classList.add("error");}
 }
-function renderCourseDatabase(mode="search"){
+function renderCourseDatabase(mode=courseDatabaseView){
+ courseDatabaseView=mode;
  const country=$("countrySelect")?.value||"",region=$("courseRegionSelect")?.value||"",query=$("courseSearchInput")?.value||"";
  let entries=asiaCourses.map((c,i)=>({c,i}));
  if(country&&mode!=="favorites"&&mode!=="recent")entries=entries.filter(x=>x.c.country_code===country);
  if(region&&mode!=="favorites"&&mode!=="recent")entries=entries.filter(x=>(x.c.region||x.c.city)===region);
  if(mode==="favorites")entries=entries.filter(x=>isCourseFavorite(x.c.course_id));
- else if(mode==="recent"){let recent=[];try{recent=JSON.parse(localStorage.getItem("wgw:recent")||"[]");}catch{}entries=recent.map(id=>entries.find(x=>x.c.course_id===id)).filter(Boolean);}
+ else if(mode==="recent"){const recent=readCourseIdList("wgw:recent");entries=recent.map(id=>entries.find(x=>x.c.course_id===id)).filter(Boolean);}
  else if(query)entries=entries.map(x=>({...x,score:courseSearchScore(x.c,query)})).filter(x=>x.score>0).sort((a,b)=>b.score-a.score);
  else entries=entries;
  const root=$("courseList");
  if(!country&&mode==="search"&&!query){root.innerHTML='<div class="muted">請選擇國家或輸入球場名稱搜尋。</div>';return;}
- if(!entries.length){root.innerHTML='<div class="muted">'+(mode==="favorites"?"尚未收藏球場，請在球場名稱右側點選 ☆。":courseDataReady?"目前沒有符合條件的球場資料。":"正在載入球場資料…")+'</div>';return;}
- root.innerHTML=entries.slice(0,100).map(({c,i})=>{
+ if(!entries.length&&mode!=="favorites"){root.innerHTML='<div class="muted">'+(mode==="recent"?"尚無最近搜尋紀錄。":courseDataReady?"目前沒有符合條件的球場資料。":"正在載入球場資料…")+'</div>';return;}
+ root.innerHTML=entries.length?entries.slice(0,100).map(({c,i})=>{
   const favorite=isCourseFavorite(c.course_id);
   return '<article class="course-item" style="display:flex;align-items:center;gap:10px;padding:12px 12px;border:1px solid var(--line);border-radius:12px;margin:8px 0;background:#fff;min-width:0"><div role="button" tabindex="0" aria-label="選擇 '+esc(c.name)+'" onclick="window.loadCourseByIndex('+i+',this)" onkeydown="if(event.key===\'Enter\'||event.key===\' \'){event.preventDefault();window.loadCourseByIndex('+i+',this)}" style="flex:1;min-width:0;cursor:pointer"><strong style="display:block;font-size:16px;line-height:1.4;font-weight:650;overflow-wrap:anywhere;text-align:left">'+esc(c.name)+'</strong></div><button type="button" aria-label="'+(favorite?"取消收藏 ":"收藏 ")+esc(c.name)+'" aria-pressed="'+favorite+'" onclick="event.stopPropagation();window.toggleCourseFavorite(\''+esc(c.course_id)+'\',\''+mode+'\')" style="flex:0 0 44px;width:44px;height:44px;padding:0;border:1px solid '+(favorite?"#d8e8dc":"#d9e1e8")+';border-radius:10px;background:'+(favorite?"#e8f5ec":"#f8fafc")+';color:'+(favorite?"#16734b":"#64748b")+';font-size:25px;line-height:1">'+(favorite?"★":"☆")+'</button></article>';
-}).join("");
+}).join(""):(mode==="favorites"?'<div class="muted">目前尚未收藏球場。可先搜尋球場並點選 ☆ 加入收藏。</div>':"");
+ if(mode==="favorites"){root.insertAdjacentHTML("beforeend",'<section class="favorites-management" aria-label="收藏資料管理"><h3>收藏資料管理</h3><div class="favorites-management-actions"><button type="button" class="secondary" onclick="window.exportCourseFavorites()">↓ 匯出收藏</button><button type="button" class="secondary" onclick="window.openFavoritesImport()">↑ 匯入收藏</button></div><div class="favorites-management-status" id="favoritesSaveStatus" aria-live="polite">目前收藏共 '+readCourseIdList("wgw:favorites").length+' 座。</div></section>');}
 }
 window.toggleCourseFavorite=toggleCourseFavorite;
+window.exportCourseFavorites=exportCourseFavorites;
+window.openFavoritesImport=()=> $("favoritesFileInput").click();
 
 function esc(value){
  return String(value??"").replace(/[&<>"']/g,ch=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[ch]));
@@ -811,7 +840,7 @@ function selectedTeeTimeRows(rows){
 function renderSelectedHourlySections(rows){
  const shown=selectedTeeTimeRows(rows||[]);
  const fmt=(v,d=1)=>v===null||v===undefined?"—":Number(v).toFixed(d);
- $("hourRows").innerHTML=shown.map(x=>`<tr><td><b>${x.time}</b></td><td><span class="wxcell"><span class="wxemoji">${wxIcon(x.code)}</span>${wx(x.code)}</span></td><td>${rainProbHTML(x.rain)}</td><td>${amountRangeHTML(x)}</td><td>${rainInterpretation(x.rain,x.mm,x.code)}</td><td>${thermometerHTML(x.temp)}</td><td>${apparentFeelHTML(x.feel)}</td><td>${fmt(x.wind)}</td><td>${fmt(x.gust)}</td><td>${x.dir===null||x.dir===undefined?"—":`${dir(x.dir)} ${Math.round(x.dir)}°`}</td><td>${x.rh??"—"}%</td><td>${x.cloud??"—"}%</td><td>${fmt(x.uv)}</td><td class="${cls(score(x.rain,x.wind,x.gust,x.feel))}">${score(x.rain,x.wind,x.gust,x.feel)}/100</td></tr>`).join("");
+ $("hourRows").innerHTML=shown.map(x=>`<tr><td><b>${String(x.time||"").replace(/:00$/,"")}</b></td><td><span class="wxcell"><span class="wxemoji">${wxIcon(x.code)}</span>${wx(x.code)}</span></td><td>${rainProbHTML(x.rain)}</td><td>${amountRangeHTML(x)}</td><td>${rainInterpretation(x.rain,x.mm,x.code)}</td><td>${thermometerHTML(x.temp)}</td><td>${apparentFeelHTML(x.feel)}</td><td>${fmt(x.wind)}</td><td>${fmt(x.gust)}</td><td>${x.dir===null||x.dir===undefined?"—":`${dir(x.dir)} ${Math.round(x.dir)}°`}</td><td>${x.rh??"—"}%</td><td>${x.cloud??"—"}%</td><td>${fmt(x.uv)}</td><td class="${cls(score(x.rain,x.wind,x.gust,x.feel))}">${score(x.rain,x.wind,x.gust,x.feel)}/100</td></tr>`).join("");
  const times=shown.map(x=>x.time);
  const maxOf=k=>{const a=shown.map(x=>x[k]).filter(v=>v!==null&&v!==undefined&&Number.isFinite(Number(v)));return a.length?Math.max(...a.map(Number)):null;};
  chart("rainChart",[shown.map(x=>x.rain)],100,["#15966a"],times,"%","rainProbability");
