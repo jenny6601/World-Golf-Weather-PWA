@@ -24,7 +24,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout development branch
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Prepare static preview
         run: |
@@ -35,7 +35,7 @@ jobs:
           touch _site/.nojekyll
 
       - name: Upload preview artifact (no Pages deployment)
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
           name: world-golf-weather-development-preview
           path: _site
