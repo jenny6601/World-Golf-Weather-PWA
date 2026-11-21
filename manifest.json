@@ -12,32 +12,14 @@
   "theme_color": "#103b31",
   "icons": [
     {
-      "src": "./icons/asia-golf-weather.svg",
-      "sizes": "any",
-      "type": "image/svg+xml",
-      "purpose": "any"
-    },
-    {
-      "src": "./icons/icon-192.png",
-      "sizes": "192x192",
+      "src": "./icons/asia-golf-weather-256.png",
+      "sizes": "256x256",
       "type": "image/png",
       "purpose": "any"
     },
     {
-      "src": "./icons/icon-512.png",
-      "sizes": "512x512",
-      "type": "image/png",
-      "purpose": "any"
-    },
-    {
-      "src": "./icons/apple-touch-icon.png",
-      "sizes": "180x180",
-      "type": "image/png",
-      "purpose": "any"
-    },
-    {
-      "src": "./icons/icon-maskable-512.png",
-      "sizes": "512x512",
+      "src": "./icons/asia-golf-weather-256.png",
+      "sizes": "256x256",
       "type": "image/png",
       "purpose": "maskable"
     }
