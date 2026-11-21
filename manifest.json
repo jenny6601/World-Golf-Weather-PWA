@@ -12,15 +12,9 @@
   "theme_color": "#103b31",
   "icons": [
     {
-      "src": "./icons/asia-golf-weather-192.png",
+      "src": "./icons/asia-golf-weather-original-192.png",
       "sizes": "192x192",
       "type": "image/png",
-      "purpose": "any"
-    },
-    {
-      "src": "./icons/asia-golf-weather.svg",
-      "sizes": "any",
-      "type": "image/svg+xml",
       "purpose": "any"
     }
   ]
