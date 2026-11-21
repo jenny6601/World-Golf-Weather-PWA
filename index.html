@@ -662,7 +662,7 @@ async function importCourseFavorites(file){
   const newIds=imported.filter(id=>!cleanCurrent.includes(id));
   const duplicateCount=imported.length-newIds.length;
   if(!newIds.length){if(status)status.textContent="沒有需要新增的收藏；重複 "+duplicateCount+" 座，未知 ID "+unknown.length+" 筆。";return;}
-  const preview="備份檔共 "+payload.favorites.length+" 筆。\n\\n將新增："+newIds.length+" 座\\n已存在、略過："+duplicateCount+" 座\\n資料庫未識別、略過："+unknown.length+" 筆\\n\\n確認合併？現有收藏不會被覆蓋。";
+  const preview=["備份檔共 "+payload.favorites.length+" 筆。","","將新增："+newIds.length+" 座","已存在、略過："+duplicateCount+" 座","資料庫未識別、略過："+unknown.length+" 筆","","確認合併？現有收藏不會被覆蓋。"].join("\n");
   if(!window.confirm(preview)){if(status)status.textContent="已取消匯入，原有收藏未變更。";return;}
   const merged=[...cleanCurrent,...newIds];
   localStorage.setItem("wgw:favorites",JSON.stringify(merged));
