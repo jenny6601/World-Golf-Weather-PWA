@@ -38,6 +38,23 @@ jobs:
         run: |
           node --check scripts/build-provider-cache.mjs
           node --check scripts/validate-provider-cache.mjs
+
+      - name: Assemble static preview artifact
+        working-directory: migration
+        run: |
+          mkdir -p _site
+          cp index.html manifest.json _site/
+          cp -R data icons _site/
+          if [ -d assets ]; then cp -R assets _site/; fi
+          touch _site/.nojekyll
+
+      - name: Upload static preview artifact (no Pages deployment)
+        uses: actions/upload-artifact@v6
+        with:
+          name: world-golf-weather-static-preview
+          path: migration/_site
+          if-no-files-found: error
+          retention-days: 7
       - name: Run provider API build only when explicitly requested
         if: ${{ github.event_name == 'workflow_dispatch' && inputs.run_provider_api_test }}
         working-directory: migration
