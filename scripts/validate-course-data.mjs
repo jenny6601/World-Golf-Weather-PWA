@@ -67,4 +67,10 @@ const scripts=[...html.matchAll(/<script\b[^>]*>([\s\S]*?)<\/script>/gi)].map(m=
 for(const [i,code] of scripts.entries()) new vm.Script(code,{filename:"index-inline-"+i+".js"});
 assert.equal(manifest.name,"World Golf Weather");
 assert.ok(manifest.icons.some(x=>x.sizes==="192x192") && manifest.icons.some(x=>x.sizes==="512x512"),"PWA icons missing");
+assert.equal(manifest.scope,"./","Manifest scope must remain relative for a GitHub Pages project site");
+assert.ok(html.includes('href="./manifest.json"'),"Manifest link must be relative to the project site");
+assert.ok(!html.includes("./api/metar-nearby"),"Static frontend must not call the retired METAR endpoint");
+assert.ok(!html.includes("loadLiveObservation("),"Live METAR loader must not be called by the frontend");
+assert.ok(html.includes("provider-forecast-cache"),"Frontend must read from the dedicated provider cache branch");
+assert.ok(!html.includes("navigator.serviceWorker"),"Offline Service Worker is intentionally out of scope");
 console.log("PASS: "+db.courses.length+" courses; "+db.courses.filter(c=>Number.isFinite(c.latitude)&&c.timezone).length+" GPS+timezone; "+vietnam.length+" Vietnam courses; 7 alias/name search cases; "+scripts.length+" inline script syntax; manifest checks.");
