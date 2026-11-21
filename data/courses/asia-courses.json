@@ -13,7 +13,7 @@
   ],
   "generated_at": "2026-11-20T11:54:00.900Z",
   "record_count": 56,
-  "notes": "資料品質盤點（2026-11-20）：共44筆、8國；verified 7筆、partially_verified 37筆、unverified 0筆。44筆目前均有經緯度及 IANA 時區，網站會依座標載入預報；partially_verified 表示球場位置／座標來源仍待進一步核實，不等同官方 GPS 核實。部分紀錄尚缺官方地址、官方網站或座標來源欄位，請以各筆資料實際欄位為準。",
+  "notes": "資料品質盤點（2026-11-20）：共56筆、8國；verified 7筆、partially_verified 49筆、unverified 0筆。56筆目前均有經緯度及 IANA 時區，網站會依座標載入預報；partially_verified 表示球場位置／座標來源仍待進一步核實，不等同官方 GPS 核實。部分紀錄尚缺官方地址、官方網站或座標來源欄位，請以各筆資料實際欄位為準。",
   "courses": [
     {
       "course_id": "jp-abiko",

@@ -1,4 +1,4 @@
-name: Deploy development preview to GitHub Pages
+name: Build development static preview artifact
 
 on:
   workflow_dispatch:
@@ -9,43 +9,44 @@ on:
       - 'manifest.json'
       - 'data/**'
       - 'icons/**'
+      - 'assets/**'
+      - '.github/workflows/development-pages-preview.yml'
+  pull_request:
+    branches: [development]
+    paths:
+      - 'index.html'
+      - 'manifest.json'
+      - 'data/**'
+      - 'icons/**'
+      - 'assets/**'
       - '.github/workflows/development-pages-preview.yml'
 
 permissions:
   contents: read
-  pages: write
-  id-token: write
 
 concurrency:
-  group: github-pages-development-preview
+  group: github-pages-development-preview-artifact
   cancel-in-progress: true
 
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout development branch
-        uses: actions/checkout@v4
+      - name: Checkout tested commit
+        uses: actions/checkout@v5
 
       - name: Prepare static preview
         run: |
           mkdir -p _site
           cp index.html manifest.json _site/
           cp -R data icons _site/
+          if [ -d assets ]; then cp -R assets _site/; fi
           touch _site/.nojekyll
 
-      - name: Upload Pages artifact
-        uses: actions/upload-pages-artifact@v3
+      - name: Upload preview artifact (no Pages deployment)
+        uses: actions/upload-artifact@v6
         with:
+          name: world-golf-weather-development-preview
           path: _site
-
-  deploy:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    runs-on: ubuntu-latest
-    needs: build
-    steps:
-      - name: Deploy development preview
-        id: deployment
-        uses: actions/deploy-pages@v4
+          if-no-files-found: error
+          retention-days: 7

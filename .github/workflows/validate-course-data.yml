@@ -8,10 +8,9 @@ on:
       - "index.html"
       - "manifest.json"
       - "scripts/**"
-      - "functions/**"
       - ".github/workflows/validate-course-data.yml"
   pull_request:
-    branches: [main]
+    branches: [development, main]
     paths:
       - "data/courses/**"
       - "data/schemas/**"
@@ -26,15 +25,12 @@ jobs:
   validate:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
         with:
           node-version: 22
+          package-manager-cache: false
       - name: Validate course records, search aliases and PWA shell
         run: node scripts/validate-course-data.mjs
-      - name: Check Cloudflare Pages Function JavaScript syntax
-        run: |
-          node --check functions/api/provider-compare.js
-          node --check functions/api/metar-nearby.js
-      - name: Test nearby global METAR endpoint with mocked AWC responses
-        run: node scripts/test-metar-nearby.mjs
+      - name: Check provider cache builder syntax
+        run: node --check scripts/build-provider-cache.mjs

@@ -21,10 +21,10 @@
 - 中國：觀瀾湖深圳、觀瀾湖東莞、佘山、亞龍灣已建立名稱／地址來源，GPS 待補；山欽灣仍待核實。
 - 越南：Ba Na Hills、Hoiana Shores、Laguna Lang Co、Legend Da Nang、Montgomerie Links 已核實官方名稱及地址，GPS 待補。
 - 泰國 3 座、馬來西亞 4 座、新加坡 4 座、印尼 3 座已核實名稱及地址；剩餘 6 座與中國山欽灣仍待核實。印尼峇里島與雅加達已分別設定 Asia\/Makassar、Asia\/Jakarta。沒有座標的球場不會使用推測座標，天氣查詢保持停用。現有 24 座具備 GPS 與時區，其中 7 座仍屬部分核實、座標待官方地圖交叉驗證。
-- 全球即時觀測／METAR 尚未接入；介面明確顯示未接入，不以預報冒充實測。
+- 不提供全球即時觀測／METAR；不以預報冒充實測。
 - 亞洲獨立預報快取尚未啟用；目前天氣預報查詢改走 Open-Meteo 即時 API。
-- PWA manifest、獨立 Service Worker 快取名稱、離線頁及圖示已建立。
-- 尚未部署 Cloudflare Pages，也尚未合併至 main。
+- PWA manifest 與圖示已建立；不提供離線功能，不使用 Service Worker。
+- GitHub Pages 為唯一目標主機；目前僅產生可下載的開發預覽 Artifact，尚未發布 GitHub Pages，也尚未合併至 main。
 
 ## 目錄
 - `index.html`：完整版天氣介面及亞洲球場搜尋。
