@@ -132,3 +132,14 @@ Added Long Bien Golf Course, BRG Legend Hill Golf Resort, and BRG Kings Island G
 - Course database validation also passed in run #44731566695.
 - This is an API connectivity, response-schema and timezone check at all 44 stored coordinate points. It does not prove coordinate pins are official/survey-grade, forecast accuracy, or visual correctness in a browser.
 - Browser/mobile end-to-end testing remains pending. No Cloudflare deployment or PR merge has been performed.
+
+
+## Migration audit addendum (2026-11-21)
+
+The live course database currently contains 56 records across 8 countries. Current verification statuses are 7 `verified` and 49 `partially_verified`; older references in this document to 44 records are historical and should not be treated as the current count.
+
+The GitHub repository currently lists only these branches: `main`, `development`, `codex/asia-golf-weather-app-icon`, and the migration branch. The frontend's former raw-content references to `visual-crossing-cache` and `verification-history` therefore do not resolve as repository branches at this audit point. The migration work redirects provider reads to a dedicated `provider-forecast-cache` branch that is created by the scheduled cache workflow. Historical verification data remains a separate follow-up item.
+
+The METAR live-observation panel and frontend request to `./api/metar-nearby` have been removed on the migration branch. The Cloudflare Function source is retained temporarily so the existing Cloudflare deployment remains available until the static GitHub Pages version passes acceptance testing.
+
+Offline support is explicitly out of scope: no Service Worker, offline page, or precache workflow will be added. The development preview workflow has been changed to upload a downloadable artifact only; it no longer calls `actions/deploy-pages` and cannot overwrite the repository's configured Pages site.
