@@ -131,7 +131,7 @@ Added Long Bien Golf Course, BRG Legend Hill Golf Resort, and BRG Kings Island G
 - GitHub Actions run #44731566692 passed: 44/44 courses returned 46 EC46 daily rows and 3 SEAS5 monthly rows; every response timezone matched the course database; zero failures.
 - Course database validation also passed in run #44731566695.
 - This is an API connectivity, response-schema and timezone check at all 44 stored coordinate points. It does not prove coordinate pins are official/survey-grade, forecast accuracy, or visual correctness in a browser.
-- Browser/mobile end-to-end testing remains pending. No Cloudflare deployment or PR merge has been performed.
+- Browser/mobile end-to-end testing remains pending. No production deployment or PR merge has been performed.
 
 
 ## Migration audit addendum (2026-11-21)
@@ -140,6 +140,6 @@ The live course database currently contains 56 records across 8 countries. Curre
 
 The GitHub repository currently lists only these branches: `main`, `development`, `codex/asia-golf-weather-app-icon`, and the migration branch. The frontend's former raw-content references to `visual-crossing-cache` and `verification-history` therefore do not resolve as repository branches at this audit point. The migration work redirects provider reads to a dedicated `provider-forecast-cache` branch that is created by the scheduled cache workflow. Historical verification data remains a separate follow-up item.
 
-The METAR live-observation panel and frontend request to `./api/metar-nearby` have been removed on the migration branch. The Cloudflare Function source is retained temporarily so the existing Cloudflare deployment remains available until the static GitHub Pages version passes acceptance testing.
+The METAR live-observation panel, frontend request to `./api/metar-nearby`, and Cloudflare Pages Function sources have been removed from the migration branch. Cloudflare is no longer part of the target architecture or deployment plan.
 
 Offline support is explicitly out of scope: no Service Worker, offline page, or precache workflow will be added. The development preview workflow has been changed to upload a downloadable artifact only; it no longer calls `actions/deploy-pages` and cannot overwrite the repository's configured Pages site.
