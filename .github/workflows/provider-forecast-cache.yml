@@ -1,0 +1,76 @@
+name: Build overseas golf provider forecast cache
+
+on:
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: "Build and validate only; do not publish the cache branch"
+        required: true
+        type: boolean
+        default: true
+  schedule:
+    - cron: "15 2 * * *"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: provider-forecast-cache
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - name: Checkout development source
+        uses: actions/checkout@v4
+        with:
+          ref: development
+          fetch-depth: 0
+
+      - name: Verify provider secrets are configured
+        env:
+          VC_API_KEY: ${{ secrets.VC_API_KEY }}
+          FORECA_API_KEY: ${{ secrets.FORECA_API_KEY }}
+        run: |
+          test -n "$VC_API_KEY" || { echo "::error::Missing repository Actions secret VC_API_KEY"; exit 1; }
+          test -n "$FORECA_API_KEY" || { echo "::error::Missing repository Actions secret FORECA_API_KEY"; exit 1; }
+
+      - name: Build normalized provider cache
+        env:
+          VC_API_KEY: ${{ secrets.VC_API_KEY }}
+          FORECA_API_KEY: ${{ secrets.FORECA_API_KEY }}
+          OUTPUT_DIR: /tmp/provider-cache-output
+        run: node scripts/build-provider-cache.mjs
+
+      - name: Upload cache preview artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: provider-forecast-cache-preview
+          path: /tmp/provider-cache-output
+          if-no-files-found: error
+          retention-days: 7
+
+      - name: Publish dedicated cache branch
+        if: ${{ github.event_name == 'schedule' || inputs.dry_run == false }}
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          if git ls-remote --exit-code --heads origin provider-forecast-cache >/dev/null 2>&1; then
+            git fetch origin provider-forecast-cache
+            git switch --force-create provider-forecast-cache FETCH_HEAD
+          else
+            git switch --orphan provider-forecast-cache
+            git rm -rf . || true
+          fi
+          cp -R /tmp/provider-cache-output/. .
+          git add -A
+          if git diff --cached --quiet; then
+            echo "Provider cache is unchanged; no commit required."
+          else
+            git commit -m "data: refresh Visual Crossing and Foreca forecast cache"
+            git push origin HEAD:provider-forecast-cache
+          fi
