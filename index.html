@@ -567,6 +567,8 @@ let currentCourseTimezone = "Asia/Tokyo";
 let courseSearchTimer = null;
 let courseDataReady = false;
 let COURSE_COUNTRIES = [];
+let courseDatabaseView = "search";
+function readCourseIdList(key){try{const value=JSON.parse(localStorage.getItem(key)||"[]");if(!Array.isArray(value))return [];return [...new Set(value.map(x=>typeof x==="string"?x:(x?.course_id||x?.id||"")).filter(x=>typeof x==="string"&&x.trim()).map(x=>x.trim()))];}catch{return [];}}
 function courseLocalYmd(offsetDays=0){
  const d=new Date(Date.now()+offsetDays*86400000);
  const p=Object.fromEntries(new Intl.DateTimeFormat("en-US",{timeZone:currentCourseTimezone,year:"numeric",month:"2-digit",day:"2-digit"}).formatToParts(d).map(x=>[x.type,x.value]));
@@ -637,11 +639,11 @@ function courseSearchScore(course,query){
  const best=Math.min(...normalized.map(x=>editDistance(q,x.slice(0,Math.max(q.length,Math.min(x.length,q.length+3))))));
  return best<=2?500-best*50:0;
 }
-function isCourseFavorite(id){try{return (JSON.parse(localStorage.getItem("wgw:favorites")||"[]")).includes(id);}catch{return false;}}
-function toggleCourseFavorite(id,mode="search"){let a=[];try{a=JSON.parse(localStorage.getItem("wgw:favorites")||"[]");}catch{}a=a.includes(id)?a.filter(x=>x!==id):[...a,id];localStorage.setItem("wgw:favorites",JSON.stringify(a));const status=$("favoritesSaveStatus");if(status)status.textContent="已自動儲存收藏，共 "+a.length+" 座球場；可匯出收藏檔備份。";renderCourseDatabase(mode);}
-function rememberCourseSearch(id){let a=[];try{a=JSON.parse(localStorage.getItem("wgw:recent")||"[]");}catch{}a=[id,...a.filter(x=>x!==id)].slice(0,10);localStorage.setItem("wgw:recent",JSON.stringify(a));}
+function isCourseFavorite(id){return readCourseIdList("wgw:favorites").includes(id);}
+function toggleCourseFavorite(id,mode=courseDatabaseView){let a=readCourseIdList("wgw:favorites");a=a.includes(id)?a.filter(x=>x!==id):[...a,id];localStorage.setItem("wgw:favorites",JSON.stringify(a));renderCourseDatabase(mode);}
+function rememberCourseSearch(id){let a=readCourseIdList("wgw:recent");a=[id,...a.filter(x=>x!==id)].slice(0,10);localStorage.setItem("wgw:recent",JSON.stringify(a));}
 function exportCourseFavorites(){
- const ids=(()=>{try{return JSON.parse(localStorage.getItem("wgw:favorites")||"[]");}catch{return [];}})();
+ const ids=readCourseIdList("wgw:favorites");
  const payload={format:"world-golf-weather-favorites",version:1,exportedAt:new Date().toISOString(),favorites:ids};
  const blob=new Blob([JSON.stringify(payload,null,2)],{type:"application/json"});
  const url=URL.createObjectURL(blob),a=document.createElement("a");
@@ -657,7 +659,7 @@ async function importCourseFavorites(file){
   const validIds=new Set(asiaCourses.map(c=>c.course_id));
   const imported=[...new Set(payload.favorites.filter(id=>validIds.has(id)))];
   const unknown=[...new Set(payload.favorites.filter(id=>!validIds.has(id)))];
-  let current=[];try{current=JSON.parse(localStorage.getItem("wgw:favorites")||"[]");}catch{}
+  let current=readCourseIdList("wgw:favorites");
   const cleanCurrent=[...new Set(current.filter(id=>validIds.has(id)))];
   const newIds=imported.filter(id=>!cleanCurrent.includes(id));
   const duplicateCount=imported.length-newIds.length;
@@ -682,9 +684,9 @@ async function initCourseDatabase(){
  const country=$("countrySelect"),region=$("courseRegionSelect"),search=$("courseSearchInput");
  country.innerHTML='<option value="">全部國家</option>'+COURSE_COUNTRIES.map(c=>'<option value="'+esc(c.code)+'">'+esc(c.name)+'</option>').join("");
  country.value=localStorage.getItem("wgw:lastCountry")||"";
- country.addEventListener("change",()=>{localStorage.setItem("wgw:lastCountry",country.value);refreshCourseRegions();renderCourseDatabase();});
- region.addEventListener("change",()=>renderCourseDatabase());
- search.addEventListener("input",()=>{clearTimeout(courseSearchTimer);courseSearchTimer=setTimeout(()=>renderCourseDatabase(),250);});
+ country.addEventListener("change",()=>{localStorage.setItem("wgw:lastCountry",country.value);refreshCourseRegions();renderCourseDatabase("search");});
+ region.addEventListener("change",()=>renderCourseDatabase("search"));
+ search.addEventListener("input",()=>{clearTimeout(courseSearchTimer);courseSearchTimer=setTimeout(()=>renderCourseDatabase("search"),250);});
  $("showFavorites").addEventListener("click",()=>{search.value="";country.value="";region.value="";refreshCourseRegions();renderCourseDatabase("favorites");});
  $("favoritesFileInput").addEventListener("change",e=>{const file=e.target.files?.[0];if(file)importCourseFavorites(file);e.target.value="";});
  $("showRecent").addEventListener("click",()=>{search.value="";country.value="";region.value="";refreshCourseRegions();renderCourseDatabase("recent");});
@@ -704,16 +706,17 @@ async function initCourseDatabase(){
   refreshCourseRegions();
   $("courseAutoStatus").textContent=asiaCourses.length+" 座亞洲球場已載入。";
   $("courseSearchStatus").textContent=asiaCourses.length?"可搜尋正式名稱、別名、城市、地址及郵遞區號。":"球場資料庫已就緒，目前尚未匯入經核實的亞洲球場資料；不會顯示虛構球場或座標。";
-  renderCourseDatabase();
+  renderCourseDatabase(courseDatabaseView);
  }catch(e){$("courseSearchStatus").textContent="球場資料庫載入失敗："+e.message;$("courseAutoStatus").textContent="無法讀取亞洲球場資料。";$("courseAutoStatus").classList.add("error");}
 }
-function renderCourseDatabase(mode="search"){
+function renderCourseDatabase(mode=courseDatabaseView){
+ courseDatabaseView=mode;
  const country=$("countrySelect")?.value||"",region=$("courseRegionSelect")?.value||"",query=$("courseSearchInput")?.value||"";
  let entries=asiaCourses.map((c,i)=>({c,i}));
  if(country&&mode!=="favorites"&&mode!=="recent")entries=entries.filter(x=>x.c.country_code===country);
  if(region&&mode!=="favorites"&&mode!=="recent")entries=entries.filter(x=>(x.c.region||x.c.city)===region);
  if(mode==="favorites")entries=entries.filter(x=>isCourseFavorite(x.c.course_id));
- else if(mode==="recent"){let recent=[];try{recent=JSON.parse(localStorage.getItem("wgw:recent")||"[]");}catch{}entries=recent.map(id=>entries.find(x=>x.c.course_id===id)).filter(Boolean);}
+ else if(mode==="recent"){const recent=readCourseIdList("wgw:recent");entries=recent.map(id=>entries.find(x=>x.c.course_id===id)).filter(Boolean);}
  else if(query)entries=entries.map(x=>({...x,score:courseSearchScore(x.c,query)})).filter(x=>x.score>0).sort((a,b)=>b.score-a.score);
  else entries=entries;
  const root=$("courseList");
@@ -723,7 +726,7 @@ function renderCourseDatabase(mode="search"){
   const favorite=isCourseFavorite(c.course_id);
   return '<article class="course-item" style="display:flex;align-items:center;gap:10px;padding:12px 12px;border:1px solid var(--line);border-radius:12px;margin:8px 0;background:#fff;min-width:0"><div role="button" tabindex="0" aria-label="選擇 '+esc(c.name)+'" onclick="window.loadCourseByIndex('+i+',this)" onkeydown="if(event.key===\'Enter\'||event.key===\' \'){event.preventDefault();window.loadCourseByIndex('+i+',this)}" style="flex:1;min-width:0;cursor:pointer"><strong style="display:block;font-size:16px;line-height:1.4;font-weight:650;overflow-wrap:anywhere;text-align:left">'+esc(c.name)+'</strong></div><button type="button" aria-label="'+(favorite?"取消收藏 ":"收藏 ")+esc(c.name)+'" aria-pressed="'+favorite+'" onclick="event.stopPropagation();window.toggleCourseFavorite(\''+esc(c.course_id)+'\',\''+mode+'\')" style="flex:0 0 44px;width:44px;height:44px;padding:0;border:1px solid '+(favorite?"#d8e8dc":"#d9e1e8")+';border-radius:10px;background:'+(favorite?"#e8f5ec":"#f8fafc")+';color:'+(favorite?"#16734b":"#64748b")+';font-size:25px;line-height:1">'+(favorite?"★":"☆")+'</button></article>';
 }).join(""):(mode==="favorites"?'<div class="muted">目前尚未收藏球場。可先搜尋球場並點選 ☆ 加入收藏。</div>':"");
- if(mode==="favorites"){root.insertAdjacentHTML("beforeend",'<section class="favorites-management" aria-label="收藏資料管理"><h3>收藏資料管理</h3><p>收藏已自動儲存在此裝置。匯出 JSON 可備份或轉移；匯入會先預覽新增與重複項目，再與現有收藏合併，不會覆蓋原資料。</p><div class="favorites-management-actions"><button type="button" class="secondary" onclick="window.exportCourseFavorites()">↓ 匯出收藏</button><button type="button" class="secondary" onclick="window.openFavoritesImport()">↑ 匯入收藏</button></div><div class="favorites-management-status" id="favoritesSaveStatus" aria-live="polite">目前收藏共 '+JSON.parse(localStorage.getItem("wgw:favorites")||"[]").length+' 座。</div></section>');}
+ if(mode==="favorites"){root.insertAdjacentHTML("beforeend",'<section class="favorites-management" aria-label="收藏資料管理"><h3>收藏資料管理</h3><div class="favorites-management-actions"><button type="button" class="secondary" onclick="window.exportCourseFavorites()">↓ 匯出收藏</button><button type="button" class="secondary" onclick="window.openFavoritesImport()">↑ 匯入收藏</button></div><div class="favorites-management-status" id="favoritesSaveStatus" aria-live="polite">目前收藏共 '+JSON.parse(localStorage.getItem("wgw:favorites")||"[]").length+' 座。</div></section>');}
 }
 window.toggleCourseFavorite=toggleCourseFavorite;
 window.exportCourseFavorites=exportCourseFavorites;
